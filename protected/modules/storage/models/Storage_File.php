@@ -10,18 +10,15 @@
  * @property string $parent_type
  * @property string $parent_id
  * @property string $user_id
- * @property string $creation_date
- * @property string $modified_date
- * @property string $service_id
+ * @property string $create_time
+ * @property string $modify_time
  * @property string $storage_path
  * @property string $extension
  * @property string $name
- * @property string $mime_major
- * @property string $mime_minor
+ * @property string $mime_type
  * @property string $size
- * @property string $hash
  */
-class Storage_Files extends CActiveRecord
+class Storage_File extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,17 +45,17 @@ class Storage_Files extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('creation_date, modified_date, storage_path, extension, mime_major, mime_minor, size, hash', 'required'),
-			array('parent_file_id, parent_id, user_id, service_id', 'length', 'max'=>11),
+			array('create_time, modify_time, storage_path, extension, mime_type, size', 'required'),
+			array('parent_file_id, parent_id, user_id', 'length', 'max'=>11),
 			array('type', 'length', 'max'=>16),
 			array('parent_type', 'length', 'max'=>32),
 			array('storage_path, name', 'length', 'max'=>255),
 			array('extension', 'length', 'max'=>8),
-			array('mime_major, mime_minor, hash', 'length', 'max'=>64),
+			array('mime_type', 'length', 'max'=>64),
 			array('size', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('file_id, parent_file_id, type, parent_type, parent_id, user_id, creation_date, modified_date, service_id, storage_path, extension, name, mime_major, mime_minor, size, hash', 'safe', 'on'=>'search'),
+			array('file_id, parent_file_id, type, parent_type, parent_id, user_id, create_time, mofify_time, storage_path, extension, name, mime_type, size', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -85,16 +82,13 @@ class Storage_Files extends CActiveRecord
 			'parent_type' => 'Parent Type',
 			'parent_id' => 'Parent',
 			'user_id' => 'User',
-			'creation_date' => 'Creation Date',
-			'modified_date' => 'Modified Date',
-			'service_id' => 'Service',
+			'create_time' => 'Creation Date',
+			'modify_time' => 'Modified Date',
 			'storage_path' => 'Storage Path',
 			'extension' => 'Extension',
 			'name' => 'Name',
-			'mime_major' => 'Mime Major',
-			'mime_minor' => 'Mime Minor',
+			'mime_type' => 'Mime Type',
 			'size' => 'Size',
-			'hash' => 'Hash',
 		);
 	}
 
@@ -115,19 +109,19 @@ class Storage_Files extends CActiveRecord
 		$criteria->compare('parent_type',$this->parent_type,true);
 		$criteria->compare('parent_id',$this->parent_id,true);
 		$criteria->compare('user_id',$this->user_id,true);
-		$criteria->compare('creation_date',$this->creation_date,true);
-		$criteria->compare('modified_date',$this->modified_date,true);
-		$criteria->compare('service_id',$this->service_id,true);
+		$criteria->compare('create_time',$this->create_time,true);
+		$criteria->compare('modify_time',$this->modify_time,true);
 		$criteria->compare('storage_path',$this->storage_path,true);
 		$criteria->compare('extension',$this->extension,true);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('mime_major',$this->mime_major,true);
-		$criteria->compare('mime_minor',$this->mime_minor,true);
+		$criteria->compare('mime_type',$this->mime_type,true);
 		$criteria->compare('size',$this->size,true);
-		$criteria->compare('hash',$this->hash,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	public function getUrl(){
+		return Yii::app()->getBaseUrl().'/'.$this->storage_path;
 	}
 }
