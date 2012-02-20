@@ -77,24 +77,33 @@ $urlScript = Yii::app()->assetManager->publish(Yii::getPathOfAlias('shipmarket')
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 	 -->
+	 
 	<div class="clear"></div>
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+	
 
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
 <div class="row">
+	<ul>
+		<?php
+			$photos = $model->getPhotos(); 
+			foreach ($photos as $photo):
+		?>
+		<li><img src="<?php echo $photo->getUrl()?>"/></li>
+		<?php endforeach;?>
+		
+	</ul>
 		<?php echo $form->labelEx($model,'img'); ?>
 		<?php 
 			Yii::import("ext.xupload.models.XUploadForm");
 			$js = <<<EOD
 js:function (files, index) {
-return $('<tr><td>'+files.name+'<\/td>' +
+return $('<tr><td><input type="radio" name="main_image" /><\/td>'+
+'<td>'+files.name+'<\/td>' +
 '<td class="file_upload_progress"><div><\/div><\/td>' +
 '<td class="filesize">'+files.size+'</td>' +
-'<td class="filesize"><img src="public/images/1/'+files.name+'" width="100px",height="100px"\/><\/td>'+
+'<td class="filesize"><img src="'+files.url+'" width="100px",height="100px"\/><\/td>'+
 '<td class="file_upload_cancel">' +
 '<button class="ui-state-default ui-corner-all" title="Cancel">' +
 '<span class="ui-icon ui-icon-cancel">Cancel<\/span>' +
@@ -102,8 +111,8 @@ return $('<tr><td>'+files.name+'<\/td>' +
 }
 EOD;
 			$this->widget('ext.xupload.XUploadWidget', array(
-                    'url' => Yii::app()->createUrl("upload/upload",array("parent_id" => 1)),
-                    'model' => new XUploadForm(),
+                    'url' => Yii::app()->createUrl("shipmarket/UploadItemImage/upload",array("parent_id" => 1)),
+                    'model' => new ItemImageForm(),
                     'attribute' => 'file',
 					'multiple' => true,
 					'options'=>array('buildDownloadRow'=>$js)
@@ -112,3 +121,6 @@ EOD;
 			));
 		?>
 	</div>
+<div class="row buttons">
+	<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+</div>

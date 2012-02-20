@@ -17,6 +17,7 @@
  */
 class ShipmarketItem extends CActiveRecord
 {
+	private $photos;
 	
 	/**
 	 * Returns the static model of the specified AR class.
@@ -65,7 +66,7 @@ class ShipmarketItem extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'owner'=>array(self::BELONGS_TO,'User','owner_id')
+			'owner'=>array(self::BELONGS_TO,'User','owner_id'),
 		);
 	}
 
@@ -129,5 +130,16 @@ class ShipmarketItem extends CActiveRecord
 		}
 		if ($sizestring == $sizes[0]) { $retstring = '%01d %s'; } // Bytes aren't normally fractional
 		return sprintf($retstring, $this->size, $sizestring);
+	}
+	
+	public function getPhotos($inclue_main= true){
+		$criteria=new CDbCriteria;
+		$criteria->compare('parent_id', $this->id, true);
+		$criteria->compare('parent_type', 'shipmarketitem', true);
+		$criteria->compare('type','thumb',true);
+		//$criteria->addCondition('type IS NULL');
+		$dataProvider = new CActiveDataProvider('Storage_File',array('criteria'=>$criteria));
+		$this->photos = $dataProvider->getData();
+		return $this->photos;
 	}
 }
