@@ -6,7 +6,7 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
-	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
+	//'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My Web Application',
 
 	// preloading 'log' component
@@ -18,19 +18,24 @@ return array(
 		'application.components.*',
 		'application.modules.user.models.*',
         'application.modules.user.components.*',
+		'application.modules.storage.models.*',
+        'application.modules.storage.components.*',
 	),
 
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
-		/*
+		
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'Enter Your Password Here',
+			'password'=>'123456',
 		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
-		*/
+		
 		'user',
+		'storage',
+		'market',
+		'shipmarket'
 	),
 
 	// application components
@@ -62,7 +67,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=lintinzone',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => '',
+			'password' => 'root',
 			'charset' => 'utf8',
 			'tablePrefix'=>'lz_',
 		
@@ -87,6 +92,10 @@ return array(
 				*/
 			),
 		),
+		'imagemod' => array(
+               //alias to dir, where you unpacked extension
+    			'class' => 'application.extensions.imagemodifier.CImageModifier',
+),
 	),
 
 	// application-level parameters that can be accessed
