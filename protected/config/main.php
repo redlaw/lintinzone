@@ -67,7 +67,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=lintinzone',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'root',
+			'password' => '',
 			'charset' => 'utf8',
 			'tablePrefix'=>'lz_',
 		

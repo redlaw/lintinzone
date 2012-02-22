@@ -86,3 +86,151 @@ Stack trace:
 #22 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
 #23 D:\freelance_space\lintinzonespace\lintinzone\index.php(13): CApplication->run()
 #24 {main} REQUEST_URI=/index.php
+2012/02/20 17:22:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
+#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
+2012/02/20 17:23:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
+#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
+2012/02/20 17:24:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
+#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
+2012/02/20 17:28:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
+#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
+2012/02/20 17:30:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
+#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
+2012/02/20 17:30:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
+#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
+2012/02/20 17:30:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
+#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
+2012/02/20 17:32:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
+#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
+2012/02/20 17:36:03 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php:364
+Stack trace:
+#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(313): CDbConnection->open()
+#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(291): CDbConnection->setActive(true)
+#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CModule.php(372): CDbConnection->init()
+#3 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(429): CModule->getComponent('db')
+#4 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(609): CApplication->getDb()
+#5 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(2275): CActiveRecord->getDbConnection()
+#6 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(372): CActiveRecordMetaData->__construct(Object(User))
+#7 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\user\models\User.php(28): CActiveRecord::model('User')
+#8 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\user\components\UserIdentity.php(25): User::model()
+#9 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#10 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\validators\CInlineValidator.php(39): UserLogin->authenticate('password', Array)
+#11 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\validators\CValidator.php(192): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#12 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CModel.php(152): CValidator->validate(Object(UserLogin), NULL)
+#13 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\user\controllers\LoginController.php(19): CModel->validate()
+#14 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\actions\CInlineAction.php(50): LoginController->actionLogin()
+#15 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#16 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(278): CController->runAction(Object(CInlineAction))
+#17 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(277): CController->run('')
+#19 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('user/login')
+#20 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#21 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
+#22 {main} REQUEST_URI=/lintinzone/index.php?r=user/login
+2012/02/20 17:36:11 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php:364
+Stack trace:
+#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(313): CDbConnection->open()
+#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(291): CDbConnection->setActive(true)
+#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CModule.php(372): CDbConnection->init()
+#3 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(429): CModule->getComponent('db')
+#4 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(609): CApplication->getDb()
+#5 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(2275): CActiveRecord->getDbConnection()
+#6 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(372): CActiveRecordMetaData->__construct(Object(ShipmarketItem))
+#7 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CActiveDataProvider.php(72): CActiveRecord::model('ShipmarketItem')
+#8 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\shipmarket\controllers\ShipmarketItemController.php(133): CActiveDataProvider->__construct('ShipmarketItem')
+#9 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\actions\CInlineAction.php(50): ShipmarketItemController->actionIndex()
+#10 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#11 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#12 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#13 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#14 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#15 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#16 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(283): CFilterChain->run()
+#17 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(277): CController->run('')
+#19 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
+#20 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#21 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
+#22 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
+2012/02/20 17:42:36 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php:364
+Stack trace:
+#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(313): CDbConnection->open()
+#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(291): CDbConnection->setActive(true)
+#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CModule.php(372): CDbConnection->init()
+#3 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(429): CModule->getComponent('db')
+#4 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(609): CApplication->getDb()
+#5 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(2275): CActiveRecord->getDbConnection()
+#6 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(372): CActiveRecordMetaData->__construct(Object(ShipmarketItem))
+#7 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CActiveDataProvider.php(72): CActiveRecord::model('ShipmarketItem')
+#8 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\shipmarket\controllers\ShipmarketItemController.php(133): CActiveDataProvider->__construct('ShipmarketItem')
+#9 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\actions\CInlineAction.php(50): ShipmarketItemController->actionIndex()
+#10 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#11 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#12 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#13 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#14 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#15 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#16 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(283): CFilterChain->run()
+#17 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(277): CController->run('')
+#19 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
+#20 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#21 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
+#22 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
+2012/02/20 17:42:39 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php:364
+Stack trace:
+#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(313): CDbConnection->open()
+#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(291): CDbConnection->setActive(true)
+#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CModule.php(372): CDbConnection->init()
+#3 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(429): CModule->getComponent('db')
+#4 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(609): CApplication->getDb()
+#5 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(2275): CActiveRecord->getDbConnection()
+#6 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(372): CActiveRecordMetaData->__construct(Object(ShipmarketItem))
+#7 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CActiveDataProvider.php(72): CActiveRecord::model('ShipmarketItem')
+#8 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\shipmarket\controllers\ShipmarketItemController.php(133): CActiveDataProvider->__construct('ShipmarketItem')
+#9 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\actions\CInlineAction.php(50): ShipmarketItemController->actionIndex()
+#10 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#11 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#12 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#13 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#14 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#15 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#16 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(283): CFilterChain->run()
+#17 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(277): CController->run('')
+#19 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
+#20 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#21 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
+#22 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
