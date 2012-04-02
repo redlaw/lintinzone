@@ -1,0 +1,16 @@
+﻿  Dear {receiver},
+
+  You have stopped receiving updates from LintinZone. Anytime you change your mind, LintinZone always welcome you back.
+
+  Any questions, ideas or contributions, please contact us: {support_link}.
+
+  Tip: You can still follow our latest updates from <span title="LintinZone - Best shipping solution" style="color: #0066CC;font-weight: bold;">LintinZone</span> - {home_link} or the social channels:
+
+    LintinZone on Facebook: http://www.facebook.com/LintinZone
+
+    LintinZone on Twitter: http://twitter.com/@LintinZone 
+
+    LintinZone on Google+: https://plus.google.com/b/114591945709472470617/	
+
+  Sincerely,
+  LintinZone - {home_link}

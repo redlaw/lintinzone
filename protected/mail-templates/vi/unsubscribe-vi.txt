@@ -1,0 +1,16 @@
+﻿  Xin chào {receiver},
+
+  Bạn đã ngừng nhận tin tức từ LintinZone. Bất cứ khi nào bạn thay đổi ý kiến, LintinZone luôn chào mừng bạn trở lại.
+
+  Mọi câu hỏi, góp ý, xin vui lòng liên hệ với chúng tôi {support_link}.
+
+  Mách nhỏ: Bạn vẫn có thể theo dõi tin tức từ LintinZone thông qua trang chủ {home_link} hay qua các kênh:
+
+    LintinZone trên Facebook: http://www.facebook.com/LintinZone
+
+    LintinZone trên Twitter: http://twitter.com/@LintinZone 
+
+    LintinZone trên Google+: https://plus.google.com/b/114591945709472470617/	
+
+  Thân,
+  LintinZone - {home_link}

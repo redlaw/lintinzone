@@ -1,0 +1,18 @@
+﻿  Xin chào {receiver},
+
+  LintinZone cảm ơn bạn đã đăng ký nhận tin tức từ LintinZone. Bạn sẽ nhận được những tin tức mới nhất về quá trình phát triển của nhóm, cũng như có cơ hội trở thành một trong những người đầu tiên được trải nghiệm bản beta thú vị của LintinZone cùng những ưu đãi đặc biệt sau này. Xin vui lòng bấm vào liên kết dưới đây để xác nhận yêu cầu của bạn.
+
+    {confirm_link}
+
+  Nếu bức thư này được gửi đến bạn là một sự nhầm lẫn, vui lòng xóa nó đi. Bạn sẽ không nhận bất cứ tin tức nào từ LintinZone nếu không bấm vào đường dẫn trên.
+
+  Mọi câu hỏi, góp ý, xin vui lòng liên hệ với chúng tôi: {support_link}.
+
+    LintinZone trên Facebook: http://www.facebook.com/LintinZone
+
+    LintinZone trên Twitter: http://twitter.com/@LintinZone
+
+    LintinZone trên Google+: https://plus.google.com/b/114591945709472470617/
+
+  Cảm ơn đã đọc thư này,
+  LintinZone - {home_link}

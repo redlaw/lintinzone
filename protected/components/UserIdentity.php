@@ -7,6 +7,12 @@
  */
 class UserIdentity extends CUserIdentity
 {
+	const ERROR_STATUS_NOTACTIVE = 0;
+	const ERROR_STATUS_BLOCKED = 1;
+	const ERROR_EMAIL_INVALID = 0;
+	private $_user_id;
+	public $username;
+	
 	/**
 	 * Authenticates a user.
 	 * The example implementation makes sure if the username and password
@@ -17,17 +23,35 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-		$users=array(
-			// username => password
-			'demo'=>'demo',
-			'admin'=>'admin',
-		);
-		if(!isset($users[$this->username]))
-			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		else if($users[$this->username]!==$this->password)
-			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-		else
-			$this->errorCode=self::ERROR_NONE;
+		$username = strtolower($this->username);
+		$user = User::model()->find('username = ?', array($username));
+		if ($user === null)
+		{
+			$user = User::model()->find('email = ?', array($username));
+			if ($user === null)
+				$this->errorCode = self::ERROR_USERNAME_INVALID;
+		}
+		if ($user !== null)
+		{
+			if (!$user->validatePassword($this->password))
+				$this->errorCode = self::ERROR_PASSWORD_INVALID;
+			else
+			{
+				$this->_user_id = $user->user_id;
+				$this->username = $user->username;
+				if ($user->active !== 1)
+					$this->errorCode = self::ERROR_STATUS_NOTACTIVE;
+				elseif ($user->blocked === 1)
+					$this->errorCode = self::ERROR_STATUS_BLOCKED;
+				else
+					$this->errorCode = self::ERROR_NONE;
+			}
+		}
 		return !$this->errorCode;
+	}
+	
+	public function getId()
+	{
+		return $this->_user_id;
 	}
 }

@@ -2,38 +2,55 @@
 
 class LoginController extends Controller
 {
-	public $defaultAction = 'login';
-
-	/**
-	 * Displays the login page
-	 */
-	public function actionLogin()
+	public function actionIndex()
 	{
-		if (Yii::app()->user->isGuest) {
-			$model=new UserLogin;
-			// collect user input data
-			if(isset($_POST['UserLogin']))
+		$formModel = new Login();
+		if (Yii::app()->user->isGuest)
+		{
+			if (isset($_POST['Login']))
 			{
-				$model->attributes=$_POST['UserLogin'];
-				// validate user input and redirect to previous page if valid
-				if($model->validate()) {
-					$this->lastViset();
-					if (strpos(Yii::app()->user->returnUrl,'/index.php')!==false)
+				$formModel->username = $_POST['Login']['username'];
+				$formModel->password = $_POST['Login']['password'];
+				$formModel->rememberMe = $_POST['Login']['rememberMe'];
+				if ($formModel->validate())
+				{
+					//$this->logSession();
+					if (strpos(Yii::app()->user->returnUrl, 'index.php') !== false)
 						$this->redirect(Yii::app()->controller->module->returnUrl);
 					else
 						$this->redirect(Yii::app()->user->returnUrl);
 				}
 			}
-			// display the login form
-			$this->render('/user/login',array('model'=>$model));
-		} else
+			$this->render('login', array('model' => $formModel));
+		}
+		else
 			$this->redirect(Yii::app()->controller->module->returnUrl);
 	}
-	
-	private function lastViset() {
-		$lastVisit = User::model()->notsafe()->findByPk(Yii::app()->user->id);
-		$lastVisit->lastvisit = time();
-		$lastVisit->save();
+
+	// Uncomment the following methods and override them if needed
+	/*
+	public function filters()
+	{
+		// return the filter configuration for this controller, e.g.:
+		return array(
+			'inlineFilterName',
+			array(
+				'class'=>'path.to.FilterClass',
+				'propertyName'=>'propertyValue',
+			),
+		);
 	}
 
+	public function actions()
+	{
+		// return external action classes, e.g.:
+		return array(
+			'action1'=>'path.to.ActionClass',
+			'action2'=>array(
+				'class'=>'path.to.AnotherActionClass',
+				'propertyName'=>'propertyValue',
+			),
+		);
+	}
+	*/
 }

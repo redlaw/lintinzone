@@ -1,236 +1,325 @@
-2011/12/28 14:29:26 [error] [exception.CDbException] exception 'CDbException' with message 'The table "{{users}}" for active record class "User" cannot be found in the database.' in D:\freelance_space\lintinzonespace\lintinzone\yii\framework\db\ar\CActiveRecord.php:2276
-Stack trace:
-#0 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\db\ar\CActiveRecord.php(372): CActiveRecordMetaData->__construct(Object(User))
-#1 D:\freelance_space\lintinzonespace\lintinzone\protected\modules\user\models\User.php(28): CActiveRecord::model('User')
-#2 D:\freelance_space\lintinzonespace\lintinzone\protected\modules\user\components\UserIdentity.php(27): User::model()
-#3 D:\freelance_space\lintinzonespace\lintinzone\protected\models\LoginForm.php(52): UserIdentity->authenticate()
-#4 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\validators\CInlineValidator.php(39): LoginForm->authenticate('password', Array)
-#5 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\validators\CValidator.php(192): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
-#6 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\base\CModel.php(152): CValidator->validate(Object(LoginForm), NULL)
-#7 D:\freelance_space\lintinzonespace\lintinzone\protected\controllers\SiteController.php(88): CModel->validate()
-#8 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionLogin()
-#9 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
-#10 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CController.php(278): CController->runAction(Object(CInlineAction))
-#11 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
-#12 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CWebApplication.php(277): CController->run('login')
-#13 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('site/login')
-#14 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#15 D:\freelance_space\lintinzonespace\lintinzone\index.php(13): CApplication->run()
-#16 {main} REQUEST_URI=/index.php?r=site/login
-2011/12/28 14:31:57 [error] [exception.CDbException] exception 'CDbException' with message 'The table "{{users}}" for active record class "User" cannot be found in the database.' in D:\freelance_space\lintinzonespace\lintinzone\yii\framework\db\ar\CActiveRecord.php:2276
-Stack trace:
-#0 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\db\ar\CActiveRecord.php(372): CActiveRecordMetaData->__construct(Object(User))
-#1 D:\freelance_space\lintinzonespace\lintinzone\protected\modules\user\models\User.php(28): CActiveRecord::model('User')
-#2 D:\freelance_space\lintinzonespace\lintinzone\protected\modules\user\components\UserIdentity.php(27): User::model()
-#3 D:\freelance_space\lintinzonespace\lintinzone\protected\models\LoginForm.php(52): UserIdentity->authenticate()
-#4 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\validators\CInlineValidator.php(39): LoginForm->authenticate('password', Array)
-#5 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\validators\CValidator.php(192): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
-#6 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\base\CModel.php(152): CValidator->validate(Object(LoginForm), NULL)
-#7 D:\freelance_space\lintinzonespace\lintinzone\protected\controllers\SiteController.php(88): CModel->validate()
-#8 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionLogin()
-#9 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
-#10 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CController.php(278): CController->runAction(Object(CInlineAction))
-#11 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
-#12 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CWebApplication.php(277): CController->run('login')
-#13 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('site/login')
-#14 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#15 D:\freelance_space\lintinzonespace\lintinzone\index.php(13): CApplication->run()
-#16 {main} REQUEST_URI=/index.php?r=site/login
-2011/12/28 14:48:25 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'lintinzone.{{users}}' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `{{users}}`.
-in D:\freelance_space\lintinzonespace\lintinzone\protected\modules\user\models\User.php (28)
-in D:\freelance_space\lintinzonespace\lintinzone\protected\modules\user\components\UserIdentity.php (27)
-in D:\freelance_space\lintinzonespace\lintinzone\protected\models\LoginForm.php (52)
-2011/12/28 14:48:25 [error] [exception.CDbException] exception 'CDbException' with message 'The table "{{users}}" for active record class "User" cannot be found in the database.' in D:\freelance_space\lintinzonespace\lintinzone\yii\framework\db\ar\CActiveRecord.php:2276
-Stack trace:
-#0 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\db\ar\CActiveRecord.php(372): CActiveRecordMetaData->__construct(Object(User))
-#1 D:\freelance_space\lintinzonespace\lintinzone\protected\modules\user\models\User.php(28): CActiveRecord::model('User')
-#2 D:\freelance_space\lintinzonespace\lintinzone\protected\modules\user\components\UserIdentity.php(27): User::model()
-#3 D:\freelance_space\lintinzonespace\lintinzone\protected\models\LoginForm.php(52): UserIdentity->authenticate()
-#4 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\validators\CInlineValidator.php(39): LoginForm->authenticate('password', Array)
-#5 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\validators\CValidator.php(192): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
-#6 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\base\CModel.php(152): CValidator->validate(Object(LoginForm), NULL)
-#7 D:\freelance_space\lintinzonespace\lintinzone\protected\controllers\SiteController.php(88): CModel->validate()
-#8 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionLogin()
-#9 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
-#10 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CController.php(278): CController->runAction(Object(CInlineAction))
-#11 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
-#12 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CWebApplication.php(277): CController->run('login')
-#13 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('site/login')
-#14 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#15 D:\freelance_space\lintinzonespace\lintinzone\index.php(13): CApplication->run()
-#16 {main} REQUEST_URI=/index.php?r=site/login
-2011/12/28 14:53:40 [error] [exception.CException] exception 'CException' with message 'Property "CBreadcrumbs.0" is not defined.' in D:\freelance_space\lintinzonespace\lintinzone\yii\framework\base\CComponent.php:174
-Stack trace:
-#0 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CWidgetFactory.php(162): CComponent->__set('0', Array)
-#1 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CBaseController.php(139): CWidgetFactory->createWidget(Object(SiteController), 'zii.widgets.CBr...', Array)
-#2 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CBaseController.php(165): CBaseController->createWidget('zii.widgets.CBr...', Array)
-#3 D:\freelance_space\lintinzonespace\lintinzone\protected\views\layouts\main.php(46): CBaseController->widget('zii.widgets.CBr...', Array)
-#4 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CBaseController.php(119): require('D:\freelance_sp...')
-#5 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CBaseController.php(88): CBaseController->renderInternal('D:\freelance_sp...', Array, true)
-#6 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\widgets\CContentDecorator.php(78): CBaseController->renderFile('D:\freelance_sp...', Array, true)
-#7 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\widgets\CContentDecorator.php(56): CContentDecorator->decorate('<div class="con...')
-#8 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\widgets\COutputProcessor.php(45): CContentDecorator->processOutput('<div class="con...')
-#9 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CBaseController.php(199): COutputProcessor->run()
-#10 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CBaseController.php(294): CBaseController->endWidget('CContentDecorat...')
-#11 D:\freelance_space\lintinzonespace\lintinzone\protected\views\layouts\column1.php(7): CBaseController->endContent()
-#12 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CBaseController.php(119): require('D:\freelance_sp...')
-#13 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CBaseController.php(88): CBaseController->renderInternal('D:\freelance_sp...', Array, true)
-#14 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CController.php(781): CBaseController->renderFile('D:\freelance_sp...', Array, true)
-#15 D:\freelance_space\lintinzonespace\lintinzone\protected\controllers\SiteController.php(32): CController->render('index')
-#16 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionIndex()
-#17 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
-#18 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CController.php(278): CController->runAction(Object(CInlineAction))
-#19 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
-#20 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CWebApplication.php(277): CController->run('')
-#21 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('')
-#22 D:\freelance_space\lintinzonespace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#23 D:\freelance_space\lintinzonespace\lintinzone\index.php(13): CApplication->run()
-#24 {main} REQUEST_URI=/index.php
-2012/02/20 17:22:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
-Stack trace:
-#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
-#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
-#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
-2012/02/20 17:23:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
-Stack trace:
-#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
-#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
-#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
-2012/02/20 17:24:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
-Stack trace:
-#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
-#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
-#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
-2012/02/20 17:28:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
-Stack trace:
-#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
-#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
-#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
-2012/02/20 17:30:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
-Stack trace:
-#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
-#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
-#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
-2012/02/20 17:30:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
-Stack trace:
-#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
-#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
-#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
-2012/02/20 17:30:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
-Stack trace:
-#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
-#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
-#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
-2012/02/20 17:32:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "shipmarket/shipmarketitem".' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php:281
-Stack trace:
-#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
-#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
-#3 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
-2012/02/20 17:36:03 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php:364
-Stack trace:
-#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(313): CDbConnection->open()
-#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(291): CDbConnection->setActive(true)
-#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CModule.php(372): CDbConnection->init()
-#3 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(429): CModule->getComponent('db')
-#4 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(609): CApplication->getDb()
-#5 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(2275): CActiveRecord->getDbConnection()
-#6 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(372): CActiveRecordMetaData->__construct(Object(User))
-#7 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\user\models\User.php(28): CActiveRecord::model('User')
-#8 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\user\components\UserIdentity.php(25): User::model()
-#9 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
-#10 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\validators\CInlineValidator.php(39): UserLogin->authenticate('password', Array)
-#11 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\validators\CValidator.php(192): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
-#12 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CModel.php(152): CValidator->validate(Object(UserLogin), NULL)
-#13 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\user\controllers\LoginController.php(19): CModel->validate()
-#14 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\actions\CInlineAction.php(50): LoginController->actionLogin()
-#15 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
-#16 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(278): CController->runAction(Object(CInlineAction))
-#17 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
-#18 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(277): CController->run('')
-#19 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('user/login')
-#20 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#21 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
-#22 {main} REQUEST_URI=/lintinzone/index.php?r=user/login
-2012/02/20 17:36:11 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php:364
-Stack trace:
-#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(313): CDbConnection->open()
-#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(291): CDbConnection->setActive(true)
-#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CModule.php(372): CDbConnection->init()
-#3 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(429): CModule->getComponent('db')
-#4 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(609): CApplication->getDb()
-#5 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(2275): CActiveRecord->getDbConnection()
-#6 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(372): CActiveRecordMetaData->__construct(Object(ShipmarketItem))
-#7 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CActiveDataProvider.php(72): CActiveRecord::model('ShipmarketItem')
-#8 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\shipmarket\controllers\ShipmarketItemController.php(133): CActiveDataProvider->__construct('ShipmarketItem')
-#9 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\actions\CInlineAction.php(50): ShipmarketItemController->actionIndex()
-#10 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
-#11 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
-#12 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
-#13 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
-#14 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
-#15 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
-#16 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(283): CFilterChain->run()
-#17 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
-#18 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(277): CController->run('')
-#19 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
-#20 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#21 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
-#22 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
-2012/02/20 17:42:36 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php:364
-Stack trace:
-#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(313): CDbConnection->open()
-#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(291): CDbConnection->setActive(true)
-#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CModule.php(372): CDbConnection->init()
-#3 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(429): CModule->getComponent('db')
-#4 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(609): CApplication->getDb()
-#5 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(2275): CActiveRecord->getDbConnection()
-#6 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(372): CActiveRecordMetaData->__construct(Object(ShipmarketItem))
-#7 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CActiveDataProvider.php(72): CActiveRecord::model('ShipmarketItem')
-#8 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\shipmarket\controllers\ShipmarketItemController.php(133): CActiveDataProvider->__construct('ShipmarketItem')
-#9 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\actions\CInlineAction.php(50): ShipmarketItemController->actionIndex()
-#10 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
-#11 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
-#12 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
-#13 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
-#14 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
-#15 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
-#16 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(283): CFilterChain->run()
-#17 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
-#18 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(277): CController->run('')
-#19 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
-#20 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#21 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
-#22 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
-2012/02/20 17:42:39 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php:364
-Stack trace:
-#0 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(313): CDbConnection->open()
-#1 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\CDbConnection.php(291): CDbConnection->setActive(true)
-#2 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CModule.php(372): CDbConnection->init()
-#3 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(429): CModule->getComponent('db')
-#4 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(609): CApplication->getDb()
-#5 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(2275): CActiveRecord->getDbConnection()
-#6 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\db\ar\CActiveRecord.php(372): CActiveRecordMetaData->__construct(Object(ShipmarketItem))
-#7 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CActiveDataProvider.php(72): CActiveRecord::model('ShipmarketItem')
-#8 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\protected\modules\shipmarket\controllers\ShipmarketItemController.php(133): CActiveDataProvider->__construct('ShipmarketItem')
-#9 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\actions\CInlineAction.php(50): ShipmarketItemController->actionIndex()
-#10 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
-#11 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
-#12 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
-#13 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
-#14 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
-#15 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
-#16 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(283): CFilterChain->run()
-#17 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
-#18 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(277): CController->run('')
-#19 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('shipmarket/ship...')
-#20 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
-#21 C:\Users\Minh-Tam Nguyen\workspace\lintinzone\index.php(13): CApplication->run()
-#22 {main} REQUEST_URI=/lintinzone/index.php?r=shipmarket/shipmarketitem
+2012/04/01 16:27:12 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:12 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:12 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:12 [trace] [system.CModule] Loading "user" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (10)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:12 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (10)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:12 [trace] [system.CModule] Loading "widgetFactory" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (30)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:12 [trace] [system.CModule] Loading "coreMessages" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (34)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:12 [trace] [system.CModule] Loading "clientScript" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (64)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:12 [trace] [system.CModule] Loading "assetManager" application component
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:12 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:12 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:12 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:12 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:32 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:32 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:32 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:32 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\protected\controllers\SiteController.php (58)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:34 [trace] [system.CModule] Loading "user" application component
+in D:\wamp\www\beta\protected\controllers\SiteController.php (61)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:34 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:34 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:34 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:34 [trace] [system.CModule] Loading "user" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (10)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:34 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (10)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:34 [trace] [system.CModule] Loading "widgetFactory" application component
+in D:\wamp\www\beta\protected\views\layouts\column1.php (1)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:27:34 [trace] [system.CModule] Loading "coreMessages" application component
+in D:\wamp\www\beta\protected\views\layouts\main.php (42)
+in D:\wamp\www\beta\protected\views\layouts\column1.php (5)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+2012/04/01 16:27:34 [trace] [system.CModule] Loading "clientScript" application component
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:31:34 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:31:34 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:31:34 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:31:34 [trace] [system.CModule] Loading "user" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (10)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:31:34 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (10)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:31:34 [trace] [system.CModule] Loading "widgetFactory" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (30)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:31:34 [trace] [system.CModule] Loading "coreMessages" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (34)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:31:34 [trace] [system.CModule] Loading "clientScript" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (64)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:31:34 [trace] [system.CModule] Loading "assetManager" application component
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:31:34 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:31:34 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:31:34 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:31:34 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:33:53 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:33:53 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:33:53 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:33:53 [trace] [system.CModule] Loading "widgetFactory" application component
+in D:\wamp\www\beta\protected\views\layouts\column1.php (1)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (32)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:33:53 [trace] [system.CModule] Loading "user" application component
+in D:\wamp\www\beta\protected\views\layouts\main.php (34)
+in D:\wamp\www\beta\protected\views\layouts\column1.php (5)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (32)
+2012/04/01 16:33:53 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\protected\views\layouts\main.php (34)
+in D:\wamp\www\beta\protected\views\layouts\column1.php (5)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (32)
+2012/04/01 16:33:53 [trace] [system.CModule] Loading "coreMessages" application component
+in D:\wamp\www\beta\protected\views\layouts\main.php (52)
+in D:\wamp\www\beta\protected\views\layouts\column1.php (5)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (32)
+2012/04/01 16:33:53 [trace] [system.CModule] Loading "clientScript" application component
+in D:\wamp\www\beta\protected\controllers\SiteController.php (32)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:37:37 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:37:37 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:37:37 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:37:37 [trace] [system.base.CModule] Loading "user" module
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:37:37 [trace] [system.CModule] Loading "user" application component
+in D:\wamp\www\beta\protected\modules\user\controllers\LoginController.php (8)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:37:37 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\protected\modules\user\controllers\LoginController.php (8)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:37:37 [trace] [system.CModule] Loading "widgetFactory" application component
+in D:\wamp\www\beta\protected\modules\user\views\login\login.php (9)
+in D:\wamp\www\beta\protected\modules\user\controllers\LoginController.php (24)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:37:38 [trace] [system.CModule] Loading "coreMessages" application component
+in D:\wamp\www\beta\protected\modules\user\views\login\login.php (14)
+in D:\wamp\www\beta\protected\modules\user\controllers\LoginController.php (24)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:37:38 [trace] [system.CModule] Loading "messages" application component
+in D:\wamp\www\beta\protected\modules\user\UserModule.php (50)
+in D:\wamp\www\beta\protected\modules\user\models\Login.php (37)
+in D:\wamp\www\beta\protected\modules\user\views\login\login.php (17)
+2012/04/01 16:37:38 [trace] [system.CModule] Loading "clientScript" application component
+in D:\wamp\www\beta\protected\modules\user\views\login\login.php (37)
+in D:\wamp\www\beta\protected\modules\user\controllers\LoginController.php (24)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:37:38 [trace] [system.CModule] Loading "assetManager" application component
+in D:\wamp\www\beta\protected\modules\user\controllers\LoginController.php (24)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:50:35 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:50:35 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:50:35 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:50:35 [trace] [system.base.CModule] Loading "user" module
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:50:35 [trace] [system.web.filters.CFilterChain] Running filter UserController.filteraccessControl()
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:50:35 [trace] [system.CModule] Loading "user" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:50:35 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:50:35 [trace] [system.CModule] Loading "db" application component
+in D:\wamp\www\beta\protected\modules\user\controllers\UserController.php (68)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:50:35 [trace] [system.db.CDbConnection] Opening DB connection
+in D:\wamp\www\beta\protected\modules\user\controllers\UserController.php (68)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:50:35 [trace] [system.db.CDbCommand] Querying SQL: SHOW COLUMNS FROM `syii_users`
+in D:\wamp\www\beta\protected\modules\user\controllers\UserController.php (68)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:50:35 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `syii_users`
+in D:\wamp\www\beta\protected\modules\user\controllers\UserController.php (68)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:50:35 [trace] [system.CModule] Loading "widgetFactory" application component
+in D:\wamp\www\beta\protected\modules\user\views\user\_form.php (8)
+in D:\wamp\www\beta\protected\modules\user\views\user\create.php (15)
+in D:\wamp\www\beta\protected\modules\user\controllers\UserController.php (82)
+2012/04/01 16:50:35 [trace] [system.CModule] Loading "messages" application component
+in D:\wamp\www\beta\protected\modules\user\UserModule.php (50)
+in D:\wamp\www\beta\protected\modules\user\models\User.php (163)
+in D:\wamp\www\beta\protected\modules\user\views\user\_form.php (16)
+2012/04/01 16:50:35 [trace] [system.CModule] Loading "clientScript" application component
+in D:\wamp\www\beta\protected\modules\user\views\user\_form.php (43)
+in D:\wamp\www\beta\protected\modules\user\views\user\create.php (15)
+in D:\wamp\www\beta\protected\modules\user\controllers\UserController.php (82)
+2012/04/01 16:50:35 [trace] [system.CModule] Loading "coreMessages" application component
+in D:\wamp\www\beta\protected\views\layouts\main.php (52)
+in D:\wamp\www\beta\protected\views\layouts\column2.php (21)
+in D:\wamp\www\beta\protected\modules\user\controllers\UserController.php (82)
+2012/04/01 16:51:20 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:20 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:20 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:20 [trace] [system.CModule] Loading "widgetFactory" application component
+in D:\wamp\www\beta\protected\views\layouts\column1.php (1)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (32)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:20 [trace] [system.CModule] Loading "user" application component
+in D:\wamp\www\beta\protected\views\layouts\main.php (34)
+in D:\wamp\www\beta\protected\views\layouts\column1.php (5)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (32)
+2012/04/01 16:51:20 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\protected\views\layouts\main.php (34)
+in D:\wamp\www\beta\protected\views\layouts\column1.php (5)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (32)
+2012/04/01 16:51:20 [trace] [system.CModule] Loading "coreMessages" application component
+in D:\wamp\www\beta\protected\views\layouts\main.php (52)
+in D:\wamp\www\beta\protected\views\layouts\column1.php (5)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (32)
+2012/04/01 16:51:20 [trace] [system.CModule] Loading "clientScript" application component
+in D:\wamp\www\beta\protected\controllers\SiteController.php (32)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:21 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:21 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:21 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:21 [trace] [system.CModule] Loading "widgetFactory" application component
+in D:\wamp\www\beta\protected\views\layouts\column1.php (1)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:21 [trace] [system.CModule] Loading "user" application component
+in D:\wamp\www\beta\protected\views\layouts\main.php (34)
+in D:\wamp\www\beta\protected\views\layouts\column1.php (5)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:21 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\protected\views\layouts\main.php (34)
+in D:\wamp\www\beta\protected\views\layouts\column1.php (5)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:21 [trace] [system.CModule] Loading "coreMessages" application component
+in D:\wamp\www\beta\protected\views\layouts\main.php (42)
+in D:\wamp\www\beta\protected\views\layouts\column1.php (5)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:21 [trace] [system.CModule] Loading "clientScript" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:22 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:22 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:22 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:22 [trace] [system.CModule] Loading "user" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (10)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:22 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (10)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:22 [trace] [system.CModule] Loading "widgetFactory" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (30)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:22 [trace] [system.CModule] Loading "coreMessages" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (34)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:22 [trace] [system.CModule] Loading "clientScript" application component
+in D:\wamp\www\beta\protected\views\site\contact.php (64)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:22 [trace] [system.CModule] Loading "assetManager" application component
+in D:\wamp\www\beta\protected\controllers\SiteController.php (67)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:22 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:22 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:22 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:22 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:23 [trace] [system.CModule] Loading "log" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:23 [trace] [system.CModule] Loading "request" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:23 [trace] [system.CModule] Loading "urlManager" application component
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:23 [trace] [system.CModule] Loading "widgetFactory" application component
+in D:\wamp\www\beta\protected\views\site\login.php (19)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (113)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:23 [trace] [system.CModule] Loading "coreMessages" application component
+in D:\wamp\www\beta\protected\views\site\login.php (26)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (113)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:23 [trace] [system.CModule] Loading "clientScript" application component
+in D:\wamp\www\beta\protected\views\site\login.php (48)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (113)
+in D:\wamp\www\beta\index.php (13)
+2012/04/01 16:51:23 [trace] [system.CModule] Loading "user" application component
+in D:\wamp\www\beta\protected\views\layouts\main.php (34)
+in D:\wamp\www\beta\protected\views\layouts\column1.php (5)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (113)
+2012/04/01 16:51:23 [trace] [system.CModule] Loading "session" application component
+in D:\wamp\www\beta\protected\views\layouts\main.php (34)
+in D:\wamp\www\beta\protected\views\layouts\column1.php (5)
+in D:\wamp\www\beta\protected\controllers\SiteController.php (113)
+2012/04/01 16:51:23 [trace] [system.CModule] Loading "assetManager" application component
+in D:\wamp\www\beta\protected\controllers\SiteController.php (113)
+in D:\wamp\www\beta\index.php (13)

@@ -57,13 +57,34 @@ class SiteController extends Controller
 			$model->attributes=$_POST['ContactForm'];
 			if($model->validate())
 			{
-				$headers="From: {$model->email}\r\nReply-To: {$model->email}";
-				mail(Yii::app()->params['adminEmail'],$model->subject,$model->body,$headers);
-				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
+				if ($this->sendMailSmtp($model->email, $model->name, $model->subject, $model->body, false) === true)
+					Yii::app()->user->setFlash('contact', 'Thank you for contacting us. We will respond to you as soon as possible.');
+				else
+					Yii::app()->user->setFlash('contact', 'An error has occurred. Please try again!');
 				$this->refresh();
 			}
 		}
 		$this->render('contact',array('model'=>$model));
+	}
+	
+	/**
+	 * Sends mail using SMTP.
+	 * @param string $from User's email address
+	 * @param string $subject Subject of the email
+	 * @param string $body Body of the email
+	 * @param boolean $html true indicates that the body format is html; false means the body is plain text
+	 * @return true|false
+	 */
+	private function sendMailSmtp($from, $fromName, $subject, $body, $html = false)
+	{
+		$mailParams = array(
+			'from' => $from,
+			'fromName' => $fromName,
+			'to' => Yii::app()->params['adminEmail'],
+			'subject' => $subject,
+			'body' => $body
+		);
+		return MailSender::sendSMTP($mailParams, '', 'text/plain');
 	}
 
 	/**

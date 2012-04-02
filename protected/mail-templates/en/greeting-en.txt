@@ -1,0 +1,16 @@
+﻿  Dear {receiver},
+
+  Congratulation, you have subscribed updates from LintinZone. Being subscribed, you will receive news about our latest functions and hava a chance to be one of the first users of LintinZone - Beta.
+
+  Any questions, ideas or contributions, please contact us: {support_link}.
+
+    LintinZone on Facebook: http://www.facebook.com/LintinZone
+
+    LintinZone on Twitter: http://twitter.com/@LintinZone 
+
+    LintinZone on Google+: https://plus.google.com/b/114591945709472470617/	
+
+  Sincerely,
+  LintinZone - {home_link}
+
+  PS: To stop receiving updates from LintinZone, please click this link: {unsubscribe_link}.

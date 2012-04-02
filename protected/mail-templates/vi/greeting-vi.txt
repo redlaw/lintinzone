@@ -1,0 +1,16 @@
+﻿  Xin chào {receiver},
+
+  Chúc mừng, bạn đã đăng ký nhận tin tức từ LintinZone. Bạn sẽ nhận được những tin tức mới nhất về những tính năng của LintinZone cũng như nhận được ưu tiên trải nghiệm bản beta của LintinZone.
+
+  Mọi câu hỏi, góp ý, xin vui lòng liên hệ với chúng tôi: {support_link}.
+
+    LintinZonetrên Facebook: http://www.facebook.com/LintinZone
+
+    LintinZone trên Twitter: http://twitter.com/@LintinZone 
+
+    LintinZone trên Google+: https://plus.google.com/b/114591945709472470617/	
+
+  Cảm ơn bạn đã đăng ký,
+  LintinZone - {home_link}
+
+  PS: Để ngưng nhận tin tức từ LintinZone, bạn bấm vào đường dẫn này {unsubscribe_link}.

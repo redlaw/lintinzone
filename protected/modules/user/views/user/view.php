@@ -1,46 +1,33 @@
 <?php
 $this->breadcrumbs=array(
-	UserModule::t('Users')=>array('index'),
-	$model->username,
+	'Users'=>array('index'),
+	$model->user_id,
+);
+
+$this->menu=array(
+	array('label'=>'List User', 'url'=>array('index')),
+	array('label'=>'Create User', 'url'=>array('create')),
+	array('label'=>'Update User', 'url'=>array('update', 'id'=>$model->user_id)),
+	array('label'=>'Delete User', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->user_id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Manage User', 'url'=>array('admin')),
 );
 ?>
-<h1><?php echo UserModule::t('View User').' "'.$model->username.'"'; ?></h1>
 
-<ul class="actions">
-	<li><?php echo CHtml::link(UserModule::t('List User'),array('index')); ?></li>
-</ul><!-- actions -->
+<h1>View User #<?php echo $model->user_id; ?></h1>
 
-<?php 
-
-// For all users
-	$attributes = array(
-			'username',
-	);
-	
-	$profileFields=ProfileField::model()->forAll()->sort()->findAll();
-	if ($profileFields) {
-		foreach($profileFields as $field) {
-			array_push($attributes,array(
-					'label' => UserModule::t($field->title),
-					'name' => $field->varname,
-					'value' => $model->profile->getAttribute($field->varname),
-				));
-		}
-	}
-	array_push($attributes,
-		array(
-			'name' => 'createtime',
-			'value' => date("d.m.Y H:i:s",$model->createtime),
-		),
-		array(
-			'name' => 'lastvisit',
-			'value' => (($model->lastvisit)?date("d.m.Y H:i:s",$model->lastvisit):UserModule::t('Not visited')),
-		)
-	);
-			
-	$this->widget('zii.widgets.CDetailView', array(
-		'data'=>$model,
-		'attributes'=>$attributes,
-	));
-
-?>
+<?php $this->widget('zii.widgets.CDetailView', array(
+	'data'=>$model,
+	'attributes'=>array(
+		'user_id',
+		'username',
+		'email',
+		'password',
+		'active',
+		'online',
+		'created_date',
+		'modified_date',
+		'last_visited_date',
+		'last_visited_ip',
+		'last_visited_loc_id',
+	),
+)); ?>

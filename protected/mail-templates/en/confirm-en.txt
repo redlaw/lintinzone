@@ -1,0 +1,18 @@
+﻿  Dear {receiver},
+
+  LintinZone has recently received your subscription request to our latest updates. By agreeing this subscription, you will receive our latest news about new functions, and have a chance to become one of the first users of LintinZone. Please confirm your subscription by clicking this link.
+
+    {confirm_link}
+
+  If you received this email by mistake, simply delete it. You won't be subscribed if you don't click the confirmation link above.
+
+  Any questions, ideas or contributions, please contact us: {support_link}.
+
+    LintinZone on Facebook: http://www.facebook.com/LintinZone
+
+    LintinZone on Twitter: http://twitter.com/@LintinZone
+
+    LintinZone on Google+: https://plus.google.com/b/114591945709472470617/
+
+  Sincerely
+  LintinZone - {home_link}
