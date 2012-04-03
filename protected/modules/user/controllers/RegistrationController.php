@@ -20,10 +20,13 @@ class RegistrationController extends Controller
 			$model->verification_code = $_POST['Registration']['verification_code'];
 			if ($model->save())
 			{
+				Yii::log('user created', 'warning', 'system.web.CController');
 				if (!User::sendRegisterVerification($model->email, $model->username))
 					Yii::app()->user->setFlash('registration', UserModule::t('We experienced some problems to send you a verification account. Make sure that your email address is valid! If it is, an email will be sent again soon.'));
+					//Yii::log('failed to send mail', 'warning', 'system.web.CController');
 				else
 					Yii::app()->user->setFlash('registration', UserModule::t('Thank you for your registration! Please check your mail inbox.'));
+					//Yii::log('send successfully', 'warning', 'system.web.CController');
 				$this->redirect(array('user/view','id' => $model->user_id));
 				//$this->refresh();
 			}
