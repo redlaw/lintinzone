@@ -44,7 +44,7 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'syii_users';
+		return '{{users}}';
 	}
 
 	/**
@@ -93,8 +93,9 @@ class User extends CActiveRecord
 					'min' => 8 // Password has at least 8 characters.
 				),
 		 		array(
-		 			'password',
-		 			'compare'
+		 			'password_repeat',
+		 			'compare',
+		 			'compareAttribute' => 'password'
 		 		),
 				array(
 					'username',
@@ -180,10 +181,10 @@ class User extends CActiveRecord
 					'min' => 8 // Password has at least 8 characters.
 				),
 				array(
-					'password',
-					'compare'/*,
-					'on' => 'register'*/
-				),
+		 			'password_repeat',
+		 			'compare',
+		 			'compareAttribute' => 'password'
+		 		),
 				array(
 					'username',
 					'unique',
@@ -301,6 +302,12 @@ class User extends CActiveRecord
 		$this->password = self::encryptPassword($this->password);
 	}
 	
+	/*public function onBeforeSave()
+	{
+		parent::onBeforeSave();
+		$this->password = self::encryptPassword($this->password);
+	}*/
+	
 	public function validatePassword($password)
 	{
 		return self::encryptPassword($password) === $this->password;
@@ -317,39 +324,81 @@ class User extends CActiveRecord
 	}
 	
 	/**
-	 * Authenticates user login.
+	 * Logs info when user logs in.
+	 * @return true
 	 */
-	/*public function authenticate($attribute, $params)
-	{
-		// Ensure the input to be authenticated is valid.
-		if (!$this->hasErrors())
-		{
-			$this->_identity = new UserIdentity($this->username, $this->password);
-			$this->_identity->authenticate();
-			switch ($this->_identity->errorCode)
-			{
-				case UserIdentity::ERROR_NONE:
-					//$duration = $this->rememberMe ? 3600 * 24 * 30 : 0;
-					$duration = 0;
-					Yii::app()->user->login($this->_identity, $duration);
-					return true;
-				case UserIdentity::ERROR_EMAIL_INVALID:
-				case UserIdentity::ERROR_USERNAME_INVALID:
-				case UserIdentity::ERROR_PASSWORD_INVALID:
-					$this->addError('username', UserModule::t('Incorrect username or password.'));
-					return false;
-				case UserIdentity::ERROR_STATUS_NOTACTIVE:
-					$this->addError('active', UserModule::t('Your account is not activated yet. Make sure you confirm your email address before logging in.'));
-					return false;
-				case UserIdentity::ERROR_STATUS_BLOCKED:
-					$this->addError('blocked', UserModule::t('Your account is blocked.'));
-					return false;
-			}
-		}
-	}*/
-	
 	public function logSession()
 	{
-		
+		//Yii::app()->getRequest()->... // Get the request
+		$this->last_visited_ip = Yii::app()->request->getUserHostAddress();
+		$this->modified_date = $this->last_visited_date = new CDbExpression('NOW()');
+		$this->save();
+		//TODO: Detect user's location
+		//TODO: Insert a record into '{{login_history}}' table
+		return true;
+	}
+	
+	public static function sendRegisterVerification($email, $username)
+	{
+		if (empty($email))
+			return false;
+		$key = sha1(uniqid(rand()));
+		$model = EmailVerification::model()->findbyPk($email);
+		if (!$model)
+		{
+			$model = new EmailVerification();
+			$model->email = $email;
+			$model->verification_key = $key;
+			$mailParams = array(
+				'from' => Yii::app()->params['adminEmail'],
+				'fromName' => 'LintinZone',
+				'to' => $email,
+				'subject' => 'LintinZone ' . UserModule::t('Xác nhận đăng ký tin tức'),
+				'body' => array(
+					'{receiver}' => (empty($username)) ? UserModule::t('my friend') : $username, // username
+					'{confirm_link}' => 'http://' . $_SERVER['SERVER_NAME'] . 'beta/user/confirm?key=' . $key . '&email=' . $email,
+					'{support_link}' => 'http://' . $_SERVER['SERVER_NAME'] . 'beta/site/contact?email=' . $email,
+					'{home_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/'
+				)
+			);
+			if (MailSender::sendSMTP($mailParams, 'register', 'text/html'))
+			{
+				$model->sent_date = new CDbExpression('NOW()');
+				$model->save();
+				return true;
+			}
+			$model->save();
+			return false;
+		}
+		else
+		{
+			if (!$model->verified)
+			{
+				$model->verification_key = $key;
+				$mailParams = array(
+					'from' => Yii::app()->params['adminEmail'],
+					'fromName' => 'LintinZone',
+					'to' => $email,
+					'subject' => 'LintinZone ' . UserModule::t('Xác nhận đăng ký tin tức'),
+					'body' => array(
+						'{receiver}' => (empty($username)) ? UserModule::t('my friend') : $username, // username
+						'{confirm_link}' => 'http://' . $_SERVER['SERVER_NAME'] . 'beta/user/confirm?key=' . $key . '&email=' . $email,
+						'{support_link}' => 'http://' . $_SERVER['SERVER_NAME'] . 'beta/site/contact?email=' . $email,
+						'{home_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/'
+					)
+				);
+				if (MailSender::sendSMTP($mailParams, 'register', 'text/html'))
+				{
+					$model->sent_date = new CDbExpression('NOW()');
+					$model->save();
+					return true;
+				}
+				$model->sent_date = new CDbExpression('NULL');
+				$model->save();
+				return false;
+			}
+			else
+				return true;
+		}
 	}
 }

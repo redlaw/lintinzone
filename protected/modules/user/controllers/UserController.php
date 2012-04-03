@@ -26,25 +26,25 @@ class UserController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index', 'create'),
+			/*array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index'),
 				'users'=>array('*'),
-			),
+			),*/
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('view', 'update'),
+				'actions'=>array('index', 'view', 'update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin', 'create','delete'),
 				'users'=>array('admin'),
 			),
-			/*array('deny',  // deny all users
+			array('deny',  // deny all users
 				'users'=>array('*'),
-			),*/
-			array('deny',
+			),
+			/*array('deny',
 				'actions' => array('create'),
 				'users' => array('@')
-			)
+			)*/
 		);
 	}
 
@@ -74,7 +74,9 @@ class UserController extends Controller
 		{
 			$model->attributes=$_POST['User'];
 			if($model->save())
+			{
 				$this->redirect(array('view','id'=>$model->user_id));
+			}
 		}
 
 		$this->render('create',array(

@@ -14,7 +14,8 @@ class LoginController extends Controller
 				$formModel->rememberMe = $_POST['Login']['rememberMe'];
 				if ($formModel->validate())
 				{
-					//$this->logSession();
+					$user = User::model()->findbyPk(Yii::app()->user->getId());
+					$user->logSession();
 					if (strpos(Yii::app()->user->returnUrl, 'index.php') !== false)
 						$this->redirect(Yii::app()->controller->module->returnUrl);
 					else

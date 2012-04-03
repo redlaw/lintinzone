@@ -9,6 +9,7 @@ class UserModule extends CWebModule
 	public $profileUrl = array("/user/profile");
 	public $returnUrl = array("/user/profile");
 	public $returnLogoutUrl = array("/user/login");
+	public $captcha = array('registration'=>true);
 	
 	public function init()
 	{
@@ -68,5 +69,14 @@ class UserModule extends CWebModule
 			else
 				return User::model()->active->findbyPk(Yii::app()->user->id);
 		}
+	}
+	
+	public static function doCaptcha($place = '')
+	{
+		if(!extension_loaded('gd'))
+			return false;
+		if (in_array($place, Yii::app()->getModule('user')->captcha))
+			return Yii::app()->getModule('user')->captcha[$place];
+		return false;
 	}
 }

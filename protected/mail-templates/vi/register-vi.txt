@@ -1,0 +1,16 @@
+﻿  Xin chào {receiver},
+
+  Chào mừng bạn đến với LintinZone... Xin vui lòng bấm vào liên kết dưới đây để hoàn tất quá trình đăng ký của bạn.
+
+    {confirm_link}
+
+  Mọi câu hỏi, góp ý, xin vui lòng liên hệ với chúng tôi: {support_link}.
+
+    LintinZone trên Facebook: http://www.facebook.com/LintinZone
+
+    LintinZone trên Twitter: http://twitter.com/@LintinZone
+
+    LintinZone trên Google+: https://plus.google.com/b/114591945709472470617/
+
+  Cảm ơn đã đọc thư này,
+  LintinZone - {home_link}

@@ -1,0 +1,16 @@
+﻿  Dear {receiver},
+
+  Welcome you to LintinZone... Please complete your registration by clicking this link.
+
+    {confirm_link}
+
+  Any questions, ideas or contributions, please contact us: {support_link}.
+
+    LintinZone on Facebook: http://www.facebook.com/LintinZone
+
+    LintinZone on Twitter: http://twitter.com/@LintinZone
+
+    LintinZone on Google+: https://plus.google.com/b/114591945709472470617/
+
+  Sincerely
+  LintinZone - {home_link}

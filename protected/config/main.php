@@ -36,7 +36,7 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
-			//'loginUrl' => array('/user/login')
+			'loginUrl' => array('/user/login')
 		),
 		// uncomment the following to enable URLs in path-format
 		'urlManager'=>array(
@@ -70,7 +70,8 @@ return array(
 			'routes'=>array(
 				array(
 					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning, trace, info',
+					//'levels'=>'error, warning, trace, info',
+					'levels' => 'error, warning'
 				),
 				// uncomment the following to show log messages on web pages
 				/*
