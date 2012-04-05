@@ -356,8 +356,8 @@ class User extends CActiveRecord
 				'subject' => 'LintinZone ' . UserModule::t('Xác nhận đăng ký tin tức'),
 				'body' => array(
 					'{receiver}' => (empty($username)) ? UserModule::t('my friend') : $username, // username
-					'{confirm_link}' => 'http://' . $_SERVER['SERVER_NAME'] . 'beta/user/confirm?key=' . $key . '&email=' . $email,
-					'{support_link}' => 'http://' . $_SERVER['SERVER_NAME'] . 'beta/site/contact?email=' . $email,
+					'{confirm_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/user/confirm?key=' . $key . '&email=' . $email,
+					'{support_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/site/contact?email=' . $email,
 					'{home_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/'
 				)
 			);
