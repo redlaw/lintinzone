@@ -19,12 +19,25 @@
 
 <body>
 
-<div class="container" id="page">
+<div class="container showgrid" id="page">
 
 	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+		<div id="logo" class="span-5">
+			<a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php">
+				<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo.png">
+			</a>
+		</div>
+		<div id="search" class="span-10">
+			<input type="text" class="text" id="search_box" name="q" value="Search here">		
+			<input id="button" type="button" value="Search">
+		</div>
+		<div id="user_panel" class="span-6 prepend-3 last">
+			<a href="">Log in</a> | 
+			<a  href="" style="width:100px">Join LintinZone</a> 
+		</div>
 	</div><!-- header -->
 
+	<!-- HIDE mainmenu --
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
@@ -36,21 +49,100 @@
 			),
 		)); ?>
 	</div><!-- mainmenu -->
-	<?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
+		
+	<div class="span-24">
+	<br>
+	</div>
+	<!-- Begin  main-->	
+    <div class="span-24 ">	
+    	<!-- Begin navigation -->	
+        <div id="nav" class="span-5">          			
+			<ul>
+			OrderZone
+				<li >
+				<a href="login.html">All Orders</a>
+				</li>
+				<li>
+				<a href="order.html">Your Orders</a>
+				</li>
+				<li>
+				<a href="">Offers</a>
+				</li>
+			</ul>
+							
+			<ul>
+			ShipZone
+				<li >
+				<a href="">All Trips</a>
+				</li>
+				<li>
+				<a href="">Your Trips</a>
+				</li>
+				<li>
+				<a href="">Requests</a>
+				</li>
+			</ul>
+						
+			<ul>
+			Transactions
+				<li>
+				<a href="">All Transactions</a>
+				</li>
+				<li>
+				<a href="">Ongoing</a>
+				</li>
+				<li>
+				<a href="">Negotiating</a>
+				</li>
+			</ul>
+        </div>
+        <!-- End navigation -->
+        
+        <!-- Begin bread-content -->
+        <div class="span-19 last">
+		<!-- Begin breadcrumb -->	
+		<div id="breadcrumbs" class="span-18">
+		<?php if(isset($this->breadcrumbs)):?>
+			<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+				'links'=>$this->breadcrumbs,
+			)); ?><!-- breadcrumbs -->
+		<?php endif?>
+		This is for breadcrumbs
+		</div>
+		<!-- End  breadcrumb-->
+		<hr style="border: 1px solid #000;"/>
+		<!--control_panel-->
+		<div id="control_panel" class="span-18">
+			<input id="button" type="button" value="New Order">
+			<input id="button" type="button" value="New Trip">
+			<input id="button" type="button" value="New Order">
+			<input id="button" type="button" value="New Trip">
+		</div>
+		<!---->
+		<hr style="border: 1px solid #000;" />
+		<!-- Begin content -->
+		<div id="content" class="span-18 box">
+		<?php echo $content; ?>
+		</div>
+		<!-- End content -->
+		</div>
+		<!-- End bread-content -->
+		
+	</div>
+	<!-- End main -->
+	
+	<!-- footer -->
+	<div id="footer" class="span-24">
+		<div id="lintinzone" class="span-9">
+			Copyright &copy; <?php echo date('Y'); ?> by LintinZone.
+			All Rights Reserved.<br/>
+		</div>
+		<div id="footer-nav" class="span-4 prepend-11 last">
+		<a href="about">About </a>|<a href="about"> Contact </a>|<a href="about"> Faq </a>
+		</div>
+	</div>	
 
-	<?php echo $content; ?>
-
-	<div class="clear"></div>
-
-	<div id="footer">
-		Copyright &copy;2011 - <?php echo date('Y'); ?> by LintinZone.<br/>
-		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
-	</div><!-- footer -->
+	
 
 </div><!-- page -->
 
