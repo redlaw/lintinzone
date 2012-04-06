@@ -133,11 +133,11 @@
 	
 	<!-- footer -->
 	<div id="footer" class="span-24">
-		<div id="lintinzone" class="span-9">
-			Copyright &copy; <?php echo date('Y'); ?> by LintinZone.
-			All Rights Reserved.<br/>
+		<div id="lintinzone" class="span-10">
+			Copyright &copy; 2011 - <?php echo date('Y'); ?> by LintinZone.
+			All Rights Reserved.
 		</div>
-		<div id="footer-nav" class="span-4 prepend-11 last">
+		<div id="footer-nav" class="span-4 prepend-10 last">
 		<a href="about">About </a>|<a href="about"> Contact </a>|<a href="about"> Faq </a>
 		</div>
 	</div>	
