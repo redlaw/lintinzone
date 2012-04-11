@@ -1,0 +1,35 @@
+﻿use lintinzo_db;
+create column family USERS with comparator = TimeUUIDType
+	and column_metadata = [
+		{
+			column_name: user_id,
+			validation_class: TimeUUIDType,
+			index_type: KEYS
+		},
+		{
+			column_name: email,
+			validation_class: BytesType,
+			index_type: KEYS
+		},
+		{
+			column_name: username,
+			validation_class: BytesType,
+			index_type: KEYS
+		},
+		{
+			column_name: password,
+			validation_class: BytesType
+		},
+		{
+			column_name: active,
+			validation_class: BooleanType
+		},
+		{
+			column_name: blocked,
+			validation_class: BooleanType
+		},
+		{
+			column_name: online,
+			validation_class: BooleanType
+		}
+	];

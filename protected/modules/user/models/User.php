@@ -17,7 +17,7 @@
  * @property string $last_visited_ip
  * @property integer $last_visited_loc_id
  */
-class User extends CActiveRecord
+class User extends ECassandraCF
 {
 	const STATUS_NOTACTIVE = 0;
 	const STATUS_ACTIVE = 1;
@@ -44,7 +44,7 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{users}}';
+		return '{{USERS}}'; // case sensitive
 	}
 
 	/**

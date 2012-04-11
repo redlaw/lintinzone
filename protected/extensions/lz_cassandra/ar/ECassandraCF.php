@@ -12,10 +12,12 @@
  * @since v0.1
  */
 
-require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
+require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
 
  /**
-  * ECassandraCF represents a column family.
+  * ECassandraCF serves the operations to manage a column family and its rows.
+  * The first intention of mine is to make the distinction between the class representing a column family (or a table, in relational database)
+  * and a row. But the default behavior of Yii makes it hard to do it!
   * 
   * @author Trần Thanh Tùng <info@lintinzone.com>
   * @version 0.1
@@ -45,20 +47,32 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
 	private static $_models = array();
 	
 	/**
+	 * List of attributes (attribute name => attribute value).
+	 * @var array
+	 */
+	private $_attributes = array();
+	
+	/**
+	 * Meta data of this column family.
+	 * @var cassandra_CfDefs
+	 */
+	private $_metadata;
+	
+	/**
 	 * Constructor.
 	 * @param string $cfName the column family name (no prefix)
 	 * @param string $scenario scenario name. See {@link CModel::scenario} for more details about this parameter
 	 */
-	public function __construct($cfName, $scenario = 'insert')
+	public function __construct($scenario = 'insert')
 	{
 		// Specify the column family.
-		$this->_cfName = $cfName;
+		//$this->_cfName = $cfName;
 		
 		if($scenario === null) // internally used by populateRecord() and model()
 			return;
 
 		$this->setScenario($scenario);
-		$this->setIsNewRecord(true);
+		//$this->setIsNewRecord(true);
 		//$this->_attributes=$this->getMetaData()->attributeDefaults;
 
 		$this->init();
@@ -78,14 +92,18 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
 	 */
  	public function init()
 	{
+		$this->_cfName = $this->tableName();
 		if (self::$_connectionPool === null)
-		{
 			self::$_connectionPool = Yii::app()->getComponent('cassandradb')->getConnectionPool();
-			$this->_columnFamily = new ColumnFamily(self::$_connectionPool, $this->cfName());
+		if (strpos($this->_cfName, '{{') >= 0)
+		{
+			$this->_cfName = str_replace('{{', '', $this->_cfName);
+			$this->_cfName = str_replace('}}', '', $this->_cfName);
+			$this->_cfName = Yii::app()->getComponent('cassandradb')->tablePrefix . $this->_cfName;
 		}
 		if ($this->_columnFamily === null)
-			$this->_columnFamily = new ColumnFamily(self::$_connectionPool, $this->cfName());
-		parent::init();
+			$this->_columnFamily = new ColumnFamily(self::$_connectionPool, $this->_cfName);
+		//parent::init();
 	}
 	
 	/**
@@ -120,12 +138,12 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
 	}
 	
 	/**
-	 * Returns the name of the associated column family.
+	 * Returns the name of the associated column family, in form of {{???}}.
 	 * @return string the column family name
 	 */
 	public function tableName()
 	{
-		return self::$_connectionPool->tablePrefix . $this->cfName();
+		//return self::$_connectionPool->tablePrefix . $this->cfName();
 	}
 	
 	/**
@@ -134,7 +152,7 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
 	 */
 	public function cfName()
 	{
-		return self::$_connectionPool->tablePrefix . $this->_cfName;
+		return $this->_cfName;
 	}
 	
 	public function getPrimaryKey()
@@ -329,11 +347,13 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
      * @param cassandra_ConsistencyLevel $writeConsistencyLevel affects the guaranteed
      *        number of nodes that must respond before the operation returns
      *
-     * @return int the timestamp for the operation
+     * @return int the timestamp for the operation | false
      */
 	public function insert($key, array $columns, $timestamp = null, $ttl = null, $writeConsistencyLevel = null)
 	{
-		return $this->_columnFamily->insert($key, $columns, $timestamp, $ttl, $writeConsistencyLevel);
+		if ($this->validate($columns))
+			return $this->_columnFamily->insert($key, $columns, $timestamp, $ttl, $writeConsistencyLevel);
+		return false;
 	}
 	
 	/**
@@ -348,11 +368,14 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
      * @param cassandra_ConsistencyLevel $writeConsistencyLevel affects the guaranteed
      *        number of nodes that must respond before the operation returns
      *
-     * @return int the timestamp for the operation
+     * @return int the timestamp for the operation | false
      */
     public function batchInsert($rows, $timestamp = null, $ttl = null, $writeConsistencyLevel = null)
     {
-    	return $this->_columnFamily->batch_insert($rows, $timestamp, $ttl, $writeConsistencyLevel);
+    	// This function is temporarily disabled because of the difficulties in validating data.
+    	return false;
+		//TODO: validate each row
+    	//return $this->_columnFamily->batch_insert($rows, $timestamp, $ttl, $writeConsistencyLevel);
     }
 	
 	/**
@@ -443,5 +466,87 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
 	public function save()
 	{
 		return false;
+	}
+	
+	public function attributeNames()
+	{
+		return array();
+	}
+	
+	/*public function setIsNewRecord()
+	{
+		return true;
+	}
+	
+	public function getIsNewRecord()
+	{
+		return true;
+	}*/
+	
+	/**
+	 * Returns the meta data for this column family.
+	 * @return cassandra_CfDefs the meta data for this column family.
+	 */
+	public function getMetaData()
+	{
+		if (!is_object($this->_metadata))
+		{
+			$keyspaceMetadata = Yii::app()->getComponent('cassandradb')->describe();
+			foreach ($keyspaceMetadata->cf_defs as $cfMetadata)
+			{
+				if ($cfMetadata->name === $this->_cfName)
+				{
+					$this->_metadata = $cfMetadata;
+					break;
+				}
+			}
+		}
+		return $this->_metadata;
+	}
+	
+	/**
+	 * Refreshes the meta data for this column family.
+	 * Note: make sure that you have refreshed the meta data of the connection pool {@link ECassandraConnection::refreshMetaData} before
+	 * calling this method
+	 * @return cassandra_CfDefs the meta data for this column family.
+	 */
+	public function refreshMetaData()
+	{
+		// If the meta data has not been retrieved
+		if (!is_object($this->_metadata))
+			return $this->getMetaData();
+		// Back it up before refreshing.
+		$oldMetaData = $this->_metadata;
+		$this->_metadata = null;
+		$this->getMetaData();
+		// If something goes wrong when retrieving the keyspace meta data.
+		// Take the backup into used.
+		if (!is_object($this->_metadata))
+			$this->_metadata = $oldMetaData;
+		return $this->_metadata;
+	}
+	
+	/**
+	 * Allows you to get an attribute value in a row by calling <pre>$model->$name</pre>.
+	 * @param string $name the attribute name
+	 * @return mixed the attribute value
+	 */
+	public function __get($name)
+	{
+		if (isset($this->_attributes[$name]))
+			return $this->_attributes[$name];
+		return null;
+	}
+	
+	/**
+	 * Allows you to set an attribute value in a row.
+	 * @param string $name property name
+	 * @param mixed $value property value
+	 * @return true;
+	 */
+	public function __set($name, $value)
+	{
+		$this->_attributes[$name] = $value;
+		return true;
 	}
  }

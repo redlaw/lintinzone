@@ -13,12 +13,21 @@ class RegistrationController extends Controller
 		{
 			//$model->attributes = $_POST['Registration'];
 			// Set attributes
-			$model->username = $_POST['Registration']['username'];
+			/*$model->username = $_POST['Registration']['username'];
 			$model->email = $_POST['Registration']['email'];
 			$model->password = $_POST['Registration']['password'];
 			$model->password_repeat = $_POST['Registration']['password_repeat'];
-			$model->verification_code = $_POST['Registration']['verification_code'];
-			if ($model->save())
+			$model->verification_code = $_POST['Registration']['verification_code'];*/
+			//if ($model->save())
+			if ($model->insert('key', array(
+					'email' => $_POST['Registration']['email'],
+					'username' => $_POST['Registration']['username'],
+					'password' => $_POST['Registration']['password'],
+					'password_repeat' => $_POST['Registration']['password_repeat'],
+					'verification_code' => $_POST['Registration']['verification_code'],
+					'active' => 0,
+					'blocked' => 0
+				)) != false)
 			{
 				Yii::log('user created', 'warning', 'system.web.CController');
 				if (!User::sendRegisterVerification($model->email, $model->username))
