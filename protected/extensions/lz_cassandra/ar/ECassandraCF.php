@@ -189,11 +189,6 @@ require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
 			$this->init();
 		return $this->_columnFamily->get($key, $columns, $columnStart, $columnFinish, $columnReversed,
 											$columnCount, $superColumn, $readConsistencyLevel);
-		/*$className = __CLASS__;
-		Yii::log($className, 'warning', 'system.web.CController');
-		$columnFamily = new $className();
-		$columnFamily->attributes = $attributes;
-		return $columnFamily;*/
     }
 	
 	/**
@@ -353,15 +348,6 @@ require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
 		$indexClause = CassandraUtil::create_index_clause(array($indexExp));
 		return $this->_columnFamily->get_indexed_slices($indexClause, $columns, $columnStart, $columnFinish,
 										$columnReversed, $columnCount, $superColumn, $readConsistencyLevel, $bufferSize);
-		/*$className = __CLASS__;
-		Yii::log('get INDEXED slices ' . $className, 'warning', 'system.web.CController');
-		$columnFamily = new $className();
-		foreach ($row as $rowKey => $attributes)
-		{
-			$columnFamily->attributes = $attributes;
-			break;
-		}
-		return $columnFamily;*/
     }
 	
 	/**
@@ -379,13 +365,16 @@ require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
      */
 	public function insert($key, array $columns, $timestamp = null, $ttl = null, $writeConsistencyLevel = null)
 	{
+		Yii::trace(__CLASS__ . ' insert', 'system.web.CController');
 		if (empty($this->_columnFamily))
 			$this->init();
-		if ($this->validate($columns))
-		{
+		//if ($this->validate($columns))
+		//{
 			//Yii::log('valid', 'warning', 'extension.lz_cassandra.ar');
-			return $this->_columnFamily->insert($key, $columns, $timestamp, $ttl, $writeConsistencyLevel);
-		}
+			$timeSt = $this->_columnFamily->insert($key, $columns, $timestamp, $ttl, $writeConsistencyLevel);
+			Yii::trace('INSERTTT ' . $timeSt, 'system.web.CController');
+			return $timeSt;
+		//}
 		//Yii::log('invalid', 'warning', 'extension.lz_cassandra.ar');
 		return false;
 	}

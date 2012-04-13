@@ -8,17 +8,9 @@ class RegistrationController extends Controller
 	{
 		$model = new Registration();
 
-		// $this->performAjaxValidation($model);
+		//$this->performAjaxValidation($model);
 		if(isset($_POST['Registration']))
 		{
-			//$model->attributes = $_POST['Registration'];
-			// Set attributes
-			/*$model->username = $_POST['Registration']['username'];
-			$model->email = $_POST['Registration']['email'];
-			$model->password = $_POST['Registration']['password'];
-			$model->password_repeat = $_POST['Registration']['password_repeat'];
-			$model->verification_code = $_POST['Registration']['verification_code'];*/
-			//if ($model->save())
 			if ($model->insert(CassandraUtil::uuid1(), array(
 					'email' => $_POST['Registration']['email'],
 					'username' => $_POST['Registration']['username'],
@@ -27,23 +19,29 @@ class RegistrationController extends Controller
 					'verification_code' => $_POST['Registration']['verification_code'],
 					'active' => 0,
 					'blocked' => 0
-				)))
+				)) !== false)
 			{
-				//Yii::log('user created', 'warning', 'system.web.CController');
-				if (!User::sendRegisterVerification($model->email, $model->username))
+				
+				/*if (!User::sendRegisterVerification($model->email, $model->username))
 					Yii::app()->user->setFlash('registration', UserModule::t('We experienced some problems to send you a verification account. Make sure that your email address is valid! If it is, an email will be sent again soon.'));
-					//Yii::log('failed to send mail', 'warning', 'system.web.CController');
 				else
-					Yii::app()->user->setFlash('registration', UserModule::t('Thank you for your registration! Please check your mail inbox.'));
-					//Yii::log('send successfully', 'warning', 'system.web.CController');
-				$this->redirect(array('index'));
-				//$this->refresh();
+					Yii::app()->user->setFlash('registration', UserModule::t('Thank you for your registration! Please check your mail inbox.'));*/
+				$this->redirect(array('/index'));
 			}
 		}
 
 		$this->render('register',array(
 			'model' => $model,
 		));
+	}
+
+	protected function performAjaxValidation($model)
+	{
+	    if(isset($_POST['ajax']) && $_POST['ajax'] === 'registration-form')
+	    {
+	        echo CActiveForm::validate($model);
+	        Yii::app()->end();
+	    }
 	}
 
 	/*

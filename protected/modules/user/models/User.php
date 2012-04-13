@@ -398,10 +398,36 @@ class User extends ECassandraCF
 			$columnFamily->attributes = $attributes;
 			break;
 		}
-		/*if (isset($attributes['password']))
-			Yii::log('pw ' . $attributes['password'], 'warning', 'system.db.ar.CActiveRecord');
-		else
-			Yii::log('NO PASS', 'warning', 'system.db.ar.CActiveRecord');*/ 
+		return $columnFamily;
+    }
+	
+	/**
+     * Fetches a row from this column family.
+     *
+     * @param string $key row key to fetch
+     * @param mixed $columnStart only fetch columns with name >= this
+     * @param mixed $columnFinish only fetch columns with name <= this
+     * @param bool $columnReversed fetch the columns in reverse order
+     * @param int $columnCount limit the number of columns returned to this amount
+     * @param mixed $superColumn return only columns in this super column
+     * @param cassandra_ConsistencyLevel $readConsistencyLevel affects the guaranteed
+     *        number of nodes that must respond before the operation returns
+     *
+     * @return mixed array(column_name => column_value)
+     */
+    public function get($key,
+                        $columns = null,
+                        $columnStart = "",
+                        $columnFinish = "",
+                        $columnReversed = false,
+                        $columnCount = ColumnFamily::DEFAULT_COLUMN_COUNT,
+                        $superColumn = null,
+                        $readConsistencyLevel = null)
+	{
+		$attributes = parent::get($key, $columns, $columnStart, $columnFinish, $columnReversed,
+											$columnCount, $superColumn, $readConsistencyLevel);
+		$columnFamily = new User();
+		$columnFamily->attributes = $attributes;
 		return $columnFamily;
     }
 }
