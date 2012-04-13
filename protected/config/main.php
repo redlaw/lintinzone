@@ -69,7 +69,8 @@ return array(
 			'keyspace' => 'lintinzo_db',
 			'credentials' => array(),
 			'servers' => array('127.0.0.1:9160'),
-			'tablePrefix' => 'lz_'
+			'tablePrefix' => 'lz_'/*,
+			'maxRetries' => 1*/
 		),
 		'cassandradb_2' => array(
 			'class' => 'ECassandraConnection',
@@ -88,8 +89,8 @@ return array(
 			'routes'=>array(
 				array(
 					'class'=>'CFileLogRoute',
-					//'levels'=>'error, warning, trace, info',
-					'levels' => 'error, warning'
+					'levels'=>'error, warning, trace, info',
+					//'levels' => 'error, warning'
 				),
 				// uncomment the following to show log messages on web pages
 				/*

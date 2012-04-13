@@ -11,8 +11,6 @@
  * @property integer $active
  * @property integer $online
  * @property integer $blocked
- * @property string $created_date
- * @property string $modified_date
  * @property string $last_visited_date
  * @property string $last_visited_ip
  * @property integer $last_visited_loc_id
