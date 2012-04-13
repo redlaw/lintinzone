@@ -11,7 +11,6 @@ class UserIdentity extends CUserIdentity
 	const ERROR_STATUS_BLOCKED = 1;
 	const ERROR_EMAIL_INVALID = 0;
 	private $_user_id;
-	public $username;
 	
 	/**
 	 * Authenticates a user.
@@ -24,12 +23,14 @@ class UserIdentity extends CUserIdentity
 	public function authenticate()
 	{
 		$username = strtolower($this->username);
-		$user = User::model()->find('username = ?', array($username));
+		//$user = User::model()->find('username = ?', array($username));
+		//Yii::log('user identity ' . $username, 'error', 'system.web.CController');
+		$user = User::model()->getIndexedSlices('username', $username);
 		if ($user === null)
 		{
-			$user = User::model()->find('email = ?', array($username));
-			if ($user === null)
-				$this->errorCode = self::ERROR_USERNAME_INVALID;
+			/*$user = User::model()->find('email = ?', array($username));
+			if ($user === null)*/
+			$this->errorCode = self::ERROR_USERNAME_INVALID;
 		}
 		if ($user !== null)
 		{

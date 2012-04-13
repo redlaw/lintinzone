@@ -34,7 +34,7 @@ class User extends ECassandraCF
 	 * @param string $className active record class name.
 	 * @return User the static model class
 	 */
-	public static function model($className=__CLASS__)
+	public static function model($className = __CLASS__)
 	{
 		return parent::model($className);
 	}
@@ -59,14 +59,8 @@ class User extends ECassandraCF
 		{
 			return array(
 				array(
-					'email, password, password_repeat',
-					'required',
-					'on' => 'register'
-				),
-				array(
-					'username, password',
-					'required',
-					'on' => 'login'
+					'email, password',
+					'required'
 				),
 				array(
 					'username', // field
@@ -92,11 +86,6 @@ class User extends ECassandraCF
 					'max' => 255,
 					'min' => 8 // Password has at least 8 characters.
 				),
-		 		array(
-		 			'password_repeat',
-		 			'compare',
-		 			'compareAttribute' => 'password'
-		 		),
 				array(
 					'username',
 					'unique',
@@ -128,13 +117,13 @@ class User extends ECassandraCF
 					'numerical',
 					'integerOnly' => true
 				),
-				array(
-					'password_repeat',
-					'safe'
-				),
 				// The following rule is used by search().
 				// Please remove those attributes that should not be searched.
-				array('user_id, username, email, active, online, created_date, modified_date, last_visited_date, last_visited_ip, last_visited_loc_id', 'safe', 'on'=>'search'),
+				array(
+					'user_id, username, email, active, online, last_visited_date, last_visited_ip, last_visited_location',
+					'safe',
+					'on'=>'search'
+				)
 			);
 		}
 		// Guest
@@ -142,20 +131,9 @@ class User extends ECassandraCF
 		{
 			return array(
 				array(
-					'email, password, password_repeat',
-					'required'/*,
-					'on' => 'register'*/
+					'email, password',
+					'required'
 				),
-				array(
-					'username, password',
-					'required'/*,
-					'on' => 'login'*/
-				),
-				/*array(
-					'rememberMe',
-					'boolean',
-					'on' => 'login'
-				),*/
 				array(
 					'username',
 					'length',
@@ -181,14 +159,8 @@ class User extends ECassandraCF
 					'min' => 8 // Password has at least 8 characters.
 				),
 				array(
-		 			'password_repeat',
-		 			'compare',
-		 			'compareAttribute' => 'password'
-		 		),
-				array(
 					'username',
 					'unique',
-					//'on' => 'register',
 					'message' => UserModule::t('This username is already registered.')
 				),
 				array(
@@ -200,18 +172,8 @@ class User extends ECassandraCF
 					'username',
 					'match',
 					'pattern' => "/^[A-Za-z0-9_]+$/u",
-					//'on' => 'register',
 					'message' => 'Only Latin alphabetical characters and numerics are allowed.'
-				),
-				array(
-					'password_repeat',
-					'safe'
-				)/*,
-				array(
-					'password',
-					'authenticate',
-					'on' => 'login'
-				)*/
+				)
 			);
 		}
 		// Member
@@ -225,8 +187,7 @@ class User extends ECassandraCF
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
-		return array(
-		);
+		return array();
 	}
 
 	/**
@@ -280,7 +241,7 @@ class User extends ECassandraCF
 		));
 	}
 	
-	protected function beforeValidate()
+	/*protected function beforeValidate()
 	{
 		if ($this->isNewRecord)
 		{
@@ -302,7 +263,7 @@ class User extends ECassandraCF
 		$this->password = self::encryptPassword($this->password);
 	}
 	
-	/*public function onBeforeSave()
+	public function onBeforeSave()
 	{
 		parent::onBeforeSave();
 		$this->password = self::encryptPassword($this->password);
@@ -327,7 +288,7 @@ class User extends ECassandraCF
 	 * Logs info when user logs in.
 	 * @return true
 	 */
-	public function logSession()
+	/*public function logSession()
 	{
 		//Yii::app()->getRequest()->... // Get the request
 		$this->last_visited_ip = Yii::app()->request->getUserHostAddress();
@@ -336,7 +297,7 @@ class User extends ECassandraCF
 		//TODO: Detect user's location
 		//TODO: Insert a record into '{{login_history}}' table
 		return true;
-	}
+	}*/
 	
 	public static function sendRegisterVerification($email, $username)
 	{
@@ -401,4 +362,46 @@ class User extends ECassandraCF
 				return true;
 		}
 	}
+
+	/**
+    * Fetches a set of rows from {{USERS}} based on an index clause.
+    *
+    * @param string $indexColumn the name of the indexed column
+	* @param mixed $indexValue the value of the column to retrieve
+    * @param mixed[] $columns limit the columns or super columns fetched to this list
+    * @param mixed $columnStart only fetch columns with name >= this
+    * @param mixed $columnFinish only fetch columns with name <= this
+    * @param bool $columnReversed fetch the columns in reverse order
+    * @param int $columnCount limit the number of columns returned to this amount
+    * @param mixed $superColumn return only columns in this super column
+    * @param cassandra_ConsistencyLevel $readConsistencyLevel affects the guaranteed
+    * 		 number of nodes that must respond before the operation returns
+    *
+    * @return mixed array(row_key => array(column_name => column_value))
+    */
+    public function getIndexedSlices($indexColumn,
+    								   $indexValue,
+                                       $columns = null,
+                                       $columnStart = '',
+                                       $columnFinish = '',
+                                       $columnReversed = false,
+                                       $columnCount = ColumnFamily::DEFAULT_COLUMN_COUNT,
+                                       $superColumn = null,
+                                       $readConsistencyLevel = null,
+                                       $bufferSize = null)
+	{
+		$row = parent::getIndexedSlices($indexColumn, $indexValue, $columns, $columnStart, $columnFinish,
+										$columnReversed, $columnCount, $superColumn, $readConsistencyLevel, $bufferSize);
+		$columnFamily = new User();
+		foreach ($row as $rowKey => $attributes)
+		{
+			$columnFamily->attributes = $attributes;
+			break;
+		}
+		/*if (isset($attributes['password']))
+			Yii::log('pw ' . $attributes['password'], 'warning', 'system.db.ar.CActiveRecord');
+		else
+			Yii::log('NO PASS', 'warning', 'system.db.ar.CActiveRecord');*/ 
+		return $columnFamily;
+    }
 }

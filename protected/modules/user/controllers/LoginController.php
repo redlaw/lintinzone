@@ -12,9 +12,12 @@ class LoginController extends Controller
 				$formModel->username = $_POST['Login']['username'];
 				$formModel->password = $_POST['Login']['password'];
 				$formModel->rememberMe = $_POST['Login']['rememberMe'];
+				//Yii::log('AAAAAAA prepare to validate', 'warning', 'system.web.CController');
 				if ($formModel->validate())
 				{
-					$user = User::model()->findbyPk(Yii::app()->user->getId());
+					//Yii::log('form model validated', 'warning', 'system.web.CController');
+					//$user = User::model()->findbyPk(Yii::app()->user->getId());
+					$user = User::model()->get(Yii::app()->user->getId());
 					$user->logSession();
 					if (strpos(Yii::app()->user->returnUrl, 'index.php') !== false)
 						$this->redirect(Yii::app()->controller->module->returnUrl);
@@ -22,6 +25,7 @@ class LoginController extends Controller
 						$this->redirect(Yii::app()->user->returnUrl);
 				}
 			}
+			$formModel->password = '';
 			$this->render('login', array('model' => $formModel));
 		}
 		else

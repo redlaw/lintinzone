@@ -40,6 +40,10 @@ class Login extends CFormModel
 		);
 	}
 	
+	/**
+	 * Authenticates the user's credentials.
+	 * @return true|false
+	 */
 	public function authenticate($attribute, $params)
 	{
 		// Ensure the input to be authenticated is valid.
