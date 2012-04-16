@@ -53,6 +53,12 @@ require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
 	private $_attributes = array();
 	
 	/**
+	 * The key of this row.
+	 * @var string
+	 */
+	private $_rowKey;
+	
+	/**
 	 * Meta data of this column family.
 	 * @var cassandra_CfDefs
 	 */
@@ -130,7 +136,11 @@ require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
 	{
 		// will return an instance of ColumnFamily class.
 		if(isset(self::$_models[$className]))
+		{
+			self::$_models[$className]->_attributes = null;
+			self::$_models[$className]->_rowKey = null;
 			return self::$_models[$className];
+		}
 		else
 		{
 			$model = self::$_models[$className] = new $className(null);
@@ -157,9 +167,13 @@ require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
 		return $this->_cfName;
 	}
 	
+	/**
+	 * Gets the primary key value.
+	 * @return string
+	 */
 	public function getPrimaryKey()
 	{
-		
+		return $this->_rowKey;
 	}
 	
 	/**
@@ -187,8 +201,13 @@ require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
 	{
 		if (empty($this->_columnFamily))
 			$this->init();
-		return $this->_columnFamily->get($key, $columns, $columnStart, $columnFinish, $columnReversed,
+		$attributes = $this->_columnFamily->get($key, $columns, $columnStart, $columnFinish, $columnReversed,
 											$columnCount, $superColumn, $readConsistencyLevel);
+		if (empty($attributes))
+			return null;
+		$this->_attributes = $attributes;
+		$this->_rowKey = $key;
+		return $this;
     }
 	
 	/**
@@ -346,8 +365,17 @@ require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
 			$this->init();
 		$indexExp = CassandraUtil::create_index_expression($indexColumn, $indexValue);
 		$indexClause = CassandraUtil::create_index_clause(array($indexExp));
-		return $this->_columnFamily->get_indexed_slices($indexClause, $columns, $columnStart, $columnFinish,
+		$row = $this->_columnFamily->get_indexed_slices($indexClause, $columns, $columnStart, $columnFinish,
 										$columnReversed, $columnCount, $superColumn, $readConsistencyLevel, $bufferSize);
+		foreach ($row as $key => $attributes)
+		{
+			$this->_rowKey = $key;
+			$this->_attributes = $attributes;
+			break;
+		}
+		if ($this->_rowKey === null)
+			return null;
+		return $this;
     }
 	
 	/**
@@ -361,21 +389,17 @@ require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
      * @param cassandra_ConsistencyLevel $writeConsistencyLevel affects the guaranteed
      *        number of nodes that must respond before the operation returns
      *
-     * @return int the timestamp for the operation | false
+     * @return true | false
      */
 	public function insert($key, array $columns, $timestamp = null, $ttl = null, $writeConsistencyLevel = null)
 	{
-		Yii::trace(__CLASS__ . ' insert', 'system.web.CController');
+		//Yii::trace(__CLASS__ . ' insert', 'system.web.CController');
 		if (empty($this->_columnFamily))
 			$this->init();
-		//if ($this->validate($columns))
-		//{
-			//Yii::log('valid', 'warning', 'extension.lz_cassandra.ar');
-			$timeSt = $this->_columnFamily->insert($key, $columns, $timestamp, $ttl, $writeConsistencyLevel);
-			Yii::trace('INSERTTT ' . $timeSt, 'system.web.CController');
-			return $timeSt;
-		//}
-		//Yii::log('invalid', 'warning', 'extension.lz_cassandra.ar');
+		if ($this->validate($columns))
+		{
+			return $timestamp === $this->_columnFamily->insert($key, $columns, $timestamp, $ttl, $writeConsistencyLevel);
+		}
 		return false;
 	}
 	

@@ -25,6 +25,6 @@ class Profile extends ECassandraCF
 	
 	public function rules()
 	{
-		
+		return array();
 	}
 }

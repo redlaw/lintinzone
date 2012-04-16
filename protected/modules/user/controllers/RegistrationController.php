@@ -11,22 +11,29 @@ class RegistrationController extends Controller
 		//$this->performAjaxValidation($model);
 		if(isset($_POST['Registration']))
 		{
-			if ($model->insert(CassandraUtil::uuid1(), array(
-					'email' => $_POST['Registration']['email'],
-					'username' => $_POST['Registration']['username'],
-					'password' => User::encryptPassword($_POST['Registration']['password']),
-					'password_repeat' => User::encryptPassword($_POST['Registration']['password_repeat']),
-					'verification_code' => $_POST['Registration']['verification_code'],
-					'active' => 0,
-					'blocked' => 0
-				)) !== false)
+			$model->email = $_POST['Registration']['email'];
+			$model->username = $_POST['Registration']['username'];
+			$model->password = $_POST['Registration']['password'];
+			$model->password_repeat = $_POST['Registration']['password_repeat'];
+			$model->verification_code = $_POST['Registration']['verification_code'];
+			if ($model->validate())
 			{
-				
-				/*if (!User::sendRegisterVerification($model->email, $model->username))
-					Yii::app()->user->setFlash('registration', UserModule::t('We experienced some problems to send you a verification account. Make sure that your email address is valid! If it is, an email will be sent again soon.'));
-				else
-					Yii::app()->user->setFlash('registration', UserModule::t('Thank you for your registration! Please check your mail inbox.'));*/
-				$this->redirect(array('/index'));
+				//Yii::trace('password ' . $_POST['Registration']['password'], 'system.web.CController');
+				if ($model->insert(CassandraUtil::uuid1(), array(
+						'email' => $_POST['Registration']['email'],
+						'username' => $_POST['Registration']['username'],
+						'password' => User::encryptPassword($_POST['Registration']['password']),
+						'active' => false,
+						'blocked' => false
+					)) === true)
+				{
+					
+					/*if (!User::sendRegisterVerification($model->email, $model->username))
+						Yii::app()->user->setFlash('registration', UserModule::t('We experienced some problems to send you a verification account. Make sure that your email address is valid! If it is, an email will be sent again soon.'));
+					else
+						Yii::app()->user->setFlash('registration', UserModule::t('Thank you for your registration! Please check your mail inbox.'));*/
+					$this->redirect(array('user/profile'));
+				}
 			}
 		}
 

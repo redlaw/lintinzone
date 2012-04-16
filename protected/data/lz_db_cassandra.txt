@@ -30,10 +30,6 @@ create column family lz_USERS
 			validation_class: BooleanType
 		},
 		{
-			column_name: last_visited_date,
-			validation_class: DateType
-		},
-		{
 			column_name: last_visited_ip,
 			validation_class: AsciiType
 		},
@@ -42,3 +38,57 @@ create column family lz_USERS
 			validation_class: AsciiType
 		}
 	];
+create column family lz_PROFILE_FIELDS
+	with comparator = UTF8Type
+	and key_validation_class = AsciiType
+	and column_metadata = [
+		{
+			column_name: field_title,
+			validation_class: UTF8Type,
+			index_type: KEYS
+		},
+		{
+			column_name: field_type,
+			validation_class: AsciiType
+		},
+		{
+			column_name: default,
+			validation_class: BytesType
+		},
+		{
+			column_name: field_size_max,
+			validation_class: IntegerType
+		},
+		{
+			column_name: field_size_min,
+			validation_class: IntegerType
+		},
+		{
+			column_name: required,
+			validation_class: BooleanType
+		},
+		{
+			column_name: error_message,
+			validation_class: UTF8Type
+		},
+		{
+			column_name: position,
+			validation_class: IntegerType
+		},
+		{
+			column_name: visible,
+			validation_class: IntegerType
+		},
+		{
+			column_name: widget,
+			validation_class: AsciiType
+		},
+		{
+			column_name: widget_params,
+			validation_class: UTF8Type
+		}
+	];
+create column family lz_PROFILE_INFO
+	with comparator = UTF8Type
+	and key_validation_class = TimeUUIDType
+	and column_type = Super;

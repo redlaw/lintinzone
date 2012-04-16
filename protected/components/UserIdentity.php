@@ -7,10 +7,12 @@
  */
 class UserIdentity extends CUserIdentity
 {
-	const ERROR_STATUS_NOTACTIVE = 0;
-	const ERROR_STATUS_BLOCKED = 1;
-	const ERROR_EMAIL_INVALID = 0;
-	private $_user_id;
+	const ERROR_STATUS_NOTACTIVE = 4;
+	const ERROR_STATUS_BLOCKED = 5;
+	const ERROR_EMAIL_INVALID = 1;
+	const ERROR_USERNAME_INVALID = 2;
+	const ERROR_PASSWORD_INVALID = 3;
+	private $_userId;
 	
 	/**
 	 * Authenticates a user.
@@ -23,14 +25,12 @@ class UserIdentity extends CUserIdentity
 	public function authenticate()
 	{
 		$username = strtolower($this->username);
-		//$user = User::model()->find('username = ?', array($username));
-		//Yii::log('user identity ' . $username, 'error', 'system.web.CController');
 		$user = User::model()->getIndexedSlices('username', $username);
 		if ($user === null)
 		{
-			/*$user = User::model()->find('email = ?', array($username));
-			if ($user === null)*/
-			$this->errorCode = self::ERROR_USERNAME_INVALID;
+			$user = User::model()->getIndexedSlices('email', $username);
+			if ($user === null)
+				$this->errorCode = self::ERROR_USERNAME_INVALID;
 		}
 		if ($user !== null)
 		{
@@ -38,12 +38,18 @@ class UserIdentity extends CUserIdentity
 				$this->errorCode = self::ERROR_PASSWORD_INVALID;
 			else
 			{
-				$this->_user_id = $user->user_id;
+				$this->_userId = $user->getPrimaryKey();
 				$this->username = $user->username;
-				if ($user->active !== 1)
-					$this->errorCode = self::ERROR_STATUS_NOTACTIVE;
-				elseif ($user->blocked === 1)
-					$this->errorCode = self::ERROR_STATUS_BLOCKED;
+				/*var_dump($user->active);
+				var_dump($user->blocked);
+				var_dump($user); die;*/
+				if (!$user->active || $user->blocked === true)
+				{
+					if (!$user->active)
+						$this->errorCode = self::ERROR_STATUS_NOTACTIVE;
+					else
+						$this->errorCode = self::ERROR_STATUS_BLOCKED;
+				}
 				else
 					$this->errorCode = self::ERROR_NONE;
 			}
@@ -53,6 +59,6 @@ class UserIdentity extends CUserIdentity
 	
 	public function getId()
 	{
-		return $this->_user_id;
+		return $this->_userId;
 	}
 }

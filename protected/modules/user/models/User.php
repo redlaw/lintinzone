@@ -21,11 +21,6 @@ class User extends ECassandraCF
 	const STATUS_ACTIVE = 1;
 	const STATUS_BLOCKED = 1;
 	const STATUS_NOTBLOCK = 0;
-	//protected $password_repeat; // -> can't let it protected or private
-	public $password_repeat;
-	//public $rememberMe;
-	
-	//private $_identity;
 	
 	/**
 	 * Returns the static model of the specified AR class.
@@ -269,6 +264,8 @@ class User extends ECassandraCF
 	
 	public function validatePassword($password)
 	{
+		/*var_dump($this->password);
+		var_dump(self::encryptPassword($password)); die;*/
 		return self::encryptPassword($password) === $this->password;
 	}
 	
@@ -279,6 +276,8 @@ class User extends ECassandraCF
 	 */
 	public static function encryptPassword($password)
 	{
+		if (empty($password))
+			return null;
 		return sha1(Yii::app()->params['saltPassword'] . $password);
 	}
 	
@@ -286,16 +285,16 @@ class User extends ECassandraCF
 	 * Logs info when user logs in.
 	 * @return true
 	 */
-	/*public function logSession()
+	public function logSession()
 	{
-		//Yii::app()->getRequest()->... // Get the request
 		$this->last_visited_ip = Yii::app()->request->getUserHostAddress();
-		$this->modified_date = $this->last_visited_date = new CDbExpression('NOW()');
-		$this->save();
+		$this->insert($this->getPrimaryKey(), array(
+			'last_visited_ip' => $this->last_visited_ip
+		));
 		//TODO: Detect user's location
 		//TODO: Insert a record into '{{login_history}}' table
 		return true;
-	}*/
+	}
 	
 	public static function sendRegisterVerification($email, $username)
 	{
@@ -360,72 +359,4 @@ class User extends ECassandraCF
 				return true;
 		}
 	}
-
-	/**
-    * Fetches a set of rows from {{USERS}} based on an index clause.
-    *
-    * @param string $indexColumn the name of the indexed column
-	* @param mixed $indexValue the value of the column to retrieve
-    * @param mixed[] $columns limit the columns or super columns fetched to this list
-    * @param mixed $columnStart only fetch columns with name >= this
-    * @param mixed $columnFinish only fetch columns with name <= this
-    * @param bool $columnReversed fetch the columns in reverse order
-    * @param int $columnCount limit the number of columns returned to this amount
-    * @param mixed $superColumn return only columns in this super column
-    * @param cassandra_ConsistencyLevel $readConsistencyLevel affects the guaranteed
-    * 		 number of nodes that must respond before the operation returns
-    *
-    * @return mixed array(row_key => array(column_name => column_value))
-    */
-    public function getIndexedSlices($indexColumn,
-    								   $indexValue,
-                                       $columns = null,
-                                       $columnStart = '',
-                                       $columnFinish = '',
-                                       $columnReversed = false,
-                                       $columnCount = ColumnFamily::DEFAULT_COLUMN_COUNT,
-                                       $superColumn = null,
-                                       $readConsistencyLevel = null,
-                                       $bufferSize = null)
-	{
-		$row = parent::getIndexedSlices($indexColumn, $indexValue, $columns, $columnStart, $columnFinish,
-										$columnReversed, $columnCount, $superColumn, $readConsistencyLevel, $bufferSize);
-		$columnFamily = new User();
-		foreach ($row as $rowKey => $attributes)
-		{
-			$columnFamily->attributes = $attributes;
-			break;
-		}
-		return $columnFamily;
-    }
-	
-	/**
-     * Fetches a row from this column family.
-     *
-     * @param string $key row key to fetch
-     * @param mixed $columnStart only fetch columns with name >= this
-     * @param mixed $columnFinish only fetch columns with name <= this
-     * @param bool $columnReversed fetch the columns in reverse order
-     * @param int $columnCount limit the number of columns returned to this amount
-     * @param mixed $superColumn return only columns in this super column
-     * @param cassandra_ConsistencyLevel $readConsistencyLevel affects the guaranteed
-     *        number of nodes that must respond before the operation returns
-     *
-     * @return mixed array(column_name => column_value)
-     */
-    public function get($key,
-                        $columns = null,
-                        $columnStart = "",
-                        $columnFinish = "",
-                        $columnReversed = false,
-                        $columnCount = ColumnFamily::DEFAULT_COLUMN_COUNT,
-                        $superColumn = null,
-                        $readConsistencyLevel = null)
-	{
-		$attributes = parent::get($key, $columns, $columnStart, $columnFinish, $columnReversed,
-											$columnCount, $superColumn, $readConsistencyLevel);
-		$columnFamily = new User();
-		$columnFamily->attributes = $attributes;
-		return $columnFamily;
-    }
 }
