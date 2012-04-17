@@ -54,7 +54,7 @@ class SiteController extends Controller
 		$model=new ContactForm;
 		if(isset($_POST['ContactForm']))
 		{
-			$model->attributes=$_POST['ContactForm'];
+			$model->attributes = $_POST['ContactForm'];
 			if($model->validate())
 			{
 				if ($this->sendMailSmtp($model->email, $model->name, $model->subject, $model->body, false) === true)
@@ -92,7 +92,7 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
-		$model=new LoginForm;
+		$model = new LoginForm;
 
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
