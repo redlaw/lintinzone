@@ -20,7 +20,8 @@ return array(
 		'application.modules.user.components.*',
 		'application.extensions.phpcassa.*',
 		'application.extensions.lz_cassandra.*',
-		'application.extensions.lz_cassandra.ar.*'
+		'application.extensions.lz_cassandra.ar.*',
+		'application.extensions.lz_cassandra.validator.*'
 	),
 
 	'modules'=>array(

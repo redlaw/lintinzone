@@ -396,11 +396,11 @@ require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
 		//Yii::trace(__CLASS__ . ' insert', 'system.web.CController');
 		if (empty($this->_columnFamily))
 			$this->init();
-		if ($this->validate($columns))
-		{
+		//if ($this->validate($columns))
+		//{
 			return $timestamp === $this->_columnFamily->insert($key, $columns, $timestamp, $ttl, $writeConsistencyLevel);
-		}
-		return false;
+		//}
+		//return false;
 	}
 	
 	/**
@@ -419,10 +419,7 @@ require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
      */
     public function batchInsert($rows, $timestamp = null, $ttl = null, $writeConsistencyLevel = null)
     {
-    	// This function is temporarily disabled because of the difficulties in validating data.
-    	return false;
-		//TODO: validate each row
-    	//return $this->_columnFamily->batch_insert($rows, $timestamp, $ttl, $writeConsistencyLevel);
+    	return $timestamp === $this->_columnFamily->batch_insert($rows, $timestamp, $ttl, $writeConsistencyLevel);
     }
 	
 	/**

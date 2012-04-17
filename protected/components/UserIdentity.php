@@ -40,9 +40,6 @@ class UserIdentity extends CUserIdentity
 			{
 				$this->_userId = $user->getPrimaryKey();
 				$this->username = $user->username;
-				/*var_dump($user->active);
-				var_dump($user->blocked);
-				var_dump($user); die;*/
 				if (!$user->active || $user->blocked === true)
 				{
 					if (!$user->active)

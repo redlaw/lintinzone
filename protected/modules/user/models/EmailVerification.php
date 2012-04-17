@@ -67,13 +67,11 @@ class EmailVerification extends ECassandraCF
 	public function attributeLabels()
 	{
 		return array(
-			'email' => 'Email',
-			'verification_key' => 'Verification Key',
-			'sent_date' => 'Sent Date',
-			'verified' => 'Verified',
-			'verified_date' => 'Verified Date',
-			'active' => 'Active',
-			'modified_date' => 'Modified Date',
+			'email' => UserModule::t('Email'),
+			'verification_key' => UserModule::t('Verification Key'),
+			'sent' => UserModule::t('Sent'),
+			'verified' => UserModule::t('Verified'),
+			'active' => UserModule::t('Active')
 		);
 	}
 

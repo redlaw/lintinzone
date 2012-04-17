@@ -6,18 +6,19 @@ class RegistrationController extends Controller
 	
 	public function actionRegister()
 	{
-		$model = new Registration();
+		$formModel = new Registration();
 
-		//$this->performAjaxValidation($model);
+		//$this->performAjaxValidation($formModel);
 		if(isset($_POST['Registration']))
 		{
-			$model->email = $_POST['Registration']['email'];
-			$model->username = $_POST['Registration']['username'];
-			$model->password = $_POST['Registration']['password'];
-			$model->password_repeat = $_POST['Registration']['password_repeat'];
-			$model->verification_code = $_POST['Registration']['verification_code'];
-			if ($model->validate())
+			$formModel->email = $_POST['Registration']['email'];
+			$formModel->username = $_POST['Registration']['username'];
+			$formModel->password = $_POST['Registration']['password'];
+			$formModel->password_repeat = $_POST['Registration']['password_repeat'];
+			$formModel->verification_code = $_POST['Registration']['verification_code'];
+			if ($formModel->validate())
 			{
+				$model = new User();
 				//Yii::trace('password ' . $_POST['Registration']['password'], 'system.web.CController');
 				if ($model->insert(CassandraUtil::uuid1(), array(
 						'email' => $_POST['Registration']['email'],
@@ -38,7 +39,7 @@ class RegistrationController extends Controller
 		}
 
 		$this->render('register',array(
-			'model' => $model,
+			'model' => $formModel,
 		));
 	}
 
