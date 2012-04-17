@@ -16,4 +16,7 @@ Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
 should you have any questions.</p>
 
 <?php
-echo 'http://' . $_SERVER['SERVER_NAME'];
+/*$metadata = Yii::app()->getComponent('cassandradb')->getMetaData();
+var_dump($metadata);
+$user = new User();
+var_dump(get_class($user));*/
