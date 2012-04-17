@@ -40,6 +40,10 @@ class Login extends CFormModel
 		);
 	}
 	
+	/**
+	 * Authenticates the user's credentials.
+	 * @return true|false
+	 */
 	public function authenticate($attribute, $params)
 	{
 		// Ensure the input to be authenticated is valid.
@@ -57,6 +61,7 @@ class Login extends CFormModel
 				case UserIdentity::ERROR_EMAIL_INVALID:
 				case UserIdentity::ERROR_USERNAME_INVALID:
 				case UserIdentity::ERROR_PASSWORD_INVALID:
+					Yii::trace('Error codeeee: ' . $identity->errorCode, 'system.db.ar.CActiveRecord');
 					$this->addError('username', UserModule::t('Incorrect username or password.'));
 					return false;
 				case UserIdentity::ERROR_STATUS_NOTACTIVE:

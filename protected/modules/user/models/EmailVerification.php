@@ -12,14 +12,14 @@
  * @property integer $active
  * @property string $modified_date
  */
-class EmailVerification extends CActiveRecord
+class EmailVerification extends ECassandraCF
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
 	 * @return EmailVerification the static model class
 	 */
-	public static function model($className=__CLASS__)
+	public static function model($className = __CLASS__)
 	{
 		return parent::model($className);
 	}
@@ -67,13 +67,11 @@ class EmailVerification extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'email' => 'Email',
-			'verification_key' => 'Verification Key',
-			'sent_date' => 'Sent Date',
-			'verified' => 'Verified',
-			'verified_date' => 'Verified Date',
-			'active' => 'Active',
-			'modified_date' => 'Modified Date',
+			'email' => UserModule::t('Email'),
+			'verification_key' => UserModule::t('Verification Key'),
+			'sent' => UserModule::t('Sent'),
+			'verified' => UserModule::t('Verified'),
+			'active' => UserModule::t('Active')
 		);
 	}
 
@@ -86,24 +84,24 @@ class EmailVerification extends CActiveRecord
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('verification_key',$this->verification_key,true);
-		$criteria->compare('sent_date',$this->sent_date,true);
-		$criteria->compare('verified',$this->verified);
-		$criteria->compare('verified_date',$this->verified_date,true);
-		$criteria->compare('active',$this->active);
-		$criteria->compare('modified_date',$this->modified_date,true);
+		$criteria->compare('email', $this->email,true);
+		$criteria->compare('verification_key', $this->verification_key,true);
+		$criteria->compare('sent_date', $this->sent_date,true);
+		$criteria->compare('verified', $this->verified);
+		//$criteria->compare('verified_date', $this->verified_date,true);
+		$criteria->compare('active', $this->active);
+		//$criteria->compare('modified_date', $this->modified_date,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
 
-	protected function beforeValidate()
+	/*protected function beforeValidate()
 	{
 		$this->modified_date = new CDbExpression('NOW()');
 		return parent::beforeValidate();
-	}
+	}*/
 }

@@ -14,14 +14,15 @@ class LoginController extends Controller
 				$formModel->rememberMe = $_POST['Login']['rememberMe'];
 				if ($formModel->validate())
 				{
-					$user = User::model()->findbyPk(Yii::app()->user->getId());
+					$user = User::model()->get(Yii::app()->user->getId());
 					$user->logSession();
-					if (strpos(Yii::app()->user->returnUrl, 'index.php') !== false)
+					/*if (strpos(Yii::app()->user->returnUrl, 'index.php') !== false)
 						$this->redirect(Yii::app()->controller->module->returnUrl);
-					else
+					else*/
 						$this->redirect(Yii::app()->user->returnUrl);
 				}
 			}
+			$formModel->password = '';
 			$this->render('login', array('model' => $formModel));
 		}
 		else

@@ -6,35 +6,50 @@ class RegistrationController extends Controller
 	
 	public function actionRegister()
 	{
-		$model = new Registration();
+		$formModel = new Registration();
 
-		// $this->performAjaxValidation($model);
+		//$this->performAjaxValidation($formModel);
 		if(isset($_POST['Registration']))
 		{
-			//$model->attributes = $_POST['Registration'];
-			// Set attributes
-			$model->username = $_POST['Registration']['username'];
-			$model->email = $_POST['Registration']['email'];
-			$model->password = $_POST['Registration']['password'];
-			$model->password_repeat = $_POST['Registration']['password_repeat'];
-			$model->verification_code = $_POST['Registration']['verification_code'];
-			if ($model->save())
+			$formModel->email = $_POST['Registration']['email'];
+			$formModel->username = $_POST['Registration']['username'];
+			$formModel->password = $_POST['Registration']['password'];
+			$formModel->password_repeat = $_POST['Registration']['password_repeat'];
+			$formModel->verification_code = $_POST['Registration']['verification_code'];
+			if ($formModel->validate())
 			{
-				Yii::log('user created', 'warning', 'system.web.CController');
-				if (!User::sendRegisterVerification($model->email, $model->username))
-					Yii::app()->user->setFlash('registration', UserModule::t('We experienced some problems to send you a verification account. Make sure that your email address is valid! If it is, an email will be sent again soon.'));
-					//Yii::log('failed to send mail', 'warning', 'system.web.CController');
-				else
-					Yii::app()->user->setFlash('registration', UserModule::t('Thank you for your registration! Please check your mail inbox.'));
-					//Yii::log('send successfully', 'warning', 'system.web.CController');
-				$this->redirect(array('user/view','id' => $model->user_id));
-				//$this->refresh();
+				$model = new User();
+				//Yii::trace('password ' . $_POST['Registration']['password'], 'system.web.CController');
+				if ($model->insert(CassandraUtil::uuid1(), array(
+						'email' => $_POST['Registration']['email'],
+						'username' => $_POST['Registration']['username'],
+						'password' => User::encryptPassword($_POST['Registration']['password']),
+						'active' => false,
+						'blocked' => false
+					)) === true)
+				{
+					
+					/*if (!User::sendRegisterVerification($model->email, $model->username))
+						Yii::app()->user->setFlash('registration', UserModule::t('We experienced some problems to send you a verification account. Make sure that your email address is valid! If it is, an email will be sent again soon.'));
+					else
+						Yii::app()->user->setFlash('registration', UserModule::t('Thank you for your registration! Please check your mail inbox.'));*/
+					$this->redirect(array('user/profile'));
+				}
 			}
 		}
 
 		$this->render('register',array(
-			'model' => $model,
+			'model' => $formModel,
 		));
+	}
+
+	protected function performAjaxValidation($model)
+	{
+	    if(isset($_POST['ajax']) && $_POST['ajax'] === 'registration-form')
+	    {
+	        echo CActiveForm::validate($model);
+	        Yii::app()->end();
+	    }
 	}
 
 	/*
