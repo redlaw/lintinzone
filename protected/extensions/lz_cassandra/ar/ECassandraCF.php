@@ -12,10 +12,12 @@
  * @since v0.1
  */
 
-require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
+require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
 
  /**
-  * ECassandraCF represents a column family.
+  * ECassandraCF serves the operations to manage a column family and its rows.
+  * The first intention of mine is to make the distinction between the class representing a column family (or a table, in relational database)
+  * and a row. But the default behavior of Yii makes it hard to do it!
   * 
   * @author Trần Thanh Tùng <info@lintinzone.com>
   * @version 0.1
@@ -28,7 +30,7 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
 	 * Name of the column family.
 	 * @var string
 	 */
-	private $_cfName;
+	private $_cfName = '';
 	
  	/**
 	 * Pool of connections to database instances.
@@ -45,20 +47,38 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
 	private static $_models = array();
 	
 	/**
+	 * List of attributes (attribute name => attribute value).
+	 * @var array
+	 */
+	private $_attributes = array();
+	
+	/**
+	 * The key of this row.
+	 * @var string
+	 */
+	private $_rowKey;
+	
+	/**
+	 * Meta data of this column family.
+	 * @var cassandra_CfDefs
+	 */
+	private $_metadata;
+	
+	/**
 	 * Constructor.
 	 * @param string $cfName the column family name (no prefix)
 	 * @param string $scenario scenario name. See {@link CModel::scenario} for more details about this parameter
 	 */
-	public function __construct($cfName, $scenario = 'insert')
+	public function __construct($scenario = 'insert')
 	{
 		// Specify the column family.
-		$this->_cfName = $cfName;
+		//$this->_cfName = $cfName;
 		
 		if($scenario === null) // internally used by populateRecord() and model()
 			return;
 
 		$this->setScenario($scenario);
-		$this->setIsNewRecord(true);
+		//$this->setIsNewRecord(true);
 		//$this->_attributes=$this->getMetaData()->attributeDefaults;
 
 		$this->init();
@@ -78,14 +98,21 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
 	 */
  	public function init()
 	{
-		if (self::$_connectionPool === null)
+		if (empty($this->_cfName))
 		{
-			self::$_connectionPool = Yii::app()->getComponent('cassandradb')->getConnectionPool();
-			$this->_columnFamily = new ColumnFamily(self::$_connectionPool, $this->cfName());
+			$this->_cfName = $this->tableName();
+			if (self::$_connectionPool === null)
+				self::$_connectionPool = Yii::app()->getComponent('cassandradb')->getConnectionPool();
+			if (strpos($this->_cfName, '{{') !== false)
+			{
+				$this->_cfName = str_replace('{{', '', $this->_cfName);
+				$this->_cfName = str_replace('}}', '', $this->_cfName);
+				$this->_cfName = Yii::app()->getComponent('cassandradb')->tablePrefix . $this->_cfName;
+			}
 		}
-		if ($this->_columnFamily === null)
-			$this->_columnFamily = new ColumnFamily(self::$_connectionPool, $this->cfName());
-		parent::init();
+		if (!empty($this->_cfName) && !is_object($this->_columnFamily))
+			$this->_columnFamily = new ColumnFamily(self::$_connectionPool, $this->_cfName);
+		//parent::init();
 	}
 	
 	/**
@@ -109,23 +136,26 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
 	{
 		// will return an instance of ColumnFamily class.
 		if(isset(self::$_models[$className]))
+		{
+			self::$_models[$className]->_attributes = null;
+			self::$_models[$className]->_rowKey = null;
 			return self::$_models[$className];
+		}
 		else
 		{
 			$model = self::$_models[$className] = new $className(null);
-			//$model->_md = new CActiveRecordMetaData($model);
-			$model->attachBehaviors($model->behaviors());
+			//$model->attachBehaviors($model->behaviors());
 			return $model;
 		}
 	}
 	
 	/**
-	 * Returns the name of the associated column family.
+	 * Returns the name of the associated column family, in form of {{???}}.
 	 * @return string the column family name
 	 */
 	public function tableName()
 	{
-		return self::$_connectionPool->tablePrefix . $this->cfName();
+		//return self::$_connectionPool->tablePrefix . $this->cfName();
 	}
 	
 	/**
@@ -134,12 +164,16 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
 	 */
 	public function cfName()
 	{
-		return self::$_connectionPool->tablePrefix . $this->_cfName;
+		return $this->_cfName;
 	}
 	
+	/**
+	 * Gets the primary key value.
+	 * @return string
+	 */
 	public function getPrimaryKey()
 	{
-		
+		return $this->_rowKey;
 	}
 	
 	/**
@@ -165,8 +199,15 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
                         $superColumn = null,
                         $readConsistencyLevel = null)
 	{
-		return $this->_columnFamily->get($key, $columns, $columnStart, $columnFinish, $columnRversed,
+		if (empty($this->_columnFamily))
+			$this->init();
+		$attributes = $this->_columnFamily->get($key, $columns, $columnStart, $columnFinish, $columnReversed,
 											$columnCount, $superColumn, $readConsistencyLevel);
+		if (empty($attributes))
+			return null;
+		$this->_attributes = $attributes;
+		$this->_rowKey = $key;
+		return $this;
     }
 	
 	/**
@@ -196,6 +237,8 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
                              $readConsistencyLevel = null,
                              $bufferSize=16)
 	{
+		if (empty($this->_columnFamily))
+			$this->init();
 		return $this->_columnFamily->multiget($keys, $columns, $columnStart, $columnFinish,
 										$columnReversed, $columnCount, $superColumn, $readConsistencyLevel, $bufferSize);
     }
@@ -220,6 +263,8 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
                               $superColumn=null,
                               $readConsistencyLevel=null)
 	{
+		if (empty($this->_columnFamily))
+			$this->init();
 		return $this->_columnFamily->get_count($key, $columns, $columnStart, $columnFinish, $superColumn,
 												$readConsistencyLevel);
     }
@@ -244,6 +289,8 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
                                    $superColumn=null,
                                    $readConsistencyLevel=null)
 	{
+		if (empty($this->_columnFamily))
+			$this->init();
 		return $this->_columnFamily->multiget_count($keys, $columns, $columnStart, $columnFinish, $superColumn,
 														$readConsistencyLevel);
     }
@@ -281,18 +328,17 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
                               $readConsistencyLevel = null,
                               $bufferSize = null)
 	{
+		if (empty($this->_columnFamily))
+			$this->init();
 		return $this->_columnFamily->get_range($keyStart, $keyFinish, $rowCount, $columns, $columnStart, $columnFinish,
 											$columnReversed, $columnCount, $superColumn, $readConsistencyLevel, $bufferSize);
     }
 	
 	/**
-    * FetchES a set of rows from this column family based on an index clause.
+    * Fetches a set of rows from this column family based on an index clause.
     *
-    * @param cassandra_IndexClause $indexClause limits the keys that are returned based
-    *        on expressions that compare the value of a column to a given value.  At least
-    *        one of the expressions in the IndexClause must be on an indexed column. You
-    *        can use the CassandraUtil::create_index_expression() and
-    *        CassandraUtil::create_index_clause() methods to help build this.
+    * @param string $indexColumn the name of the indexed column
+	* @param mixed $indexValue the value of the column to retrieve
     * @param mixed[] $columns limit the columns or super columns fetched to this list
     * @param mixed $columnStart only fetch columns with name >= this
     * @param mixed $columnFinish only fetch columns with name <= this
@@ -304,7 +350,8 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
     *
     * @return mixed array(row_key => array(column_name => column_value))
     */
-    public function getIndexedSlices($indexClause,
+    public function getIndexedSlices($indexColumn,
+    								   $indexValue,
                                        $columns = null,
                                        $columnStart = '',
                                        $columnFinish = '',
@@ -314,8 +361,21 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
                                        $readConsistencyLevel = null,
                                        $bufferSize = null)
 	{
-		return $this->_columnFamily->get_indexed_slices($indexClause, $columns, $columnStart, $columnFinish,
-											$columnReversed, $columnCount, $superColumn, $readConsistencyLevel, $bufferSize);
+		if (empty($this->_columnFamily))
+			$this->init();
+		$indexExp = CassandraUtil::create_index_expression($indexColumn, $indexValue);
+		$indexClause = CassandraUtil::create_index_clause(array($indexExp));
+		$row = $this->_columnFamily->get_indexed_slices($indexClause, $columns, $columnStart, $columnFinish,
+										$columnReversed, $columnCount, $superColumn, $readConsistencyLevel, $bufferSize);
+		foreach ($row as $key => $attributes)
+		{
+			$this->_rowKey = $key;
+			$this->_attributes = $attributes;
+			break;
+		}
+		if ($this->_rowKey === null)
+			return null;
+		return $this;
     }
 	
 	/**
@@ -329,11 +389,18 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
      * @param cassandra_ConsistencyLevel $writeConsistencyLevel affects the guaranteed
      *        number of nodes that must respond before the operation returns
      *
-     * @return int the timestamp for the operation
+     * @return true | false
      */
 	public function insert($key, array $columns, $timestamp = null, $ttl = null, $writeConsistencyLevel = null)
 	{
-		return $this->_columnFamily->insert($key, $columns, $timestamp, $ttl, $writeConsistencyLevel);
+		//Yii::trace(__CLASS__ . ' insert', 'system.web.CController');
+		if (empty($this->_columnFamily))
+			$this->init();
+		//if ($this->validate($columns))
+		//{
+			return $timestamp === $this->_columnFamily->insert($key, $columns, $timestamp, $ttl, $writeConsistencyLevel);
+		//}
+		//return false;
 	}
 	
 	/**
@@ -348,11 +415,11 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
      * @param cassandra_ConsistencyLevel $writeConsistencyLevel affects the guaranteed
      *        number of nodes that must respond before the operation returns
      *
-     * @return int the timestamp for the operation
+     * @return int the timestamp for the operation | false
      */
     public function batchInsert($rows, $timestamp = null, $ttl = null, $writeConsistencyLevel = null)
     {
-    	return $this->_columnFamily->batch_insert($rows, $timestamp, $ttl, $writeConsistencyLevel);
+    	return $timestamp === $this->_columnFamily->batch_insert($rows, $timestamp, $ttl, $writeConsistencyLevel);
     }
 	
 	/**
@@ -381,6 +448,8 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
     public function add($key, $column, $value = 1, $superColumn=null,
 								$writeConsistencyLevel = null, $cassandraConnection = null)
 	{
+		if (empty($this->_columnFamily))
+			$this->init();
 		// If no separate connection is specified, use the current connection.
 		if ($cassandraConnection === null)
 		{
@@ -415,6 +484,8 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
      */
 	public function update($key, array $columns, $timestamp = null, $ttl = null, $writeConsistencyLevel = null)
 	{
+		if (empty($this->_columnFamily))
+			$this->init();
 		return $this->_columnFamily->insert($key, $columns, $timestamp, $ttl, $writeConsistencyLevel);
 	}
 	
@@ -433,6 +504,8 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
      */
     public function delete($key, $columns = null, $superColumn = null, $writeConsistencyLevel = null)
     {
+		if (empty($this->_columnFamily))
+			$this->init();
     	return $this->_columnFamily->remove($key, $columns, $superColumn, $writeConsistencyLevel);
     }
 	
@@ -443,5 +516,87 @@ require_once(dirname(__FILE__) . '/../phpcassa/columnfamily.php');
 	public function save()
 	{
 		return false;
+	}
+	
+	public function attributeNames()
+	{
+		return array();
+	}
+	
+	/*public function setIsNewRecord()
+	{
+		return true;
+	}
+	
+	public function getIsNewRecord()
+	{
+		return true;
+	}*/
+	
+	/**
+	 * Returns the meta data for this column family.
+	 * @return cassandra_CfDefs the meta data for this column family.
+	 */
+	public function getMetaData()
+	{
+		if (!is_object($this->_metadata))
+		{
+			$keyspaceMetadata = Yii::app()->getComponent('cassandradb')->describe();
+			foreach ($keyspaceMetadata->cf_defs as $cfMetadata)
+			{
+				if ($cfMetadata->name === $this->_cfName)
+				{
+					$this->_metadata = $cfMetadata;
+					break;
+				}
+			}
+		}
+		return $this->_metadata;
+	}
+	
+	/**
+	 * Refreshes the meta data for this column family.
+	 * Note: make sure that you have refreshed the meta data of the connection pool {@link ECassandraConnection::refreshMetaData} before
+	 * calling this method
+	 * @return cassandra_CfDefs the meta data for this column family.
+	 */
+	public function refreshMetaData()
+	{
+		// If the meta data has not been retrieved
+		if (!is_object($this->_metadata))
+			return $this->getMetaData();
+		// Back it up before refreshing.
+		$oldMetaData = $this->_metadata;
+		$this->_metadata = null;
+		$this->getMetaData();
+		// If something goes wrong when retrieving the keyspace meta data.
+		// Take the backup into used.
+		if (!is_object($this->_metadata))
+			$this->_metadata = $oldMetaData;
+		return $this->_metadata;
+	}
+	
+	/**
+	 * Allows you to get an attribute value in a row by calling <pre>$model->$name</pre>.
+	 * @param string $name the attribute name
+	 * @return mixed the attribute value
+	 */
+	public function __get($name)
+	{
+		if (isset($this->_attributes[$name]))
+			return $this->_attributes[$name];
+		return null;
+	}
+	
+	/**
+	 * Allows you to set an attribute value in a row.
+	 * @param string $name property name
+	 * @param mixed $value property value
+	 * @return true;
+	 */
+	public function __set($name, $value)
+	{
+		$this->_attributes[$name] = $value;
+		return true;
 	}
  }
