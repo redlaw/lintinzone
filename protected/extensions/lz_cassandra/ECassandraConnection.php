@@ -91,6 +91,12 @@ require_once(dirname(__FILE__) . '/../phpcassa/connection.php');
 	 */
 	public $frameTransport = true;
 	
+	/**
+	 * The metadata of this keyspace.
+	 * @var cassandra_KsDefs
+	 */
+	private $_metadata;
+	
  	/**
 	 * Pool of connections to database instances.
 	 * @var ConnectionPool
@@ -115,8 +121,44 @@ require_once(dirname(__FILE__) . '/../phpcassa/connection.php');
 		return true;
 	}
 	
+	/**
+	 * Gets the connection pool.
+	 * @return ConnectionPool
+	 */
 	public function getConnectionPool()
 	{
 		return $this->_connectionPool;
+	}
+	
+	/**
+	 * Describes the keyspace itself.
+	 * @return cassandra_KsDefs
+	 */
+	public function getMetaData()
+	{
+		// If the meta data has not been retrieved
+		if (!is_object($this->_metadata))
+			$this->_metadata = $this->_connectionPool->describe_keyspace();
+		return $this->_metadata;
+	}
+	
+	/**
+	 * Refreshes the meta data of this keyspace.
+	 * @return cassandra_KsDefs
+	 */
+	public function refreshMetaData()
+	{
+		// If the meta data has not been retrieved
+		if (!is_object($this->_metadata))
+			return $this->getMetaData();
+		// Back it up before refreshing.
+		$oldMetaData = $this->_metadata;
+		$this->_metadata = null;
+		$this->getMetaData();
+		// If something goes wrong when retrieving the keyspace meta data.
+		// Take the backup into used.
+		if (!is_object($this->_metadata))
+			$this->_metadata = $oldMetaData;
+		return $this->_metadata;
 	}
  }
