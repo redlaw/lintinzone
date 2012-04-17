@@ -32,23 +32,19 @@
 			<input id="button" type="button" value="Search">
 		</div>
 		<div id="user_panel" class="span-6 prepend-3 last">
-			<a href="">Log in</a> | 
-			<a  href="" style="width:100px">Join LintinZone</a> 
+			<?php
+				if (Yii::app()->user->isGuest)
+				{
+					//echo CHtml::link('Login', 'user/login') . ' | ';
+					//echo CHtml::link('Join LintinZone', 'user/registration');
+					echo '<a href="' . Yii::app()->createAbsoluteUrl('user/login') . '" title="Login">Login</a> | ';
+					echo '<a href="' . Yii::app()->createAbsoluteUrl('user/registration') . '" title="Join LintinZone">Join LintinZone</a>';
+				}
+				else
+					echo '<a href="' . Yii::app()->createAbsoluteUrl('site/logout') . '" title="Logout">Logout (' . Yii::app()->user->name . ')</a>';
+			?>
 		</div>
 	</div><!-- header -->
-
-	<!-- HIDE mainmenu --
-	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view' => 'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
-		)); ?>
-	</div><!-- mainmenu -->
 		
 	<div class="span-24">
 	<br>
