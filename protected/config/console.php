@@ -12,12 +12,12 @@ return array(
 		),*/
 		// uncomment the following to use a MySQL database
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=sample-yii_db',
+			'connectionString' => 'mysql:host=localhost;dbname=lintinzone',
 			'emulatePrepare' => true,
-			'username' => 'tung',
-			'password' => 'tungduy',
+			'username' => 'root',
+			'password' => '',
 			'charset' => 'utf8',
-			'tablePrefix' => 'syii_'
+			'tablePrefix' => 'lz_'
 		),
 	),
 );
