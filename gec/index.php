@@ -71,12 +71,15 @@
 			<?php include 'include/menu.inc'; ?>
 		</div>
 		<div class="content">
+			<br>
+			<p>
 			<ol>
 				<li>Bạn có bao giờ muốn mua một món hàng ở nước ngoài mà không thể được vì sự bất tiện trong việc vận chuyển hay chi phí quá cao?</li>
 				<li>Bạn rất muốn có một sản phẩm mới ngay mà không muốn phải chờ đợi hay nhờ vả người thân ở nước ngoài về?</li>
 				<li>Bạn cảm thấy các dịch vụ giao hàng từ nước ngoài về Việt Nam hiện tại là quá đắt đỏ?</li>
 				<li>Bạn có muốn trang trải chi phí du lịch nước ngoài đắt đỏ?</li>
 			</ol>	
+			</p>
 			<p>
 				Nếu câu trả lời là <span class="bold">CÓ</span> cho bất kỳ một trong những câu hỏi trên, LintinZone là chính là giải pháp tối ưu!
 			</p>
