@@ -8,7 +8,7 @@
 		<a href="http://lintinzone.com/" target="_blank">
 			<img width="477" height="50" src="../public/images/lintinzone-slogan.png" alt="LintinZone - Social Shipping Network" title="LintinZone - Social Shipping Network" />
 		</a>
-	</h2>
+	</h2>	
 </div>
 <script type="text/javascript">
   var _gaq = _gaq || [];
