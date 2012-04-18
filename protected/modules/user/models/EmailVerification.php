@@ -14,6 +14,13 @@
  */
 class EmailVerification extends ECassandraCF
 {
+	const CONFIRM_ALREADY_ACTIVE = 1;
+	const CONFIRM_INVALID_KEY = 2;
+	const CONFIRM_KEY_NOT_ACTIVE = 3;
+	const CONFIRM_ERROR = 4;
+	const CONFIRM_SUCCESS = 5;
+	const CONFIRM_USER_BLOCKED = 6;
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -29,7 +36,7 @@ class EmailVerification extends ECassandraCF
 	 */
 	public function tableName()
 	{
-		return '{{email_verification}}';
+		return '{{EMAIL_VERIFICATION}}';
 	}
 
 	/**
@@ -40,13 +47,11 @@ class EmailVerification extends ECassandraCF
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, verification_key, modified_date', 'required'),
-			array('verified, active', 'numerical', 'integerOnly'=>true),
+			array('email, verification_key', 'required'),
 			array('email, verification_key', 'length', 'max'=>50),
-			array('sent_date, verified_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('email, verification_key, sent_date, verified, verified_date, active, modified_date', 'safe', 'on'=>'search'),
+			array('email, verification_key, sent, verified, verified, active', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -97,6 +102,45 @@ class EmailVerification extends ECassandraCF
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	/**
+	 * Confirms an email address.
+	 * @param string $email The email to confirm
+	 * @param string $key The confirmation key
+	 * @return int
+	 */
+	public function confirm($email, $key)
+	{
+		$emailVerify = $this->get($email);
+		$user = User::model()->getIndexedSlices('email', $email);
+		$userId = $user->getPrimaryKey();
+		// If this account is blocked
+		if ($user->blocked === true)
+			return self::CONFIRM_USER_BLOCKED;
+		// If this email has already been verified
+		if ($user->active === true)
+			return self::CONFIRM_ALREADY_ACTIVE;
+		// If the verification key does not match
+		if ($emailVerify->verification_key !== $key)
+			return self::CONFIRM_INVALID_KEY;
+		// If this key is not active
+		if ($emailVerify->active == false)
+			return self::CONFIRM_KEY_NOT_ACTIVE;
+		// After all, update the database
+		$verifyData = array(
+			'active' => false,
+			'verified' => true
+		);
+		if ($emailVerify->sent == false)
+			$verifyData['sent'] = true;
+		// Mark this key as verified
+		if ($this->insert($email, $verifyData) !== true)
+			return self::CONFIRM_ERROR;
+		// Mark this account as activated
+		if (User::model()->insert($userId, array('active' => true)) === true)
+			return self::CONFIRM_SUCCESS;
+		return self::CONFIRM_ERROR;
 	}
 
 	/*protected function beforeValidate()

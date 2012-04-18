@@ -168,58 +168,73 @@ class User extends ECassandraCF
 		if (empty($email))
 			return false;
 		$key = sha1(uniqid(rand()));
-		$model = EmailVerification::model()->findbyPk($email);
-		if (!$model)
+		$data = array(
+			'verification_key' => $key
+		);
+		$model = EmailVerification::model()->get($email);
+		if ($model === null)
 		{
-			$model = new EmailVerification();
+			/*$model = new EmailVerification();
 			$model->email = $email;
-			$model->verification_key = $key;
+			$model->verification_key = $key;*/
 			$mailParams = array(
 				'from' => Yii::app()->params['adminEmail'],
 				'fromName' => 'LintinZone',
 				'to' => $email,
-				'subject' => 'LintinZone ' . UserModule::t('Xác nhận đăng ký tin tức'),
+				'subject' => 'LintinZone ' . UserModule::t('Xác nhận đăng ký thành viên'),
 				'body' => array(
 					'{receiver}' => (empty($username)) ? UserModule::t('my friend') : $username, // username
-					'{confirm_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/user/confirm?key=' . $key . '&email=' . $email,
+					'{confirm_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/user/registration/confirm?key=' . $key . '&email=' . $email,
 					'{support_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/site/contact?email=' . $email,
 					'{home_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/'
 				)
 			);
 			if (MailSender::sendSMTP($mailParams, 'register', 'text/html'))
 			{
-				$model->sent_date = new CDbExpression('NOW()');
-				$model->save();
+				/*$model->sent_date = new CDbExpression('NOW()');
+				$model->save();*/
+				$data['sent'] = true;
+				$data['active'] = true;
+				$data['verified'] = false;
+				EmailVerification::model()->insert($email, $data);
 				return true;
 			}
-			$model->save();
+			//$model->save();
+			$data['sent'] = false;
+			$data['active'] = true;
+			$data['verified'] = false;
+			EmailVerification::model()->insert($email, $data);
 			return false;
 		}
 		else
 		{
 			if (!$model->verified)
 			{
-				$model->verification_key = $key;
+				//$model->verification_key = $key;
 				$mailParams = array(
 					'from' => Yii::app()->params['adminEmail'],
 					'fromName' => 'LintinZone',
 					'to' => $email,
-					'subject' => 'LintinZone ' . UserModule::t('Xác nhận đăng ký tin tức'),
+					'subject' => 'LintinZone ' . UserModule::t('Xác nhận đăng ký thành viên'),
 					'body' => array(
 						'{receiver}' => (empty($username)) ? UserModule::t('my friend') : $username, // username
-						'{confirm_link}' => 'http://' . $_SERVER['SERVER_NAME'] . 'beta/user/confirm?key=' . $key . '&email=' . $email,
+						'{confirm_link}' => 'http://' . $_SERVER['SERVER_NAME'] . 'beta/user/registration/confirm?key=' . $key . '&email=' . $email,
 						'{support_link}' => 'http://' . $_SERVER['SERVER_NAME'] . 'beta/site/contact?email=' . $email,
 						'{home_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/'
 					)
 				);
 				if (MailSender::sendSMTP($mailParams, 'register', 'text/html'))
 				{
-					$model->sent_date = new CDbExpression('NOW()');
-					$model->save();
+					$data['sent'] = true;
+					$data['active'] = true;
+					$data['verified'] = false;
+					EmailVerification::model()->insert($email, $data);
 					return true;
 				}
-				$model->sent_date = new CDbExpression('NULL');
-				$model->save();
+				$data['sent'] = false;
+				$data['active'] = true;
+				$data['verified'] = false;
+				EmailVerification::model()->insert($email, $data);
 				return false;
 			}
 			else

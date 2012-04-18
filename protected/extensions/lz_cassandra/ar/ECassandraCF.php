@@ -201,10 +201,18 @@ require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
 	{
 		if (empty($this->_columnFamily))
 			$this->init();
-		$attributes = $this->_columnFamily->get($key, $columns, $columnStart, $columnFinish, $columnReversed,
-											$columnCount, $superColumn, $readConsistencyLevel);
-		if (empty($attributes))
+		try
+		{
+			$attributes = $this->_columnFamily->get($key, $columns, $columnStart, $columnFinish, $columnReversed,
+													$columnCount, $superColumn, $readConsistencyLevel);
+		}
+		catch (Exception $exc)
+		{
+			Yii::log($exc, 'error', 'extension.lz_cassandra.ar.ECassandraCF');
 			return null;
+		}
+		/*if (empty($attributes)) // ->> if a row not found, an cassandra_NotFoundException will be raised :( -> bad implementation!!!
+			return null;*/
 		$this->_attributes = $attributes;
 		$this->_rowKey = $key;
 		return $this;

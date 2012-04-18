@@ -28,12 +28,22 @@ class RegistrationController extends Controller
 						'blocked' => false
 					)) === true)
 				{
-					
-					/*if (!User::sendRegisterVerification($model->email, $model->username))
-						Yii::app()->user->setFlash('registration', UserModule::t('We experienced some problems to send you a verification account. Make sure that your email address is valid! If it is, an email will be sent again soon.'));
+					//Yii::trace('Model email ' . $model->email . ' && username ' . $model->username, 'system.web.CController');
+					echo 'Model email ' . $formModel->email . ' && username ' . $formModel->username;
+					if (!User::sendRegisterVerification($formModel->email, $formModel->username))
+					{
+						//Yii::trace('Failed to send mail to ' . $model->email, 'system.web.CController');
+						echo 'failed';
+						//Yii::app()->user->setFlash('registration', UserModule::t('We experienced some problems to send you a verification account. Make sure that your email address is valid! If it is, an email will be sent again soon.'));
+					}
 					else
-						Yii::app()->user->setFlash('registration', UserModule::t('Thank you for your registration! Please check your mail inbox.'));*/
-					$this->redirect(array('user/profile'));
+					{
+						//Yii::trace('Mail sent successfully to ' . $model->email, 'system.web.CController');
+						echo 'done';
+						//Yii::app()->user->setFlash('registration', UserModule::t('Thank you for your registration! Please check your mail inbox.'));
+					}
+					die;
+					//$this->redirect(array('user/profile'));
 				}
 			}
 		}
@@ -78,5 +88,32 @@ class RegistrationController extends Controller
 				'backColor' => 0xFFFFFF,
 			),
 		);
+	}
+	
+	public function actionConfirm()
+	{
+		if (!isset($_GET['email']) && !isset($_GET['key']))
+			$this->redirect(array('index/index'));
+		switch (EmailVerification::model()->confirm($_GET['email'], $_GET['key']))
+		{
+			case EmailVerification::CONFIRM_ALREADY_ACTIVE:
+				echo UserModule::t('This email address has already been verified. Thank you!');
+				break;
+			case EmailVerification::CONFIRM_INVALID_KEY:
+				echo UserModule::t('The confirmation key is invalid!');
+				break;
+			case EmailVerification::CONFIRM_KEY_NOT_ACTIVE:
+				echo UserModule::t('This key is no longer active');
+				break;
+			case EmailVerification::CONFIRM_USER_BLOCKED:
+				echo UserModule::t('This account is currently blocked');
+				break;
+			case EmailVerification::CONFIRM_SUCCESS:
+				echo UserModule::t('This email is now verified. You can log in your account using this email. Thank you!');
+				break;
+			case EmailVerification::CONFIRM_ERROR:
+			default:
+				echo UserModule::t('Oops, an error has occurred! Please try again.');
+		}
 	}
 }
