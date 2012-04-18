@@ -178,6 +178,10 @@ div.menu, div.content
 	border-radius: 6px;
 }
 
+div.menu
+{
+	height:40px;
+}
 div.content
 {
 	min-height: 380px;
@@ -191,12 +195,14 @@ div#comming-soon, ul#messages
 
 ul#main-nav
 {
-	margin: auto;
+	/*margin: auto;*/
 	padding: .5em;
-	width: 544px;
+	/*width: 544px;*/
+	width:550px;
 	/*font: 14px/22px Arial,Helvetica,sans-serif;*/
 	border: 0 none;
 	height: 1.9em;
+	float:left;
 }
 
 ul#main-nav li
@@ -232,6 +238,55 @@ ul#main-nav li.current-page
 }
 
 ul#main-nav a:hover
+{
+	text-decoration: none !important;
+}
+
+ul#lang-nav
+{
+	/*margin: auto;*/
+	padding: .5em;
+	/*width: 544px;*/
+	width:200px;
+	/*font: 14px/22px Arial,Helvetica,sans-serif;*/
+	border: 0 none;
+	height: 1.9em;
+	float:right;
+}
+
+ul#lang-nav li
+{
+	/*background: #3E3E3E;*/
+	background-color: black;
+	color: white;
+	min-width: 70px;
+	height: 1.6em;
+	text-align: center;
+	margin: 0 5px 5px 5px;
+	border-radius: 6px;
+	float: right;
+	font-weight: bold;
+	/*display: inline-block;*/
+}
+
+ul#lang-nav a
+{
+	text-decoration: none;
+}
+
+ul#lang-nav li:hover
+{
+	/*background: #A1AE1A;*/
+	background-color: #004A7F;
+}
+
+ul#lang-nav li.current-page
+{
+	/*background: #A1AE1A;*/
+	background-color: #004A7F;
+}
+
+ul#lang-nav a:hover
 {
 	text-decoration: none !important;
 }
