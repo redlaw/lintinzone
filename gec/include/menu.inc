@@ -34,6 +34,12 @@
 		<a name="contact" href="contact.php" title="Liên hệ với chúng tôi">Liên hệ</a>
 	</li>
 </ul>
+	<a href="?lang=vi">
+		<img width="24" height="24" src="../public/images/vi_inactive.gif" alt="Ti?ng Vi?t Nam" title="Ti?ng Vi?t Nam" />
+	</a>
+	<a href="?lang=en">
+		<img width="24" height="24" src="../public/images/en_active.gif" alt="English" title="You are now viewing this page in English." />
+	</a>
 <script type="text/javascript">
 	var overtextHandle = function()
 	{
