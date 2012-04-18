@@ -184,9 +184,9 @@ class User extends ECassandraCF
 				'subject' => 'LintinZone ' . UserModule::t('Xác nhận đăng ký thành viên'),
 				'body' => array(
 					'{receiver}' => (empty($username)) ? UserModule::t('my friend') : $username, // username
-					'{confirm_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/user/registration/confirm?key=' . $key . '&email=' . $email,
-					'{support_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/site/contact?email=' . $email,
-					'{home_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/'
+					'{confirm_link}' => Yii::app()->createAbsoluteUrl('user/registration/confirm', array('key' => $key, 'email' => $email)),
+					'{support_link}' => Yii::app()->createAbsoluteUrl('site/contact', array('email' => $email)),
+					'{home_link}' => Yii::app()->createAbsoluteUrl('')
 				)
 			);
 			if (MailSender::sendSMTP($mailParams, 'register', 'text/html'))
@@ -218,9 +218,9 @@ class User extends ECassandraCF
 					'subject' => 'LintinZone ' . UserModule::t('Xác nhận đăng ký thành viên'),
 					'body' => array(
 						'{receiver}' => (empty($username)) ? UserModule::t('my friend') : $username, // username
-						'{confirm_link}' => 'http://' . $_SERVER['SERVER_NAME'] . 'beta/user/registration/confirm?key=' . $key . '&email=' . $email,
-						'{support_link}' => 'http://' . $_SERVER['SERVER_NAME'] . 'beta/site/contact?email=' . $email,
-						'{home_link}' => 'http://' . $_SERVER['SERVER_NAME'] . '/beta/'
+						'{confirm_link}' => Yii::app()->createAbsoluteUrl('user/registration/confirm', array('key' => $key, 'email' => $email)),
+						'{support_link}' => Yii::app()->createAbsoluteUrl('site/contact', array('email' => $email)),
+						'{home_link}' => Yii::app()->createAbsoluteUrl('')
 					)
 				);
 				if (MailSender::sendSMTP($mailParams, 'register', 'text/html'))
