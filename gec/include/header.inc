@@ -1,4 +1,4 @@
-<div class="site-logo">
+<div class="site-logo" style="align:left">
 	<h1>
 		<a id="link-site" name="link-site" href="http://lintinzone.com/" target="_blank">
 			<img width="477" height="83" id="site-logo" src="public/images/lintinzone-logo.png" alt="LintinZone - Giải pháp giao hàng tốt nhất" title="LintinZone - Giải pháp giao hàng tốt nhất" />

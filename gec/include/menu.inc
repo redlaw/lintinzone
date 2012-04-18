@@ -28,18 +28,22 @@
 		<a name="faq" href="faq.php" title="Những câu hỏi về dự án">FAQ</a>
 	</li>
 	<li id="main-nav-about-us" <?php echo ($about === true) ? 'class="current-page"' : ''; ?>>
-		<a name="contact" href="about-us.php" title="Nhóm phát triển">Nhóm chúng tôi</a>
+		<a name="about" href="about-us.php" title="Nhóm phát triển">Nhóm chúng tôi</a>
 	</li>
 	<li id="main-nav-contact" <?php echo ($contact === true) ? 'class="current-page"' : ''; ?>>
 		<a name="contact" href="contact.php" title="Liên hệ với chúng tôi">Liên hệ</a>
 	</li>
 </ul>
-	<a href="?lang=vi">
-		<img width="24" height="24" src="../public/images/vi_inactive.gif" alt="Ti?ng Vi?t Nam" title="Ti?ng Vi?t Nam" />
-	</a>
-	<a href="?lang=en">
-		<img width="24" height="24" src="../public/images/en_active.gif" alt="English" title="You are now viewing this page in English." />
-	</a>
+
+<ul id="lang-nav">	
+	<li>
+		<a href="?lang=vi">Tiếng Việt</a>	
+	</li>
+	<li>
+		<a href="?lang=en">English</a>
+	</li>
+</ul>
+
 <script type="text/javascript">
 	var overtextHandle = function()
 	{
