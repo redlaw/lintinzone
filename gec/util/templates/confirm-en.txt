@@ -1,0 +1,10 @@
+﻿Dear {receiver},
+
+LintinZone has recently received your subscription to our lastest updates. Please confirm your subscription by clicking on this link.
+{confirm_link}
+
+If you received this email by mistake, simply delete it. You won't be subscribed if you don't click the confirmation link above.
+Any questions, ideas or contributed opinions, please contact us: {support_link}
+
+LintinZone - Best shipping solution
+{home_link}
