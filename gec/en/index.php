@@ -71,7 +71,6 @@
 			<?php include 'include/menu.inc'; ?>
 		</div>
 		<div class="content">
-			<div>
 				<ol>
 					<li>Have you ever found a product online but cannot buy it because the website does not ship to your country?</li>
 					<li>Do you want to get the lastest product overseas without having a friend or relative living there?</li>
@@ -81,7 +80,6 @@
 				<p>
 					If the answer is <span class="bold">YES</span> for any of them, LintinZone is the ultimate solution!
 				</p>
-			</div>
 			<div class="social-plugins">
 				<!-- AddThis Button BEGIN -->
 				<div class="addthis_toolbox addthis_default_style ">

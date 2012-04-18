@@ -17,7 +17,7 @@
 	elseif (strpos($_SERVER['REQUEST_URI'], 'faq.php') != false)
 		$faq = true;
 ?>
-<ul id="main-nav" style="width: 450px;">
+<ul id="main-nav" style="width:450px;">
 	<li id="main-nav-index" <?php echo ($index === true) ? 'class="current-page"' : ''; ?>>
 		<a name="home" href="index.php" title="Home">Home</a>
 	</li>
@@ -28,18 +28,22 @@
 		<a name="faq" href="faq.php" title="Frequently Asked Questions">FAQ</a>
 	</li>
 	<li id="main-nav-about-us" <?php echo ($about === true) ? 'class="current-page"' : ''; ?>>
-		<a name="contact" href="about-us.php" title="About us">About us</a>
+		<a name="about" href="about-us.php" title="About us">About us</a>
 	</li>
 	<li id="main-nav-contact" <?php echo ($contact === true) ? 'class="current-page"' : ''; ?>>
 		<a name="contact" href="contact.php" title="Contact us">Contact</a>
 	</li>
 </ul>
-	<a href="?lang=vi">
-		<img width="24" height="24" src="../public/images/vi_inactive.gif" alt="Ti?ng Vi?t Nam" title="Ti?ng Vi?t Nam" />
-	</a>
-	<a href="?lang=en">
-		<img width="24" height="24" src="../public/images/en_active.gif" alt="English" title="You are now viewing this page in English." />
-	</a>
+
+<ul id="lang-nav">	
+	<li>
+		<a href="?lang=vi">Tiếng Việt</a>	
+	</li>
+	<li>
+		<a href="?lang=en">English</a>
+	</li>
+</ul>
+
 <script type="text/javascript">
 	var overtextHandle = function()
 	{
