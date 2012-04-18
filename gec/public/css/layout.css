@@ -1,0 +1,372 @@
+@CHARSET "utf-8";
+
+/***** General *****/
+*
+{
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+}
+
+body
+{
+	font: 14px/22px Arial,Helvetica,sans-serif;
+	/*background: #313131;*/
+	background-color: #8EC1DA;
+}
+
+input
+{
+	padding: .3em;
+	margin: .2em;
+	font: 14px/22px Arial,Helvetica,sans-serif;
+}
+
+input[type="text"]
+{
+	min-width: 305px;
+	border-radius: 7px;
+}
+
+input[type="button"], input[type="submit"], input[type="reset"]
+{
+	min-width: 70px;
+	border-radius: 4px;
+	cursor: pointer;
+	/*background: #A1AE1A;*/
+	background-color: #0094FF;
+	color: white;
+	font-weight: bold;
+}
+
+p, h1, h2, h3, h4, h5, h6, a, div, span, ul, ol
+{
+	/*color: white;*/
+	text-align: justify;
+}
+
+p, h1, h2, h3, h4, h5, h6
+{
+	padding: .5em;
+}
+
+ol
+{
+	padding: .5em 1em .5em 2em;
+}
+
+ul
+{
+	list-style: none;
+}
+
+ul li
+{
+	padding: .2em;
+}
+
+a
+{
+	text-decoration: underline;
+	color: inherit;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+img
+{
+	vertical-align: middle;
+}
+
+p img
+{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.clearboth
+{
+	clear: both;
+}
+
+.row
+{
+	clear: both;
+}
+
+.left
+{
+	float: left;
+}
+
+.right
+{
+	float: right;
+}
+
+.center
+{
+	text-align: center;
+}
+
+.hidden
+{
+	display: none !important;
+}
+
+.bold
+{
+	font-weight: bold;
+}
+
+.italic
+{
+	font-style: italic;
+}
+
+.underline
+{
+	text-decoration: underline;
+}
+
+.half-col
+{
+	width: 48%;
+	margin: 0;
+	display: inline-block;
+}
+
+/***** Home page *****/
+
+div.header
+{
+	width: 477px;
+	height: 125px;
+	margin: auto;
+	padding: 10px 0 10px 0;
+	/*overflow: hidden;*/
+}
+
+div.header h2
+{
+	margin: 0;
+	padding: 0;
+}
+
+div.header h1
+{
+	padding: 0;
+	margin: 0;
+}
+
+div.announcement, div.menu, div.content
+{
+	width: 800px;
+	margin: auto;
+	margin-top: .3em;
+	margin-bottom: .3em;
+}
+
+div.menu, div.content
+{
+	/*background: #212121;*/
+	/*background-color: #C0DEED;*/
+	background-color: #D3E8F2;
+	border-radius: 6px;
+}
+
+div.content
+{
+	min-height: 380px;
+}
+
+div#comming-soon, ul#messages
+{
+	width: 410px;
+	margin: auto;
+}
+
+ul#main-nav
+{
+	margin: auto;
+	padding: .5em;
+	width: 544px;
+	/*font: 14px/22px Arial,Helvetica,sans-serif;*/
+	border: 0 none;
+	height: 1.9em;
+}
+
+ul#main-nav li
+{
+	/*background: #3E3E3E;*/
+	background-color: #0094FF;
+	color: white;
+	min-width: 70px;
+	height: 1.6em;
+	text-align: center;
+	margin: 0 5px 5px 5px;
+	border-radius: 6px;
+	float: left;
+	font-weight: bold;
+	/*display: inline-block;*/
+}
+
+ul#main-nav a
+{
+	text-decoration: none;
+}
+
+ul#main-nav li:hover
+{
+	/*background: #A1AE1A;*/
+	background-color: #004A7F;
+}
+
+ul#main-nav li.current-page
+{
+	/*background: #A1AE1A;*/
+	background-color: #004A7F;
+}
+
+ul#main-nav a:hover
+{
+	text-decoration: none !important;
+}
+
+div.social-plugins
+{
+	padding: 10px 0 0 10px;
+}
+
+div.input-holder
+{
+	position: relative;
+	display: inline-block;
+}
+
+span.overtext
+{
+	position: absolute;
+	left: .4em;
+	top: .4em;
+	font: 14px/22px Arial,Helvetica,sans-serif;
+	color: black;
+}
+
+div.footer
+{
+	width: 800px;
+	margin: auto;
+	margin-bottom: 5px;
+	/*padding: 1em;*/
+	background-color: #D3E8F2;
+	border-radius: 6px;
+	padding: .5em 0 .5em 0;
+}
+
+div.footer a
+{
+	display: inline-block;
+	/*display: block;
+	float: right;*/
+	vertical-align: middle;
+	margin-left: 5px;
+	/*height: 32px;*/
+}
+
+div.footer span#copyright
+{
+	width: 75%;
+	margin-left: .5em;
+	display: inline-block;
+}
+
+/***** Subscribers *****/
+div#page-content
+{
+	width: 100%;
+	overflow: auto;
+}
+
+ul.table_header
+{
+	background: #A1AE1A;
+	font-weight: bold;
+	border: 1px solid white;
+	overflow: auto;
+}
+
+ul.table_header li
+{
+	border-right: 1px solid white;
+}
+
+ul.table_header li, li#subscribers-data li
+{
+	padding: .1em .3em;
+}
+
+li.checkbox_col
+{
+	width: 15px;
+	border-width: 1px;
+	margin-left: 5px;
+}
+
+li.email_col
+{
+	width: 250px;
+}
+
+li.name_col
+{
+	width: 150px;
+}
+
+li.subscribed_date_col, li.confirmed_date_col
+{
+	width: 150px;
+	text-align: center;
+}
+
+li.subscribed_col, li.confirmed_col
+{
+	width: 150px;
+	text-align: center;
+}
+
+li.operations_col
+{
+	width: 150px;
+	text-align: center;
+}
+
+li#subscribers-data ul
+{
+	overflow: auto;
+}
+
+li#subscribers-data ul li:hover
+{
+	background: #212121;
+}
+
+ul#bottom_panel
+{
+	width: 1260px;
+}
+
+li#pager
+{
+	float: right;
+}
+
+span#items_count
+{
+	font-style: italic;
+	font-size: 90%;
+	padding-right: 1em;
+}
