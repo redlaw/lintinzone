@@ -4,7 +4,10 @@ class ProfileController extends Controller
 {
 	public function actionIndex()
 	{
-		$this->render('index');
+		if (Yii::app()->user->isGuest)
+			$this->redirect($this->createUrl('/'));
+		$profile = Profile::getProfileInfo(Yii::app()->user->getId(), 'user_');
+		$this->render('index', array('profile' => $profile));
 	}
 	
 	public function actionUpdate()
