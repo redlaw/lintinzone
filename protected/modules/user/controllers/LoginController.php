@@ -2,6 +2,8 @@
 
 class LoginController extends Controller
 {
+	public $layout='//layouts/column3';
+	
 	public function actionIndex()
 	{
 		$formModel = new Login();
