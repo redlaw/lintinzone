@@ -1,4 +1,3 @@
-<div id="content" class="span-18 box">
 <div class="form">
 
 <?php
@@ -38,4 +37,3 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
-</div>
