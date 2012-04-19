@@ -9,7 +9,7 @@
 	));
 ?>
 
-Log in to lintinzone.com
+<h1><?php echo UserModule::t("Log in to LintinZone"); ?></h1>
 	
 	<!--<?php echo $form->errorSummary($model); ?>-->
 
@@ -31,7 +31,7 @@ Log in to lintinzone.com
  	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Submit'); ?>
+		<?php echo CHtml::submitButton('Log In'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
