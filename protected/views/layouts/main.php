@@ -49,7 +49,7 @@
 	<div class="span-24">
 	<br>
 	</div>
-	<!-- Begin  main-->	
+	<!-- Begin  main section-->	
     <div class="span-24 ">	
     	<!-- Begin navigation -->	
         <div id="nav" class="span-5">          			
