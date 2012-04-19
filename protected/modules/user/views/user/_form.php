@@ -48,6 +48,7 @@
 		<div class="row">
 			<?php echo $form->labelEx($model, 'verification_code'); ?>
 			<?php $this->widget('CCaptcha'); ?>
+			<br>
 			<?php echo $form->textField($model, 'verification_code'); ?>
 			<?php echo $form->error($model, 'verification_code'); ?>
 			<p class="hint">
@@ -58,7 +59,7 @@
 	<?php endif; ?>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Register' : 'Save'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
