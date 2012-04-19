@@ -68,6 +68,7 @@ class Profile extends ECassandraCF
 			'field_value' => UserModule::t('Value'),
 			'note' => UserModule::t('Note'),
 			'verified' => UserModule::t('Verified'),
+			'privacy' => UserModule::t('Privacy'),
 			'active' => UserModule::t('Active')
 		);
 	}
