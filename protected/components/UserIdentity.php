@@ -7,11 +7,12 @@
  */
 class UserIdentity extends CUserIdentity
 {
-	const ERROR_STATUS_NOTACTIVE = 0;
-	const ERROR_STATUS_BLOCKED = 1;
-	const ERROR_EMAIL_INVALID = 0;
-	private $_user_id;
-	public $username;
+	const ERROR_STATUS_NOTACTIVE = 4;
+	const ERROR_STATUS_BLOCKED = 5;
+	const ERROR_EMAIL_INVALID = 1;
+	const ERROR_USERNAME_INVALID = 2;
+	const ERROR_PASSWORD_INVALID = 3;
+	private $_userId;
 	
 	/**
 	 * Authenticates a user.
@@ -24,10 +25,10 @@ class UserIdentity extends CUserIdentity
 	public function authenticate()
 	{
 		$username = strtolower($this->username);
-		$user = User::model()->find('username = ?', array($username));
+		$user = User::model()->getIndexedSlices('username', $username);
 		if ($user === null)
 		{
-			$user = User::model()->find('email = ?', array($username));
+			$user = User::model()->getIndexedSlices('email', $username);
 			if ($user === null)
 				$this->errorCode = self::ERROR_USERNAME_INVALID;
 		}
@@ -37,12 +38,15 @@ class UserIdentity extends CUserIdentity
 				$this->errorCode = self::ERROR_PASSWORD_INVALID;
 			else
 			{
-				$this->_user_id = $user->user_id;
+				$this->_userId = $user->getPrimaryKey();
 				$this->username = $user->username;
-				if ($user->active !== 1)
-					$this->errorCode = self::ERROR_STATUS_NOTACTIVE;
-				elseif ($user->blocked === 1)
-					$this->errorCode = self::ERROR_STATUS_BLOCKED;
+				if (!$user->active || $user->blocked === true)
+				{
+					if (!$user->active)
+						$this->errorCode = self::ERROR_STATUS_NOTACTIVE;
+					else
+						$this->errorCode = self::ERROR_STATUS_BLOCKED;
+				}
 				else
 					$this->errorCode = self::ERROR_NONE;
 			}
@@ -52,6 +56,6 @@ class UserIdentity extends CUserIdentity
 	
 	public function getId()
 	{
-		return $this->_user_id;
+		return $this->_userId;
 	}
 }
