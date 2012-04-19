@@ -17,7 +17,7 @@
 		$browserLang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 		if ($browserLang !== 'vi')
 		{
-			$url = "en/about-us.php?lang=en";
+			$url = "about-us.php?lang=vi";
 			header("Location: $url");
 			ob_end_flush();
 		}

@@ -16,6 +16,8 @@
  */
 class User extends ECassandraCF
 {
+	const PREFIX = 'user_';
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
