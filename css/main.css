@@ -305,6 +305,16 @@ div.search-form
 	background: #80CFFF;
 }
 
+#content h1{
+	font-size: 20px ;
+	font-weight:bold;
+	color: #004A7F;
+	padding:0;
+	list-style: none;
+	border-width:1px;
+	text-decoration:none;
+}
+
 /*button*/
 #button {
 	font-family: "Tahoma", Geneva, sans-serif;
@@ -312,7 +322,16 @@ div.search-form
 	background: #d5edf8;
 	border-color: #92cae4;
 	color: #205791;
-	
+	font-weight:bold;
+}
+
+input[type=submit]{
+	font-family: "Tahoma", Geneva, sans-serif;
+	font-size:14px;
+	background: #d5edf8;
+	border-color: #92cae4;
+	color: #205791;
+	font-weight:bold;
 }
 
 #button-red {
