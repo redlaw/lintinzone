@@ -57,8 +57,6 @@ class MailSender
 		foreach ($data as $token => $value)
 			$body = str_replace($token, $value, $body);
 		// Ensure that each line has at max 70 characters.
-		Yii::log($body, 'warning', 'system.web.CController');
-		Yii::log(wordwrap($body, 70), 'warning', 'system.web.CController');
 		return wordwrap($body, 70);
 	}
 	
@@ -146,7 +144,6 @@ class MailSender
 		{
 			$format = 'text/plain';
 			$body = strip_tags($body);
-			Yii::log('strip_tags body ' . $body, 'warning', 'system.web.CController');
 			$alt = $body;
 		}
 
@@ -183,10 +180,6 @@ class MailSender
 			{
 				Yii::log('Failed to send mail to ' . $to . ' (from ' . $from . ') with the body:' . PHP_EOL . $alt . PHP_EOL . self::$_mailer->ErrorInfo, 'error', 'system.web.CController');
 				return false;
-			}
-			else
-			{
-				Yii::log('Sent successfully', 'warning', 'system.web.CController');
 			}
 		}
 		catch (Exception $exc)

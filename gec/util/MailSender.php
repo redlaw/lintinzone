@@ -50,10 +50,10 @@ class MailSender
 		$this->_mailer->IsSMTP();
 		$this->_mailer->Host     = 'mail.lintinzone.com';
 		$this->_mailer->SMTPAuth = true;
-		$this->_mailer->Username = 'lintinzone@lintinzone.com';
+		$this->_mailer->Username = 'info@lintinzone.com';
 		$this->_mailer->Password = 'l1nTInte@m';
 		
-		$this->_mailer->From     = 'lintinzone@lintinzone.com';
+		$this->_mailer->From     = 'info@lintinzone.com';
 		$this->_mailer->FromName = 'LintinZone';
 		$this->_mailer->WordWrap = 70;
 		return false;
