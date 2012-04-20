@@ -94,7 +94,11 @@ div.breadcrumbs span
 	color:#004A7F;
 }
 
-
+div.clear {
+	clear: both;
+	width: 100%;
+	height: 20px;
+}
 
 /*left navigation*/
 #nav {
@@ -317,16 +321,7 @@ div.search-form
 }
 
 /*button*/
-#button {
-	font-family: "Tahoma", Geneva, sans-serif;
-	font-size:14px;
-	background: #d5edf8;
-	border-color: #92cae4;
-	color: #205791;
-	font-weight:bold;
-}
-
-input[type=submit]{
+#button,input[type=submit] {
 	font-family: "Tahoma", Geneva, sans-serif;
 	font-size:14px;
 	background: #d5edf8;
