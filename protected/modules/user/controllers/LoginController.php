@@ -2,7 +2,7 @@
 
 class LoginController extends Controller
 {
-	public $layout='//layouts/column3';
+	public $layout='//layouts/noNavigation';
 	
 	public function actionIndex()
 	{

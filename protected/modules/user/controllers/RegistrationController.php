@@ -2,7 +2,7 @@
 
 class RegistrationController extends Controller
 {
-	public $layout='//layouts/main';
+	public $layout='//layouts/noNavigation';
 		
 	public $defaultAction = 'register';
 	
