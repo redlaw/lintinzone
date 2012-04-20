@@ -41,9 +41,8 @@
 				</div>
 			</div><!-- header -->
 				
-			<div class="span-24">
-				<br />
-			</div>
+			<div class="clear"></div>
+			
 			<!-- Begin  main-->	
 		    <div class="span-24 ">	
 		    	<!-- Begin navigation -->	
@@ -114,10 +113,11 @@
 					</div>
 					<!-- End content -->
 				</div>
-				<!-- End bread-content -->
-				
+				<!-- End bread-content -->				
 			</div>
 			<!-- End main -->
+			
+			<div class="clear"></div>
 			
 			<!-- footer -->
 			<div id="footer" class="span-24">
