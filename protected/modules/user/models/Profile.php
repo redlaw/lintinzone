@@ -35,6 +35,7 @@ class Profile extends ECassandraCF
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
+		//return Profile::model()->rules();
 		return array();
 	}
 

@@ -41,57 +41,7 @@ create column family lz_USERS
 create column family lz_PROFILE_FIELDS
 	with comparator = UTF8Type
 	and key_validation_class = AsciiType
-	and column_metadata = [
-		{
-			column_name: field_title,
-			validation_class: UTF8Type,
-			index_type: KEYS
-		},
-		{
-			column_name: field_type,
-			validation_class: AsciiType
-		},
-		{
-			column_name: default,
-			validation_class: BytesType
-		},
-		{
-			column_name: field_size_max,
-			validation_class: IntegerType
-		},
-		{
-			column_name: field_size_min,
-			validation_class: IntegerType
-		},
-		{
-			column_name: required,
-			validation_class: BooleanType
-		},
-		{
-			column_name: error_message,
-			validation_class: UTF8Type
-		},
-		{
-			column_name: other_validator,
-			validation_class: AsciiType
-		},
-		{
-			column_name: position,
-			validation_class: IntegerType
-		},
-		{
-			column_name: visible,
-			validation_class: IntegerType
-		},
-		{
-			column_name: widget,
-			validation_class: AsciiType
-		},
-		{
-			column_name: widget_params,
-			validation_class: UTF8Type
-		}
-	];
+	and column_type = Super;
 create column family lz_PROFILE_INFO
 	with comparator = UTF8Type
 	and key_validation_class = TimeUUIDType
@@ -118,30 +68,3 @@ create column family lz_EMAIL_VERIFICATION
 			validation_class: BooleanType
 		},
 	];
-set lz_PROFILE_FIELDS['email']['field_title'] = utf8('Email');
-set lz_PROFILE_FIELDS['email']['field_type'] = 'AsciiType';
-set lz_PROFILE_FIELDS['email']['required'] = true;
-set lz_PROFILE_FIELDS['email']['other_validator'] = 'email';
-set lz_PROFILE_FIELDS['first_name']['field_title'] = utf8('First name');
-set lz_PROFILE_FIELDS['first_name']['field_type'] = 'UTF8Type';
-set lz_PROFILE_FIELDS['first_name']['required'] = false;
-set lz_PROFILE_FIELDS['last_name']['field_title'] = utf8('Last name');
-set lz_PROFILE_FIELDS['last_name']['field_type'] = 'UTF8Type';
-set lz_PROFILE_FIELDS['last_name']['required'] = false;
-set lz_PROFILE_FIELDS['birthday']['field_title'] = utf8('Birthday');
-set lz_PROFILE_FIELDS['birthday']['field_type'] = 'DateType';
-set lz_PROFILE_FIELDS['birthday']['required'] = false;
-set lz_PROFILE_FIELDS['gender']['field_title'] = utf8('Gender');
-set lz_PROFILE_FIELDS['gender']['field_type'] = 'AsciiType';
-set lz_PROFILE_FIELDS['gender']['required'] = false;
-set lz_PROFILE_FIELDS['hometown']['field_title'] = utf8('Hometown');
-set lz_PROFILE_FIELDS['hometown']['field_type'] = 'UTF8Type';
-set lz_PROFILE_FIELDS['hometown']['required'] = false;
-set lz_PROFILE_FIELDS['country']['field_title'] = utf8('Country');
-set lz_PROFILE_FIELDS['country']['field_type'] = 'UTF8Type';
-set lz_PROFILE_FIELDS['country']['required'] = false;
-set lz_PROFILE_FIELDS['phone']['field_title'] = utf8('Phone');
-set lz_PROFILE_FIELDS['phone']['field_type'] = 'AsciiType';
-set lz_PROFILE_FIELDS['phone']['required'] = false;
-set lz_PROFILE_FIELDS['phone']['field_size_min'] = 3;
-set lz_PROFILE_FIELDS['phone']['field_size_max'] = 15;

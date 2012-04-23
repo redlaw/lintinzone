@@ -20,3 +20,6 @@ should you have any questions.</p>
 var_dump($metadata);
 $user = new User();
 var_dump(get_class($user));*/
+echo Yii::app()->createAbsoluteUrl('') . '<br />';
+echo Yii::app()->createUrl('') . '<br />';
+echo time();
