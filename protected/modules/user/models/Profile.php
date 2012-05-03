@@ -159,7 +159,7 @@ class Profile extends ECassandraCF
 			$objectType = User::PREFIX;
 		
 		// If field value is left as null, the column will be removed.
-		if ($fieldValue === null)
+		if (empty($fieldValue))
 		{
 			$this->delete($objectType . $objectId, array($fieldName));
 			return true;
@@ -196,13 +196,25 @@ class Profile extends ECassandraCF
 	public function setProfileFields($objectId, $objectType, array $fields)
 	{
 		if (empty($objectId)
-			|| empty($fieldName)
 			|| empty($fields))
 			return false;
 			
 		if (empty($objectType))
 			$objectType = User::PREFIX;
 		
+		foreach ($fields as $fieldName => $fieldValues)
+		{
+			if (empty($fieldValues['value']))
+			{
+				$this->setFieldInfo($objectId, $objectType, $fieldName, '');
+				unset($fields[$fieldName]);
+			}
+			else
+			{
+				if ($this->getFieldInfo($objectId, $objectType, $fieldName) === null)
+					$fields['verified'] = false;
+			}
+		}
 		return $this->insert($objectType . $objectId, $fields);
 	}
 }

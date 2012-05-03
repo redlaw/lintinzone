@@ -12,7 +12,33 @@ class ProfileController extends Controller
 	
 	public function actionUpdate()
 	{
-		$this->render('update');
+		$formModel = new ProfileForm();
+		if (isset($_POST['ProfileForm']))
+		{
+			$allFieldTypes = $formModel->getAllFieldTypes();
+			foreach ($allFieldTypes as $fieldName => $fieldType)
+			{
+				$formModel->$fieldName = $_POST['ProfileForm'][$fieldName];
+			}
+			if ($formModel->validate())
+			{
+				$model = new Profile();
+				$data = array();
+				foreach ($allFieldTypes as $fieldName => $fieldType)
+				{
+					$data[$fieldName] = array(
+						'value' => $formModel->$fieldName
+					);
+				}
+				$model->setProfileFields(Yii::app()->user->getId(), User::PREFIX, $data);
+			}
+		}
+		$this->render('update', array('model' => $formModel));
+	}
+	
+	public function actionPicture()
+	{
+		$this->render('picture');
 	}
 
 	// Uncomment the following methods and override them if needed

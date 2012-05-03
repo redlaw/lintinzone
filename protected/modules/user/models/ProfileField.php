@@ -15,17 +15,39 @@ class ProfileField extends ECassandraCF
 	
 	/**
 	 * List of available profile fields.
-	 * @var array
+	 * @var RangeColumnFamilyIterator
 	 */
 	private static $_data;
+	
+	/**
+	 * List of field types
+	 * @var array
+	 */
+	 private static $_types;
 	
 	/**
 	 * Flags
 	 * @var boolean
 	 */
-	private static $_refresh = false;
-	private static $_refreshRules = false;
-	private static $_refreshFields = false;
+	private static $_refresh = true;
+	private static $_refreshRules = true;
+	private static $_refreshFields = true;
+	private static $_refreshTypes = true;
+	
+	protected function initFields()
+	{
+		if (empty($this->_fields) || self::$_refreshFields === true)
+		{
+			self::$_refreshFields = false;
+			$this->_fields = array();
+			$this->getAllFieldsMetadata();
+			foreach (self::$_data as $fieldName => $metadata)
+			{
+				//array_push($this->_fields, $fieldName);
+				$this->_fields[$fieldName] = '';
+			}
+		}
+	}
 	
 	/**
 	 * Returns the static model of the specified AR class.
@@ -55,8 +77,9 @@ class ProfileField extends ECassandraCF
 		// will receive user inputs.
 		if (empty(self::$_rules) || self::$_refreshRules === true)
 		{
+			self::$_rules = array();
 			self::$_refreshRules = false;
-			$fieldMetadata = $this->getAllFields();
+			$fieldMetadata = $this->getAllFieldsMetadata();
 			/*
 			List of validators
 			 * boolean  * captcha  * compare  * date  * default
@@ -66,11 +89,11 @@ class ProfileField extends ECassandraCF
 			*/
 			foreach ($fieldMetadata as $fieldName => $metadata)
 			{
-				if ($fieldName !== 'field_title') // field_title is the title or label of this field. It is not a validator.
+				foreach ($metadata as $validator => $validatorAttributes)
 				{
-					$temp = array($fieldName);
-					foreach ($metadata as $validator => $validatorAttributes)
+					if ($validator !== 'not_validator')
 					{
+						$temp = array($fieldName);
 						switch ($validator)
 						{
 							// CBooleanValidator
@@ -320,8 +343,8 @@ class ProfileField extends ECassandraCF
 								$temp['enableClientValidation'] = $validatorAttributes['enableClientValidation'];
 						} // endif
 						array_push(self::$_rules, $temp);
-					} // endforeach
-				} // endif
+					} // endif
+				} // endforeach
 			}// endforeach
 		}
 		return self::$_rules;
@@ -342,43 +365,39 @@ class ProfileField extends ECassandraCF
 	 */
 	public function attributeLabels()
 	{
-		/*return array(
-			'email' => UserModule::t('Email'),
-			'first_name' => UserModule::t('First name'),
-			'last_name' => UserModule::t('Last name'),
-			'birthday' => UserModule::t('Birthday'),
-			'gender' => UserModule::t('Gender'),
-			'hometown' => UserModule::t('Hometown'),
-			'country' => UserModule::t('Country'),
-			'phone' => UserModule::t('Phone')
-		);*/
-		
+		$fieldMetadata = $this->getAllFieldsMetadata();
+		$labels = array();
+		foreach ($fieldMetadata as $fieldName => $metadata)
+		{
+			array_push($labels, UserModule::t($metadata['not_validator']['field_title']));
+		}
+		return $labels;
 	}
 	
 	/**
-	 * Gets all the information of a field.
+	 * Gets metadata of a field.
 	 * @param string $fieldName name of the field to get
 	 * @return array
 	 */
-	public function getField($fieldName)
+	public function getFieldMetadata($fieldName)
 	{
 		/*if (empty($fieldName))
 			return null;
 		return $this->get($fieldName);*/
-		$this->getAllFields();
+		$this->getAllFieldsMetadata();
 		return self::$_data[$fieldName];
 	}
 	
 	/**
-	 * Gets information of all fields.
+	 * Gets metadata of all fields.
 	 * @return array
 	 */
-	public function getAllFields()
+	public function getAllFieldsMetadata()
 	{
 		if (self::$_data === null
-			|| self::$refresh === true)
+			|| self::$_refresh === true)
 		{
-			self::$_data = $this->get();
+			self::$_data = $this->getRange();
 			self::$_refresh = false;
 		}
 		return self::$_data;
@@ -392,5 +411,66 @@ class ProfileField extends ECassandraCF
 		self::$_refresh = true;
 		self::$_refreshFields = true;
 		self::$_refreshRules = true;
+		self::$_refreshTypes = true;
+	}
+	
+	/**
+	 * Returns a value of a field.
+	 * @param string $name Name of the field to get value
+	 * @return mixed field's value | null if such field has not existed
+	 */
+	public function __get($name)
+	{
+		if (isset($this->_fields[$name]))
+			return $this->_fields[$name];
+		return null;
+	}
+	
+	/**
+	 * Sets value of a field.
+	 * @param string $name Name of the field to set value
+	 * @param mixed $value The value to set
+	 * @return true set value successfully | false
+	 */
+	public function __set($name, $value)
+	{
+		$this->initFields();
+		if (isset($this->_fields[$name]))
+		{
+			$this->_fields[$name] = $value;
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Gets all field types.
+	 * @return array
+	 */
+	public function getAllFieldTypes()
+	{
+		/*
+		 * List of field types:
+		 *  - checkBox
+		 *  - checkBoxList
+		 *  - dropDownList
+		 *  - fileField
+		 *  - passwordField
+		 *  - radioButton
+		 *  - radioButtonList
+		 *  - textArea
+		 *  - textField
+		 */
+		if (empty(self::$_types) || self::$_refreshTypes === true)
+		{
+			self::$_refreshTypes = false;
+			$fieldMetadata = $this->getAllFieldsMetadata();
+			self::$_types = array();
+			foreach ($fieldMetadata as $fieldName => $metadata)
+			{
+				self::$_types[$fieldName] = UserModule::t($metadata['not_validator']['field_type']);
+			}
+			return self::$_types;
+		}
 	}
 }

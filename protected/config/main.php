@@ -6,7 +6,7 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
-	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
+	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 	'name'=>'LintinZone',
 
 	// preloading 'log' component
@@ -101,6 +101,9 @@ return array(
 				*/
 			),
 		),
+		'imagemod' => array(
+			'class' => 'application.extensions.imagemodifier.CImageModifier',
+		),
 	),
 
 	// application-level parameters that can be accessed
@@ -110,6 +113,7 @@ return array(
 		'adminEmail'=>'info@lintinzone.com',
 		'mailHost' => 'mail.lintinzone.com',
 		'mailPassword' => 'l1nTInte@m',
-		'saltPassword' => 'l1nTInz0ne'
-	),
+		'saltPassword' => 'l1nTInz0ne',
+		'storagePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'files'
+	)
 );

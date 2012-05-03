@@ -41,11 +41,15 @@ create column family lz_USERS
 create column family lz_PROFILE_FIELDS
 	with comparator = UTF8Type
 	and key_validation_class = AsciiType
-	and column_type = Super;
+	and default_validation_class = UTF8Type
+	and column_type = Super
+	and subcomparator = UTF8Type;
 create column family lz_PROFILE_INFO
 	with comparator = UTF8Type
-	and key_validation_class = TimeUUIDType
-	and column_type = Super;
+	and key_validation_class = AsciiType
+	and default_validation_class = UTF8Type
+	and column_type = Super
+	and subcomparator = UTF8Type;
 create column family lz_EMAIL_VERIFICATION
 	with comparator = AsciiType
 	and key_validation_class = AsciiType
@@ -68,3 +72,79 @@ create column family lz_EMAIL_VERIFICATION
 			validation_class: BooleanType
 		},
 	];
+set lz_PROFILE_FIELDS['first_name']['not_validator']['field_title'] = utf8('First name');
+set lz_PROFILE_FIELDS['first_name']['not_validator']['field_type'] = utf8('textField');
+set lz_PROFILE_FIELDS['first_name']['length']['max'] = utf8(50);
+
+set lz_PROFILE_FIELDS['last_name']['not_validator']['field_title'] = utf8('Last name');
+set lz_PROFILE_FIELDS['last_name']['not_validator']['field_type'] = utf8('textField');
+set lz_PROFILE_FIELDS['last_name']['length']['max'] = utf8(50);
+
+set lz_PROFILE_FIELDS['email']['not_validator']['field_title'] = utf8('Email');
+set lz_PROFILE_FIELDS['email']['not_validator']['field_type'] = utf8('textField');
+set lz_PROFILE_FIELDS['email']['length']['max'] = utf8(50);
+set lz_PROFILE_FIELDS['email']['email']['message'] = utf8('A valid email address is required');
+
+set lz_PROFILE_FIELDS['birthday']['not_validator']['field_title'] = utf8('Birthday');
+set lz_PROFILE_FIELDS['birthday']['not_validator']['field_type'] = utf8('textField');
+set lz_PROFILE_FIELDS['birthday']['date']['message'] = utf8('This is not a valid date');
+
+set lz_PROFILE_FIELDS['address']['not_validator']['field_title'] = utf8('Address');
+set lz_PROFILE_FIELDS['address']['not_validator']['field_type'] = utf8('textField');
+set lz_PROFILE_FIELDS['address']['length']['max'] = utf8(150);
+
+set lz_PROFILE_FIELDS['phone']['not_validator']['field_title'] = utf8('Phone');
+set lz_PROFILE_FIELDS['phone']['not_validator']['field_type'] = utf8('textField');
+set lz_PROFILE_FIELDS['phone']['length']['max'] = utf8(50);
+
+facebook account
+
+linkedin
+twitter
+gender
+about
+interests
+website
+
+create column family lz_STORAGE
+	with comparator = AsciiType
+	and key_validation_class = AsciiType
+	and default_validation_class = AsciiType
+	and column_metadata = [
+		{
+			column_name: storage_path,
+			validation_class: UTF8Type,
+			index_type: KEYS
+		},
+		{
+			column_name: mime_type,
+			validation_class: AsciiType
+		},
+		{
+			column_name: title,
+			validation_class: UTF8Type
+		},
+		{
+			column_name: description,
+			validation_class: UTF8Type
+		},
+		{
+			column_name: user_id,
+			validation_class: TimeUUIDType
+		},
+		{
+			column_name: extension,
+			validation_class: AsciiType
+		}
+	];
+
+create column family lz_SETTINGS
+	with comparator = AsciiType
+	and key_validation_class = AsciiType
+	and column_metadata = [
+		{
+			column_name: value,
+			validation_class: AsciiType
+		}
+	];
+set lz_SETTINGS['photo_types']['value'] = '{"original":{"width":"1024","height":"768"},"thumb.profile":{"width":"160","height":"160","suffix":"_p"},"thumb.feed":{"width":"50","height":"50","suffix":"_f"},"thumb.icon":{"width":"32","height":"32","suffix":"_i"}}';

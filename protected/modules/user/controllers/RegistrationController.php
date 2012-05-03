@@ -21,7 +21,6 @@ class RegistrationController extends Controller
 			if ($formModel->validate())
 			{
 				$model = new User();
-				//Yii::trace('password ' . $_POST['Registration']['password'], 'system.web.CController');
 				if ($model->insert(CassandraUtil::uuid1(), array(
 						'email' => $_POST['Registration']['email'],
 						'username' => $_POST['Registration']['username'],
@@ -30,19 +29,14 @@ class RegistrationController extends Controller
 						'blocked' => false
 					)) === true)
 				{
-					//Yii::trace('Model email ' . $model->email . ' && username ' . $model->username, 'system.web.CController');
 					echo 'Model email ' . $formModel->email . ' && username ' . $formModel->username;
 					if (!User::sendRegisterVerification($formModel->email, $formModel->username))
 					{
-						//Yii::trace('Failed to send mail to ' . $model->email, 'system.web.CController');
 						echo 'failed';
-						//Yii::app()->user->setFlash('registration', UserModule::t('We experienced some problems to send you a verification account. Make sure that your email address is valid! If it is, an email will be sent again soon.'));
 					}
 					else
 					{
-						//Yii::trace('Mail sent successfully to ' . $model->email, 'system.web.CController');
 						echo 'done';
-						//Yii::app()->user->setFlash('registration', UserModule::t('Thank you for your registration! Please check your mail inbox.'));
 					}
 					die;
 					//$this->redirect(array('user/profile'));
