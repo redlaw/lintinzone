@@ -5,18 +5,69 @@
 class Profile extends ECassandraCF
 {
 	/**
-	 * The temporary data
+	 * The ID of the object.
+	 * @var string
 	 */
-	//private static $_tempData = array();
+	private $_objectId;
+	
+	/**
+	 * The type of the object, for example, user_
+	 * @var string
+	 */
+	private $_objectType;
+	
+	/**
+	 * Array of profile fields.
+	 * @var array
+	 */
+	private $_fields;
+	
+	/**
+	 * List of instances that hold data for objects.
+	 * @var array
+	 */
+	private static $_instances;
+	
+	public function __construct($objectId, $objectType, $scenario = 'insert')
+	{
+		$this->_objectId = $objectId;
+		$this->_objectType = $objectType;
+		parent::__construct($scenario);
+	}
 	
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
+	 * @param string $objectId The ID of the target object
+	 * @param string $objectType The type of the target object plus the underscore (_), for example, user_
+	 * @param string $className active record class name
 	 * @return User the static model class
 	 */
-	public static function model($className = __CLASS__)
+	public static function model($objectId, $objectType, $className = __CLASS__)
 	{
-		return parent::model($className);
+		if (empty($objectId))
+		{
+			$userId = Yii::app()->user->getId();
+			if (!empty($userId))
+				$objectId = CassandraUtil::import($userId)->__toString();
+			else
+				throw new InvalidArgumentException('Object ID is empty');
+		}
+		else
+		{
+			$objectId = CassandraUtil::import($objectId)->__toString();
+		}
+		if (empty($objectType))
+			$objectType = User::PREFIX;
+		// If there is an instance of this object, return it.
+		if (isset(self::$_instances[$objectType . $objectId]))
+			return self::$_instances[$objectType . $objectId];
+		// If not, create one. Save it.
+		else
+		{
+			$newInstance = new Profile($objectId, $objectType);
+			self::$_instances[$objectType . $objectId] = $newInstance;
+			return $newInstance;
+		}
 	}
 
 	/**
@@ -104,40 +155,26 @@ class Profile extends ECassandraCF
 	
 	/**
 	 * Gets value of a specific profile field.
-	 * @param string $objectId the row key of the object to get info
-	 * @param string $objectType type of the object (for example, user, trip...) plus the underscore (_)
+	 * Note, this function does not use cache data.
+	 * Use this function to refresh the data.
 	 * @param string $fieldName the name of the field to get (for example, first_name, last_name...)
 	 * @return array
 	 */
-	public function getFieldInfo($objectId, $objectType, $fieldName)
+	public function getFieldInfo($fieldName)
 	{
-		if (empty($objectId)
-			|| empty($fieldName))
+		if (empty($fieldName))
 			return null;
-			
-		if (empty($objectType))
-			$objectType = User::PREFIX;
-			
-		//TODO: Improve the performance by caching data.
-		/*if (!isset(self::$_tempData[$objectType . '_' . $objectId]))
-			self::$_tempData[$objectType . '_' . $objectId] = array(
-				'data' => $this->get($objectType . '_' . $objectId),
-				'createdTime' => time(),
-				'lastAccessTime' => time()
-			);
-		else
-		{
-			return self::$_tempData[$objectType . '_' . $objectId]['data'][$fieldName];
-		}*/
 		
 		// Get the whole profile info.
-		$profileValues = $this->get($objectType . $objectId);
+		$profileValues = $this->get($this->_objectType . $this->_objectId, array($fieldName));
 		// Return null if the profile of the given object cannot be found.
 		if (empty($profileValues))
+		{
+			if (isset($this->_fields[$fieldName]))
+				unset($this->_fields[$fieldName]);
 			return null;
-		// Return null if such given field cannot be found.
-		if (!isset($profileValues[$fieldName]))
-			return null;
+		}
+		$this->_fields[$fieldName] = $profileValues[$fieldName];
 		return $profileValues[$fieldName];
 	}
 	
@@ -149,72 +186,91 @@ class Profile extends ECassandraCF
 	 * @param mixed $fieldValue the value to set. Note, leave this value as null will result in this column to be removed
 	 * @return true|false
 	 */
-	public function setFieldInfo($objectId, $objectType, $fieldName, $fieldValue)
+	public function setFieldInfo($fieldName, $fieldValue)
 	{
-		if (empty($objectId)
-			|| empty($fieldName))
+		if (empty($fieldName))
 			return false;
-			
-		if (empty($objectType))
-			$objectType = User::PREFIX;
 		
 		// If field value is left as null, the column will be removed.
 		if (empty($fieldValue))
 		{
 			$this->delete($objectType . $objectId, array($fieldName));
+			if (isset($this->_fields[$fieldName]))
+				unset($this->_fields[$fieldName]);
 			return true;
 		}
-		return $this->insert($objectType . $objectId, array($fieldName => $fieldValue));
+		return $this->insert($this->_objectType . $this->_objectId, array($fieldName => $fieldValue));
 	}
 	
 	/**
 	 * Gets all profile info of an object.
-	 * @param string $objectId the row key of the object to get info
-	 * @param string $objectType type of the object (for example, user, trip...) plus the underscore (_)
 	 * @return array
 	 */
-	public function getProfileInfo($objectId, $objectType)
+	public function getProfileInfo()
 	{
-		if (empty($objectId)
-			|| empty($fieldName))
-			return null;
-			
-		if (empty($objectType))
-			$objectType = User::PREFIX;
-		
-		// Get the whole profile info.
-		return $this->get($objectType . $objectId);
+		$data = $this->get($this->_objectType . $this->_objectId);
+		return $data;
+		$fields = array();
+		foreach ($data as $fieldName => $fieldValue)
+		{
+			$fields[$fieldName] = $fieldValue;
+		}
+		$this->_fields = $fields;
+		return $this->_fields;
 	}
 	
 	/**
 	 * Sets the fields value of an object.
-	 * @param string $objectId the row key of the object to get info
-	 * @param string $objectType type of the object (for example, user, trip...) plus the underscore (_)
 	 * @param array $fields an associative array of (field_name => field_value)
 	 * @return true|false
 	 */
-	public function setProfileFields($objectId, $objectType, array $fields)
+	public function setProfileFields(array $fields)
 	{
-		if (empty($objectId)
-			|| empty($fields))
+		if (empty($fields))
 			return false;
-			
-		if (empty($objectType))
-			$objectType = User::PREFIX;
 		
 		foreach ($fields as $fieldName => $fieldValues)
 		{
 			if (empty($fieldValues['value']))
 			{
-				$this->setFieldInfo($objectId, $objectType, $fieldName, '');
+				$this->setFieldInfo($fieldName, '');
 				unset($fields[$fieldName]);
 			}
 			else
 			{
-				if ($this->getFieldInfo($objectId, $objectType, $fieldName) === null)
-					$fields['verified'] = false;
+				if ($this->getFieldInfo($fieldName) === null)
+					$fields['verified'] = array('value' => false);
 			}
 		}
-		return $this->insert($objectType . $objectId, $fields);
+		return $this->insert($this->_objectType . $this->_objectId, $fields);
+	}
+	
+	/**
+	 * Returns a value of a field.
+	 * @param string $name Name of the field to get value
+	 * @return mixed field's value | null if such field has not existed
+	 */
+	public function __get($name)
+	{
+		if (isset($this->_fields[$name]))
+			return $this->_fields[$name];
+		return null;
+	}
+	
+	/**
+	 * Sets value of a field.
+	 * @param string $name Name of the field to set value
+	 * @param mixed $value The value to set
+	 * @return true set value successfully | false
+	 */
+	public function __set($name, $value)
+	{
+		$this->initFields();
+		if (isset($this->_fields[$name]))
+		{
+			$this->_fields[$name] = $value;
+			return true;
+		}
+		return false;
 	}
 }

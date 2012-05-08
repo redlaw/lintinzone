@@ -8,12 +8,6 @@ class ProfileField extends ECassandraCF
 	private static $_rules;
 	
 	/**
-	 * Array of profile fields.
-	 * @var array
-	 */
-	private $_fields;
-	
-	/**
 	 * List of available profile fields.
 	 * @var RangeColumnFamilyIterator
 	 */
@@ -31,26 +25,12 @@ class ProfileField extends ECassandraCF
 	 */
 	private static $_refresh = true;
 	private static $_refreshRules = true;
-	private static $_refreshFields = true;
 	private static $_refreshTypes = true;
-	
-	protected function initFields()
-	{
-		if (empty($this->_fields) || self::$_refreshFields === true)
-		{
-			self::$_refreshFields = false;
-			$this->_fields = array();
-			$this->getAllFieldsMetadata();
-			foreach (self::$_data as $fieldName => $metadata)
-			{
-				//array_push($this->_fields, $fieldName);
-				$this->_fields[$fieldName] = '';
-			}
-		}
-	}
 	
 	/**
 	 * Returns the static model of the specified AR class.
+	 * @param string $objectId
+	 * @param string $objectType
 	 * @param string $className active record class name.
 	 * @return User the static model class
 	 */
@@ -207,7 +187,7 @@ class ProfileField extends ECassandraCF
 									if (isset($validatorAttributes['not']))
 										$temp['not'] = $validatorAttributes['not'];
 									if (isset($validatorAttributes['range']))
-										$temp['range'] = $validatorAttributes['range'];
+										$temp['range'] = json_decode($validatorAttributes['range'], true);
 									if (isset($validatorAttributes['strict']))
 										$temp['strict'] = $validatorAttributes['strict'];
 								}
@@ -328,7 +308,7 @@ class ProfileField extends ECassandraCF
 									if (isset($validatorAttributes['pattern']))
 										$temp['pattern'] = $validatorAttributes['pattern'];
 									if (isset($validatorAttributes['validSchemes']))
-										$temp['validSchemes'] = $validatorAttributes['validSchemes'];
+										$temp['validSchemes'] = json_decode($validatorAttributes['validSchemes'], true);
 								}
 								break;
 						} // endswitch
@@ -409,38 +389,8 @@ class ProfileField extends ECassandraCF
 	public function refresh()
 	{
 		self::$_refresh = true;
-		self::$_refreshFields = true;
 		self::$_refreshRules = true;
 		self::$_refreshTypes = true;
-	}
-	
-	/**
-	 * Returns a value of a field.
-	 * @param string $name Name of the field to get value
-	 * @return mixed field's value | null if such field has not existed
-	 */
-	public function __get($name)
-	{
-		if (isset($this->_fields[$name]))
-			return $this->_fields[$name];
-		return null;
-	}
-	
-	/**
-	 * Sets value of a field.
-	 * @param string $name Name of the field to set value
-	 * @param mixed $value The value to set
-	 * @return true set value successfully | false
-	 */
-	public function __set($name, $value)
-	{
-		$this->initFields();
-		if (isset($this->_fields[$name]))
-		{
-			$this->_fields[$name] = $value;
-			return true;
-		}
-		return false;
 	}
 	
 	/**
@@ -468,9 +418,22 @@ class ProfileField extends ECassandraCF
 			self::$_types = array();
 			foreach ($fieldMetadata as $fieldName => $metadata)
 			{
-				self::$_types[$fieldName] = UserModule::t($metadata['not_validator']['field_type']);
+				if ($metadata['not_validator']['field_type'] !== 'dropDownList'
+					&& $metadata['not_validator']['field_type'] !== 'checkBoxList'
+					&& $metadata['not_validator']['field_type'] !== 'radioButtonList'
+					&& $metadata['not_validator']['field_type'] !== 'listBox')
+				{
+					self::$_types[$fieldName] = $metadata['not_validator']['field_type'];
+				}
+				else
+				{
+					self::$_types[$fieldName] = array(
+						'type' => $metadata['not_validator']['field_type'],
+						'data' => json_decode($metadata['not_validator']['items'], true)
+					);
+				}
 			}
-			return self::$_types;
 		}
+		return self::$_types;
 	}
 }

@@ -180,6 +180,7 @@ require_once(dirname(__FILE__) . '/../../phpcassa/columnfamily.php');
      * Fetches a row from this column family.
      *
      * @param string $key row key to fetch
+	 * @param mixed[] $columns limit the columns or super columns fetched to this list 
      * @param mixed $columnStart only fetch columns with name >= this
      * @param mixed $columnFinish only fetch columns with name <= this
      * @param bool $columnReversed fetch the columns in reverse order

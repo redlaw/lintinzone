@@ -337,3 +337,12 @@ div.search-form
 	border-color: #fbc2c4;
 	color: #8a1f11;	
 }
+
+/* profile picture*/
+#profile-picture-box .picture-border
+{
+	width: 160px;
+	/*height: 160px;*/
+	text-align: center;
+	display: inline-block;
+}

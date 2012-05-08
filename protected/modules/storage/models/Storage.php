@@ -120,10 +120,11 @@ class Storage extends ECassandraCF
 	private function saveImg($uploadedImg, $title = '', $description = '', $albumName = '')
 	{
 		// Key
-		$key = Yii::app()->user->getId() . '_' . CassandraUtil::uuid1();
+		$userId = CassandraUtil::import(Yii::app()->user->getId())->__toString();
+		$key = $userId . '_' . CassandraUtil::uuid1();
 		
 		// Path
-		$path = Yii::app()->params['storagePath'] . DIRECTORY_SEPARATOR . Yii::app()->user->getId();
+		$path = realpath(Yii::app()->params['storagePath']) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $userId;
 		if(!is_dir($path))
 			mkdir($path, 0775);
 		if (!empty($albumName))
@@ -151,7 +152,7 @@ class Storage extends ECassandraCF
 		// Render this image into different versions
 		$photoTypes = Setting::model()->photo_types;
 		// Get list of image types in JSON format. Decode it.
-		$photoTypes = json_decode($photoTypes);
+		$photoTypes = json_decode($photoTypes['value'], true);
 		$img = Yii::app()->imagemod->load($data['storage_path']);
 		$convertedImgs = array();
 		foreach ($photoTypes as $type => $config)

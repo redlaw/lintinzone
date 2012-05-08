@@ -97,14 +97,38 @@ set lz_PROFILE_FIELDS['phone']['not_validator']['field_title'] = utf8('Phone');
 set lz_PROFILE_FIELDS['phone']['not_validator']['field_type'] = utf8('textField');
 set lz_PROFILE_FIELDS['phone']['length']['max'] = utf8(50);
 
-facebook account
+set lz_PROFILE_FIELDS['facebook']['not_validator']['field_title'] = utf8('Facebook');
+set lz_PROFILE_FIELDS['facebook']['not_validator']['field_type'] = utf8('textField');
+set lz_PROFILE_FIELDS['facebook']['length']['max'] = utf8(50);
 
-linkedin
-twitter
-gender
-about
-interests
-website
+set lz_PROFILE_FIELDS['linkedin']['not_validator']['field_title'] = utf8('LinkedIn');
+set lz_PROFILE_FIELDS['linkedin']['not_validator']['field_type'] = utf8('textField');
+set lz_PROFILE_FIELDS['linkedin']['length']['max'] = utf8(50);
+
+set lz_PROFILE_FIELDS['twitter']['not_validator']['field_title'] = utf8('Twitter');
+set lz_PROFILE_FIELDS['twitter']['not_validator']['field_type'] = utf8('textField');
+set lz_PROFILE_FIELDS['twitter']['length']['max'] = utf8(50);
+
+set lz_PROFILE_FIELDS['gender']['not_validator']['field_title'] = utf8('Gender');
+set lz_PROFILE_FIELDS['gender']['not_validator']['field_type'] = utf8('dropDownList');
+set lz_PROFILE_FIELDS['gender']['not_validator']['items'] = utf8('{"male":"Male","female":"Female","other":"Other"}');
+set lz_PROFILE_FIELDS['gender']['in']['range'] = utf8('["male","female","other"]');
+
+set lz_PROFILE_FIELDS['about']['not_validator']['field_title'] = utf8('About');
+set lz_PROFILE_FIELDS['about']['not_validator']['field_type'] = utf8('textArea');
+set lz_PROFILE_FIELDS['about']['length']['max'] = utf8(200);
+
+set lz_PROFILE_FIELDS['interests']['not_validator']['field_title'] = utf8('Interests');
+set lz_PROFILE_FIELDS['interests']['not_validator']['field_type'] = utf8('textArea');
+set lz_PROFILE_FIELDS['interests']['length']['max'] = utf8(200);
+
+set lz_PROFILE_FIELDS['website']['not_validator']['field_title'] = utf8('Website');
+set lz_PROFILE_FIELDS['website']['not_validator']['field_type'] = utf8('textField');
+set lz_PROFILE_FIELDS['website']['length']['max'] = utf8(50);
+
+set lz_PROFILE_FIELDS['picture']['not_validator']['field_title'] = utf8('Picture');
+set lz_PROFILE_FIELDS['picture']['not_validator']['field_type'] = utf8('textField');
+set lz_PROFILE_FIELDS['picture']['length']['max'] = utf8(100);
 
 create column family lz_STORAGE
 	with comparator = AsciiType

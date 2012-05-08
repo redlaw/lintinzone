@@ -30,7 +30,7 @@ class ProfileController extends Controller
 						'value' => $formModel->$fieldName
 					);
 				}
-				$model->setProfileFields(Yii::app()->user->getId(), User::PREFIX, $data);
+				$model->setProfileFields(CassandraUtil::import(Yii::app()->user->getId())->__toString(), User::PREFIX, $data);
 			}
 		}
 		$this->render('update', array('model' => $formModel));
@@ -38,7 +38,12 @@ class ProfileController extends Controller
 	
 	public function actionPicture()
 	{
-		$this->render('picture');
+		$formModel = new PictureForm();
+		$img = ProfilePicture::getPictureInfo('', 'thumb.profile');
+		$this->render('picture', array(
+			'model' => $formModel,
+			'img' => $img
+		));
 	}
 
 	// Uncomment the following methods and override them if needed

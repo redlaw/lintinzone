@@ -1,5 +1,6 @@
 <div class="site-logo">
 	<h1>
+		<span class="hidden">LintinZone - the Social Shipping Network</span>
 		<a id="link-site" name="link-site" href="http://lintinzone.com/" target="_blank">
 			<img width="477" height="83" id="site-logo" src="../public/images/lintinzone-logo.png" alt="LintinZone - Social Shipping Network" title="LintinZone - Social Shipping Network" />
 		</a>

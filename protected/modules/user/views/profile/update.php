@@ -15,10 +15,23 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<?php foreach($model->getAllFieldTypes() as $fieldName => $fieldType): ?>
-		<?php echo $fieldName . ' ' . $fieldType; ?>
 		<div class="row">
 			<?php echo $form->labelEx($model, $fieldName); ?>
-			<?php echo $form->$fieldType($model, $fieldName); ?>
+			<?php
+				/*if ($fieldType !== 'dropDownList'
+					&& $fieldType !== 'checkBoxList'
+					&& $fieldType !== 'radioButtonList'
+					&& $fieldType !== 'listBox')*/
+				if (!is_array($fieldType))
+				{
+					echo $form->$fieldType($model, $fieldName);
+				}
+				else
+				{
+					$type = $fieldType['type'];
+					echo $form->$type($model, $fieldName, $fieldType['data']);
+				}
+			?>
 			<?php echo $form->error($model, $fieldName); ?>
 		</div>
 	<?php endforeach; ?>

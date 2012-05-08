@@ -114,6 +114,6 @@ return array(
 		'mailHost' => 'mail.lintinzone.com',
 		'mailPassword' => 'l1nTInte@m',
 		'saltPassword' => 'l1nTInz0ne',
-		'storagePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'files'
+		'storagePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'files'
 	)
 );

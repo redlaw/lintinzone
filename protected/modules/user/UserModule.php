@@ -20,6 +20,10 @@ class UserModule extends CWebModule
 		$this->setImport(array(
 			'user.models.*',
 			'user.components.*',
+			'application.modules.system.models.*',
+			'application.modules.system.components.*',
+			'application.modules.storage.models.*',
+			'application.modules.storage.components.*'
 		));
 	}
 
